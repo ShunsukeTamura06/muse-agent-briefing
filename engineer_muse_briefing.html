@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta Muse ― エンジニア向け勉強会</title>
+<style>
+/* =========================================================
+   完全オフライン。外部リソース参照ゼロ。
+   フォントはWindows/Mac標準搭載のもののみ。
+   投影前提のため文字サイズは vw と vh の小さい方に追従させ、
+   16:9 の短い画面でも1枚に収まるようにしている。
+   ========================================================= */
+:root{
+  --ink:#1d1d1f;
+  --ink-2:#6e6e73;
+  --line:#d2d2d7;
+  --bg:#ffffff;
+  --bg-2:#f5f5f7;
+  --blue:#0066cc;
+  --blue-soft:#b8d4f0;
+  --amber:#8a6d1f;
+  --amber-bg:#fdf9ef;
+  --amber-line:#d9b85c;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:"Yu Gothic Medium","Yu Gothic",YuGothic,"Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+}
+section{
+  height:100vh;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:3.4vh 5vw;
+  position:relative;
+  overflow:hidden;
+}
+.wrap{width:100%;max-width:1240px;}
+    /* 行末に1文字だけ残る折り返しを避ける。語中で切りたくない語句は .nb で囲む */
+    p,td,th,li{text-wrap:pretty;}
+    .nb{white-space:nowrap;}
+.center{text-align:center;}
+
+/* ---------- タイポ ---------- */
+h2{
+  font-size:clamp(26px,min(3.15vw,5.35vh),52px);
+  line-height:1.25;
+  letter-spacing:-0.02em;
+  margin:0 0 .38em;
+  font-weight:700;
+}
+.kicker{
+  font-size:clamp(13px,min(1.12vw,1.9vh),19px);
+  letter-spacing:0.18em;
+  color:var(--ink-2);
+  margin:0 0 .6em;
+  font-weight:600;
+}
+.lead{font-size:clamp(16px,min(1.45vw,2.45vh),26px);line-height:1.65;color:var(--ink-2);margin:0;}
+.pop{color:var(--blue);}
+.tight{letter-spacing:-0.03em;}
+
+/* ---------- Hero ---------- */
+.hero{background:#000;color:#fff;}
+.hero .huge{
+  font-size:clamp(40px,min(8.6vw,15vh),132px);
+  font-weight:700;
+  letter-spacing:-0.045em;
+  line-height:1;
+  margin:0;
+  white-space:nowrap;
+}
+.hero .arrowbig{color:#5a5a5f;padding:0 .12em;}
+.hero .sub{
+  font-size:clamp(16px,min(1.72vw,2.92vh),30px);
+  color:#a1a1a6;
+  margin-top:1em;
+  letter-spacing:.02em;
+  line-height:1.6;
+}
+.hero .ctx{
+  font-size:clamp(13px,min(1.1vw,1.88vh),19px);
+  color:#6e6e73;
+  margin-top:2.4em;
+  line-height:1.8;
+}
+/* 表紙 */
+    .hero .cover-kicker{font-size:clamp(12px,min(1.1vw,1.88vh),20px);color:#6e6e73;letter-spacing:.2em;font-weight:600;margin:0 0 1.7em;}
+    .hero .cover-title{font-size:clamp(30px,min(5.2vw,8.8vh),92px);font-weight:700;letter-spacing:-.035em;line-height:1.18;margin:0;}
+    .hero .cover-lead{font-size:clamp(14px,min(1.5vw,2.55vh),26px);color:#a1a1a6;line-height:1.75;margin:1.9em auto 0;max-width:42em;font-weight:500;}
+    .hero .q{
+  font-size:clamp(17px,min(1.82vw,3.1vh),32px);
+  color:#a1a1a6;font-weight:700;line-height:1.5;margin:0 0 1.2em;
+}
+.scrollhint{
+  position:absolute;bottom:4vh;left:50%;transform:translateX(-50%);
+  color:#6e6e73;font-size:13px;letter-spacing:.1em;
+  animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,7px);}}
+
+/* ---------- 汎用パーツ ---------- */
+.alt{background:var(--bg-2);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,36px);align-items:stretch;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(11px,1.5vw,24px);align-items:stretch;}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:clamp(12px,min(1.45vw,2.45vh),22px);
+}
+.card h3{font-size:clamp(16px,min(1.42vw,2.42vh),25px);margin:0 0 .6em;font-weight:700;}
+.card p{margin:0;font-size:clamp(14px,min(1.15vw,1.95vh),22px);line-height:1.7;color:var(--ink-2);}
+/* .card p より詳細度を上げる（これが無いと大きい数字が本文サイズに潰れる） */
+.big-num,.card p.big-num{
+  font-size:clamp(32px,min(4.3vw,7.3vh),72px);font-weight:700;letter-spacing:-0.03em;line-height:1;
+  color:var(--ink);
+}
+.unit{font-size:.42em;font-weight:600;color:var(--ink-2);margin-left:.15em;}
+.foot{
+  margin-top:.85em;font-size:clamp(12px,min(.95vw,1.6vh),18px);color:#86868b;line-height:1.7;
+}
+/* 入れ子カード（1枚に複数情報を載せる密度用） */
+.mini{padding:clamp(9px,min(1vw,1.7vh),15px);}
+.mini .big-num,.mini p.big-num{font-size:clamp(24px,min(3vw,5.1vh),48px);}
+.mini p{font-size:clamp(14px,min(1.2vw,2.05vh),22px);line-height:1.55;}
+
+/* ---------- ファネル図 ---------- */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:6px;margin:.8em 0 .3em;}
+.funnel-band{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#fff;font-weight:700;border-radius:9px;padding:10px 14px;width:100%;
+  font-size:clamp(13px,min(1.12vw,1.9vh),19px);line-height:1.35;
+  opacity:0;transform:translateY(10px) scaleX(.94);transform-origin:center;
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,.9,.28,1);
+}
+.in .funnel-band{opacity:1;transform:translateY(0) scaleX(1);}
+.funnel-band small{display:block;font-weight:500;opacity:.85;font-size:.84em;margin-top:3px;}
+.funnel-arrow{color:var(--ink-2);font-size:13px;line-height:1;opacity:0;transition:opacity .4s ease .15s;}
+.in .funnel-arrow{opacity:1;}
+
+/* 大きい数字のカウントアップ */
+[data-count]{font-variant-numeric:tabular-nums;}
+
+/* ---------- バーチャート ---------- */
+.bars{display:flex;flex-direction:column;gap:clamp(7px,min(1vw,1.7vh),14px);}
+.bar{display:grid;grid-template-columns:minmax(120px,14vw) 1fr minmax(66px,6vw);align-items:center;gap:clamp(8px,1vw,16px);}
+.bar .nm{font-size:clamp(12px,min(1.08vw,1.85vh),19px);text-align:right;line-height:1.3;}
+.bar .nm small{display:block;color:var(--ink-2);font-size:.84em;font-weight:400;}
+.track{background:#e3e3e6;border-radius:99px;height:clamp(14px,min(1.7vw,2.9vh),28px);overflow:hidden;}
+.fill{
+  height:100%;border-radius:99px;background:var(--blue-soft);
+  width:0;transition:width 1.15s cubic-bezier(.22,.9,.28,1);
+}
+.fill.key{background:var(--blue);}
+.fill.nil{background:#9ea3ab;}
+/* 満点＝基準点の行。実測値ではないので塗らず、破線の枠だけで示す */
+    .bar.ref .track{background:transparent;border:1px dashed #b9b9c0;}
+    .bar.ref .nm,.bar.ref .vl{color:var(--ink-2);font-weight:500;}
+    /* Astra の2行を強調（この2本が本題なので、他社・人間の行と差をつける） */
+.bar.hl{background:rgba(0,102,204,.07);border-radius:9px;padding:5px 7px;margin:-5px -7px;}
+.bar.hl .nm{font-weight:700;color:var(--ink);}
+.bar.hl .nm small{color:var(--blue);font-weight:600;}
+.bar.hl .vl{color:var(--blue);}
+.bar .vl{font-size:clamp(15px,min(1.28vw,2.18vh),24px);font-weight:700;white-space:nowrap;}
+.in .fill{width:var(--w);}
+/* 半カラムに収める圧縮版 */
+.bars.compact .bar{grid-template-columns:minmax(80px,8vw) 1fr minmax(50px,4.6vw);gap:8px;}
+.bars.compact .nm{font-size:clamp(11px,min(.95vw,1.62vh),17px);}
+.bars.compact .vl{font-size:clamp(13px,min(1.12vw,1.92vh),21px);}
+.bars.compact .track{height:clamp(12px,min(1.4vw,2.4vh),22px);}
+
+/* ---------- 比較テーブル ---------- */
+table{width:100%;border-collapse:collapse;font-size:clamp(13px,min(1.1vw,1.88vh),21px);}
+th,td{padding:.5em .4em;border-bottom:1px solid var(--line);text-align:right;}
+th:first-child,td:first-child{text-align:left;}
+th{font-size:.85em;color:var(--ink-2);font-weight:600;border-bottom:1.5px solid #b9b9be;}
+td.g{color:var(--blue);font-weight:700;}
+/* 表内の見出し行（知識／自律作業の区切り） */
+tr.grp td{
+  font-size:.85em;font-weight:700;color:var(--ink-2);
+  padding-top:.95em;border-bottom:1px solid var(--line);text-align:left;
+}
+tr.grp td .hint2{font-weight:600;}
+/* 英語の評価名だけでは伝わらないため、下に日本語の補足を添える */
+td small,th small{display:block;color:var(--ink-2);font-size:.8em;font-weight:400;line-height:1.3;margin-top:.15em;}
+.tag{
+  display:inline-block;border:1px solid var(--line);border-radius:99px;
+  padding:.3em .85em;font-size:clamp(12px,min(1.05vw,1.8vh),19px);color:var(--ink-2);margin:.18em .2em;
+}
+
+/* ---------- 動画 ---------- */
+.vid{
+  position:relative;width:100%;aspect-ratio:16/10;border-radius:14px;overflow:hidden;
+  background:#111;border:1px solid #2a2a2e;
+}
+.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.vid .hint{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  color:#8a8a90;font-size:clamp(12px,min(1.05vw,1.8vh),18px);line-height:1.9;text-align:center;padding:1em;
+}
+.vid .hint code{background:#1e1e22;color:#c9c9cf;padding:.15em .5em;border-radius:5px;font-size:.95em;}
+.caption{margin-top:.7em;font-size:clamp(14px,min(1.2vw,2.05vh),22px);line-height:1.55;}
+
+/* ---------- 制約セクション（トーン切替） ---------- */
+.warn{background:#17171a;color:#f5f5f7;}
+.warn h2{color:#fff;}
+.warn .kicker{color:#c8a24a;}
+.warn .card{background:#212126;border-color:#35353c;}
+.warn .card h3{color:#e8c979;}
+.warn .card p{color:#a1a1a6;}
+.warn .big-num,.warn .card p.big-num{color:#fff;}
+.warn .unit{color:#8a8a90;}
+.warn .foot{color:#75757c;}
+.warn .lead{color:#c7c7cc;}
+
+/* ---------- 予測セクション（意図的に未完成な見た目） ---------- */
+.fc .card.dash{border:2px dashed #b0b0b6;background:#fafafa;box-shadow:none;}
+.fc .card.dash h3{color:var(--ink-2);}
+.badge{
+  display:inline-block;background:#6e6e73;color:#fff;border-radius:7px;
+  padding:.24em .9em;font-size:clamp(12px,min(1.05vw,1.8vh),19px);font-weight:700;letter-spacing:.1em;
+  margin-bottom:.9em;
+}
+/* 62.7% と 99.9% の測り方の違いを説明する注記 */
+.numnote{
+  border:1px solid var(--line);border-radius:12px;background:var(--bg-2);
+  padding:clamp(9px,min(1.05vw,1.8vh),16px) clamp(12px,1.4vw,20px);
+  margin-top:clamp(7px,1.1vh,13px);
+}
+.numnote p{margin:0;font-size:clamp(12px,min(1.08vw,1.85vh),19px);line-height:1.7;color:var(--ink-2);}
+.numnote strong{color:var(--ink);}
+.numnote .k{color:var(--blue);font-weight:700;}
+
+/* 「予測ではなく事実」の枠。年月を左に揃えて並べ、進み方の速さを見せる */
+.factbox p{color:var(--ink);margin-top:.45em;}
+.factbox p:first-child{margin-top:0;}
+.factbox .when{color:var(--blue);font-weight:700;margin-right:.4em;}
+.factbox .cav{color:var(--ink-2);font-size:.9em;margin-top:.7em;line-height:1.6;}
+
+/* 締めの黒帯（冒頭の黒画面と呼応させる） */
+.closer{
+  background:#17171a;color:#fff;border-radius:14px;text-align:center;
+  padding:clamp(12px,min(1.5vw,2.6vh),24px) 1.2em;margin-top:clamp(12px,1.6vh,22px);
+}
+.closer p{margin:0;font-weight:700;line-height:1.45;font-size:clamp(18px,min(2.05vw,3.5vh),36px);}
+/* 締めは「変わらなかった側」と「変わった側」を対比させる */
+.closer .c1{font-size:clamp(13px,min(1.18vw,2vh),21px);color:#a1a1a6;font-weight:600;}
+.closer .c2{font-size:clamp(17px,min(1.85vw,3.15vh),32px);margin-top:.35em;}
+.closer .c3{font-size:clamp(15px,min(1.58vw,2.7vh),28px);margin-top:.6em;color:#c7c7cc;}
+.closer .num{font-size:.72em;font-weight:600;color:#8a8a90;margin-left:.4em;}
+
+/* ---------- 進行ドット ---------- */
+.dots{
+  position:fixed;right:20px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:11px;z-index:50;
+}
+.dots i{
+  width:7px;height:7px;border-radius:50%;background:#c7c7cc;display:block;
+  transition:.35s;cursor:pointer;
+}
+.dots i.on{background:var(--blue);transform:scale(1.55);}
+.dots.ondark i{background:#4a4a51;}
+.dots.ondark i.on{background:#fff;}
+
+/* ---------- 発表者ノート（既定OFF / Nキー） ---------- */
+#notes{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:rgba(12,12,14,.95);color:#e8e8ed;padding:18px 26px;
+  font-size:15px;line-height:1.75;max-height:38vh;overflow:auto;
+  border-top:2px solid var(--blue);
+}
+#notes.show{display:block;}
+#notes b{color:#7ab5f0;}
+#notes .qa{display:block;margin-top:.7em;padding-top:.6em;border-top:1px solid #3a3a42;color:#9a9aa2;font-size:.93em;}
+/* 操作ヒントは投影中に映り込まないよう数秒で消す（マウスを動かすと再表示） */
+.helpkey{
+  position:fixed;left:16px;bottom:14px;z-index:55;color:#b8b8be;font-size:11.5px;
+  letter-spacing:.04em;transition:opacity .8s;pointer-events:none;
+}
+.helpkey.hide{opacity:0;}
+
+/* ---------- 印刷（PDFバックアップ用） ---------- */
+@media print{
+  body{overflow:visible;scroll-snap-type:none;}
+  section{height:auto;min-height:0;page-break-after:always;padding:26px 30px;}
+  .scrollhint,.dots,#notes,.helpkey{display:none!important;}
+  .hero,.warn{background:#fff!important;color:#000!important;}
+  .hero .huge,.hero .q,.warn h2,.warn .big-num{color:#000!important;}
+  .hero .sub,.hero .ctx,.warn .card p,.warn .lead{color:#444!important;}
+  .warn .card{background:#fff!important;border-color:#999!important;}
+  .closer{background:#fff!important;color:#000!important;border:1.5px solid #999;}
+  .closer p{color:#000!important;}
+  .fill{width:var(--w)!important;transition:none!important;}
+  .funnel-band,.funnel-arrow{opacity:1!important;transform:none!important;transition:none!important;}
+}
+@media (max-width:900px){
+  .grid2,.grid3{grid-template-columns:1fr;}
+  .bar{grid-template-columns:110px 1fr 58px;}
+}
+
+
+/* =========================================================
+   ここから下は Muse 版で追加した分。
+   ========================================================= */
+code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
+
+/* 2〜3枚目：小見出しつきの図カード */
+.chart-t{font-size:clamp(14px,min(1.25vw,2.1vh),22px);font-weight:700;margin:0 0 .15em;}
+.chart-s{font-size:clamp(11px,min(.95vw,1.62vh),17px);color:var(--ink-2);margin:0 0 .8em;}
+.mini-tbl td,.mini-tbl th{padding:.38em .3em;}
+.mini-tbl td.k{color:var(--blue);font-weight:700;}
+
+/* 3枚目：DAU の折れ線（外部ライブラリを使わず SVG を直書き） */
+.lc{width:100%;height:auto;display:block;}
+.lc .gl{stroke:#e3e3e6;stroke-width:1;}
+.lc .ax{fill:#86868b;font-size:11px;}
+.lc .ln{fill:none;stroke:var(--blue);stroke-width:3;stroke-linejoin:round;stroke-linecap:round;}
+.lc .ar{fill:rgba(0,102,204,.08);}
+.lc .pt{fill:var(--blue);stroke:#fff;stroke-width:2;}
+.lc .lb{fill:var(--ink);font-size:13px;font-weight:700;}
+
+/* 4枚目：4つの性質を上罫だけで並べる */
+.layers{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,34px);margin-top:1.1em;}
+.layers .ly{border-top:4px solid var(--acc);padding-top:.65em;}
+.layers .ly h3{margin:0 0 .35em;color:var(--acc);font-weight:700;font-size:clamp(16px,min(1.62vw,2.75vh),29px);}
+.layers .ly p{margin:0;color:var(--ink-2);line-height:1.6;font-size:clamp(12px,min(1.2vw,2.05vh),22px);}
+.hx1{--acc:#0066cc;} .hx2{--acc:#00875a;} .hx3{--acc:#b5540a;} .hx4{--acc:#6b3fa0;}
+.example{margin-top:clamp(12px,2vh,26px);border-left:4px solid var(--line);padding:.2em 0 .2em 1em;
+  font-size:clamp(13px,min(1.2vw,2.05vh),22px);line-height:1.7;color:var(--ink);}
+.example b{color:var(--blue);}
+
+/* 5枚目：ターミナルの抜粋 */
+.term{background:#111114;color:#d7d7dc;border-radius:12px;padding:clamp(10px,1.4vh,18px) clamp(12px,1.3vw,22px);
+  font-size:clamp(11px,min(1vw,1.7vh),17px);line-height:1.65;margin:0;white-space:pre-wrap;overflow:hidden;}
+.term .c{color:#7a7a82;}
+.term .p{color:#7ab5f0;}
+.term .o{color:#9fd8a4;}
+.roles{display:flex;gap:clamp(8px,1vw,16px);margin-top:.9em;}
+.roles .r{flex:1;border:1px solid var(--line);border-radius:12px;padding:.6em .8em;text-align:center;}
+.roles .r b{display:block;font-size:clamp(15px,min(1.45vw,2.45vh),26px);}
+.roles .r span{font-size:clamp(11px,min(1vw,1.7vh),17px);color:var(--ink-2);}
+
+/* 6枚目：実測スペック表と構成図 */
+.spec td{text-align:left;padding:.42em .5em;}
+.spec td:first-child{color:var(--ink-2);font-weight:600;white-space:nowrap;width:28%;}
+.spec td b{color:var(--blue);}
+.arch{display:flex;flex-direction:column;gap:clamp(6px,1vh,12px);}
+.arch .box{border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:.55em .8em;
+  font-size:clamp(12px,min(1.1vw,1.88vh),20px);line-height:1.45;}
+.arch .box b{display:block;font-size:1.08em;}
+.arch .box small{color:var(--ink-2);}
+.arch .vm{border:2px solid var(--blue);background:rgba(0,102,204,.04);padding:.6em .8em .8em;}
+.arch .vm>.lbl{font-weight:700;color:var(--blue);font-size:clamp(12px,min(1.1vw,1.88vh),20px);margin-bottom:.45em;}
+.arch .inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,.8vw,10px);}
+.arch .gate{border-color:#b5540a;background:#fdf6ef;}
+.arch .gate b{color:#b5540a;}
+.arch .dn{text-align:center;color:#a1a1a6;font-size:clamp(12px,1.1vw,18px);line-height:1;}
+
+/* 7枚目：各社比較（左寄せの表） */
+.svc td,.svc th{text-align:left;vertical-align:top;}
+.svc td:first-child b{display:block;}
+.svc tr.me td{background:rgba(0,102,204,.06);}
+.svc tr.sep td{border-top:1.5px solid #b9b9be;}
+.pill{display:inline-block;border-radius:99px;padding:.12em .7em;font-size:.82em;font-weight:700;white-space:nowrap;}
+.pill.on{background:#e6f0fa;color:#0058b0;}
+.pill.task{background:#f1f1f3;color:#58585e;}
+
+/* 8枚目：OS勢の3列 */
+.os3 .card h3 small{display:block;font-size:.66em;color:var(--ink-2);font-weight:600;margin-top:.3em;}
+.os3 ul{margin:.3em 0 0;padding-left:1.1em;}
+.os3 li{font-size:clamp(13px,min(1.12vw,1.9vh),21px);line-height:1.6;color:var(--ink-2);margin:.15em 0;}
+.os3 li b{color:var(--ink);}
+.os3 .where{margin-top:.7em;padding-top:.55em;border-top:1px solid var(--line);font-weight:700;
+  font-size:clamp(12px,min(1.05vw,1.8vh),19px);}
+
+/* 9枚目：試算（暗いトーン） */
+.warn table th{color:#a1a1a6;border-bottom-color:#4a4a52;}
+.warn table td{border-bottom-color:#35353c;color:#e8e8ed;}
+.warn table td small{color:#8a8a90;}
+.warn table tr.top td{color:#fff;font-weight:700;}
+.warn table tr.low td{color:#8fc0f0;font-weight:700;}
+.ratio{display:flex;align-items:baseline;justify-content:center;gap:.4em;margin:.35em 0 0;}
+.ratio .n{font-size:clamp(40px,min(6vw,10vh),104px);font-weight:700;letter-spacing:-.04em;color:#fff;line-height:1;}
+.ratio .t{font-size:clamp(13px,min(1.2vw,2.05vh),22px);color:#c7c7cc;font-weight:600;}
+.ext{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1vw,16px);margin-top:.9em;}
+.ext .card p{font-size:clamp(12px,min(1.05vw,1.8vh),19px);}
+.ext .card p b{color:#fff;}
+
+/* 11枚目：OS型とクラウドVM型の対置 */
+.duel{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(10px,1.6vw,28px);align-items:stretch;margin-top:.9em;}
+.duel .vsx{align-self:center;color:#c7c7cc;font-weight:700;font-size:clamp(16px,1.6vw,28px);}
+.duel h3{margin:0 0 .45em;font-size:clamp(17px,min(1.6vw,2.7vh),28px);}
+.duel ul{margin:0;padding-left:1.1em;}
+.duel li{font-size:clamp(13px,min(1.2vw,2.05vh),22px);line-height:1.6;color:var(--ink-2);margin:.2em 0;}
+.duel li b{color:var(--ink);}
+.duel .os h3{color:#6b3fa0;}
+.duel .cl h3{color:var(--blue);}
+.sameweek{display:flex;justify-content:center;gap:clamp(10px,2vw,36px);margin:.3em 0 0;flex-wrap:wrap;}
+.sameweek span{font-size:clamp(14px,min(1.35vw,2.3vh),24px);font-weight:700;}
+.sameweek em{font-style:normal;color:var(--blue);margin-right:.35em;}
+.meta-note{margin-top:.9em;text-align:center;font-size:clamp(13px,min(1.2vw,2.05vh),22px);color:var(--ink-2);line-height:1.6;}
+.meta-note b{color:var(--ink);}
+
+/* 暗いページ（.warn）で白く見せる強調と金色の見出し。印刷では白背景になるので濃い色に戻す */
+.warn .hi{color:#fff;}
+.gold{color:#e8c979;}
+@media print{
+  .warn .hi{color:#000!important;}
+  .warn .card h3,.warn .kicker,.gold{color:#8a6d1f!important;}
+  .warn table th,.warn table tr.low td{color:#444!important;}
+}
+
+/* 問いで締める1行 */
+.ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
+  font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
+
+/* 参考：自分で試した記録の差し込み枠 */
+.slot{border:2px dashed #b0b0b6;border-radius:16px;background:#fafafa;min-height:38vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:1.2em;color:var(--ink-2);}
+.slot p{margin:.25em 0;font-size:clamp(13px,min(1.2vw,2.05vh),22px);line-height:1.6;}
+.slot code{background:#ececef;border-radius:5px;padding:.1em .45em;font-size:.92em;}
+
+@media (max-width:900px){
+  .layers{grid-template-columns:1fr 1fr;}
+  .duel{grid-template-columns:1fr;}
+  .duel .vsx{display:none;}
+  .ext,.arch .inner{grid-template-columns:1fr;}
+}
+@media print{
+  .warn table td,.warn table tr.top td,.ratio .n,.ext .card p b{color:#000!important;}
+  .layers .ly{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 0. 表紙 ============ -->
+<section id="s0" class="hero" data-note="<b>【約25秒】</b>今日は Meta の Muse の話をします。Meta が9月8日にアメリカで公開したパーソナルAIエージェントで、日本でも10月23日から使えます。一言でいうと、<b>AIが話し相手から、自分のパソコンを持った代理人になりました。</b>今日は、どれくらい流行っているのか、何ができるのか、裏側で何が動いているのか、他社はどうか、そして最後に、これを本当に回し続けられるのか、という仮説を2つ立てて終わります。">
+  <div class="wrap center">
+    <p class="cover-kicker">エンジニア勉強会　／　2026年11月</p>
+    <h1 class="cover-title">Muse は、<br>1人に1台パソコンを配った</h1>
+    <p class="cover-lead">Meta のパーソナルAIエージェント「Muse」― 流行り方、できること、裏側の仮想マシン、<br>他社とOSの動き、そして「この作りは回し続けられるのか」という仮説までを扱います。</p>
+  </div>
+  <div class="scrollhint">↓ &nbsp; SCROLL</div>
+</section>
+
+<!-- ============ 1. 流行具合① 立ち上がり ============ -->
+<section id="s1" data-note="<b>【約1分20秒】</b>まず、どれだけ流行っているか。左は、公開から40日間のアメリカでのダウンロード数です。Muse が1,020万件。同じ40日でChatGPTは370万件、Grokは50万件、Claudeは20万件でした。<br>右は、500万ダウンロードに届くまでの日数で、短いほど速い。Muse は22日。ChatGPTは56日、Grokは103日、Claudeは492日かかっています。<br>40日で1,000万を超えたアプリは、Sensor Tower が数え始めた2015年以降で<b>Muse を含めて12本しかなく</b>、大半はポケモンGOやフォートナイトのようなゲームです。ゲーム以外では Threads と Disney+ に続く3本目。<b>AIアプリとしては過去最速の立ち上がり</b>と言ってよいと思います。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 世界全体では40日で1,090万件。世界で比べるとChatGPTは40日で約1,500万件で、Museを上回ります。ただしMuseは当時、米国とカナダだけでの提供でした。数字はすべて調査会社の推計で、同じ時期の累計でも Sensor Tower 340万、Apptopia 430万、Appfigures 約230万と会社ごとにかなり差があります。</span>">
+  <div class="wrap">
+    <p class="kicker">流行具合 ①　立ち上がり</p>
+    <h2>40日で1,000万ダウンロード。<br><span class="pop">AIアプリで過去最速</span></h2>
+    <div class="grid2" style="margin-top:1em">
+      <div class="card">
+        <p class="chart-t">公開後40日間の米国ダウンロード数</p>
+        <p class="chart-s">Sensor Tower 推計</p>
+        <div class="bars">
+          <div class="bar hl"><div class="nm">Muse</div><div class="track"><div class="fill key" style="--w:100%"></div></div><div class="vl">1,020万</div></div>
+          <div class="bar"><div class="nm">ChatGPT</div><div class="track"><div class="fill" style="--w:36.3%"></div></div><div class="vl">370万</div></div>
+          <div class="bar"><div class="nm">Grok</div><div class="track"><div class="fill" style="--w:4.9%"></div></div><div class="vl">50万</div></div>
+          <div class="bar"><div class="nm">Claude</div><div class="track"><div class="fill" style="--w:2%"></div></div><div class="vl">20万</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="chart-t">500万ダウンロードに届くまでの日数</p>
+        <p class="chart-s">短いほど速い　／　Sensor Tower 推計</p>
+        <div class="bars">
+          <div class="bar hl"><div class="nm">Muse</div><div class="track"><div class="fill key" style="--w:4.5%"></div></div><div class="vl">22日</div></div>
+          <div class="bar"><div class="nm">ChatGPT</div><div class="track"><div class="fill" style="--w:11.4%"></div></div><div class="vl">56日</div></div>
+          <div class="bar"><div class="nm">Grok</div><div class="track"><div class="fill" style="--w:20.9%"></div></div><div class="vl">103日</div></div>
+          <div class="bar"><div class="nm">Claude</div><div class="track"><div class="fill nil" style="--w:100%"></div></div><div class="vl">492日</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1em">40日で1,000万を超えたアプリは2015年以降で<strong style="color:var(--ink)">12本だけ</strong>。ゲーム以外では Threads、Disney+ に続く3本目。</p>
+    <p class="foot">Muse は 2026年9月8日に米国で公開（9月18日にカナダ追加）。数値は調査会社の推計で、会社ごとに差がある。Source: Sensor Tower（TechCrunch 2026/10/20、9to5Mac）</p>
+  </div>
+</section>
+
+<!-- ============ 2. 流行具合② 使われ方 ============ -->
+<section id="s2" class="alt" data-note="<b>【約1分50秒】</b>では使われ続けているか。左が1日あたりの利用者数、DAUの推移です。アメリカのアプリだけで、9月10日に6万人、10月5日に218万人、10月17日に291万人。Meta自身も10月21日の決算で、<b>登録者は1,000万人を超え、そのうち約25%が毎日使っている</b>と言っています。<br>ただ、真ん中を見てください。DAUの1日あたりの純増は、9月中旬の約20万人から、10月頭には7万人台まで落ちています。<b>伸びは明らかに鈍化しています。</b><br>右が定着度です。7日後・14日後に戻ってくる割合は、Sensor Tower では競合AIアプリの平均を上回る。一方 Similarweb の14日継続率では ChatGPT に届いていません。<b>評価は割れています。</b>はっきり差が出ているのは利用時間で、Muse は1日7.5分、ChatGPT は23分です。<br>もう一つ正直に言っておくと、この立ち上がりには<b>Meta自身の広告</b>がかなり効いています。10月は広告予算の39%をMuseに回していて、利用者の95%以上がFacebook利用者です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 月間アクティブユーザー（MAU）はMetaも調査会社も出していません。DAUはアプリ単体の数字で、WhatsApp経由やWeb経由は含みません。純増の数字は TickerTrends のデータを Hunterbrook が分析したもので、Hunterbrook はこれを根拠に Meta 株を空売りしています。規模感としては、ChatGPTは週12億人、Geminiアプリは月10億人で、桁が2つ違います。</span>">
+  <div class="wrap">
+    <p class="kicker">流行具合 ②　使われ方</p>
+    <h2>伸びは鈍化。<span class="pop">定着は健闘、ただし評価は割れる</span></h2>
+    <div class="grid3" style="margin-top:1em">
+      <div class="card">
+        <p class="chart-t">米国DAU（アプリ単体）</p>
+        <p class="chart-s">Similarweb 推計</p>
+        <svg class="lc" viewBox="0 0 400 220" role="img" aria-label="Muse 米国DAU。9月10日 約6万、10月5日 218万、10月17日 291万">
+          <line class="gl" x1="40" y1="190" x2="390" y2="190"/>
+          <line class="gl" x1="40" y1="136.7" x2="390" y2="136.7"/>
+          <line class="gl" x1="40" y1="83.3" x2="390" y2="83.3"/>
+          <line class="gl" x1="40" y1="30" x2="390" y2="30"/>
+          <text class="ax" x="34" y="194" text-anchor="end">0</text>
+          <text class="ax" x="34" y="140" text-anchor="end">100万</text>
+          <text class="ax" x="34" y="87" text-anchor="end">200万</text>
+          <text class="ax" x="34" y="34" text-anchor="end">300万</text>
+          <path class="ar" d="M56.2,186.6 L258.6,73.7 L355.7,34.8 L355.7,190 L56.2,190 Z"/>
+          <polyline class="ln" points="56.2,186.6 258.6,73.7 355.7,34.8"/>
+          <circle class="pt" cx="56.2" cy="186.6" r="5"/>
+          <circle class="pt" cx="258.6" cy="73.7" r="5"/>
+          <circle class="pt" cx="355.7" cy="34.8" r="5"/>
+          <text class="lb" x="62" y="176">6万</text>
+          <text class="lb" x="252" y="62" text-anchor="end">218万</text>
+          <text class="lb" x="350" y="22" text-anchor="end">291万</text>
+          <text class="ax" x="56.2" y="208" text-anchor="middle">9/10</text>
+          <text class="ax" x="258.6" y="208" text-anchor="middle">10/5</text>
+          <text class="ax" x="355.7" y="208" text-anchor="middle">10/17</text>
+        </svg>
+        <p style="margin-top:.5em">Meta発表：登録者 <strong style="color:var(--ink)">1,000万人超</strong>、うち<strong style="color:var(--ink)">約25%</strong>が毎日利用</p>
+      </div>
+      <div class="card">
+        <p class="chart-t">DAUの1日あたり純増</p>
+        <p class="chart-s">TickerTrends データ（Hunterbrook 分析）</p>
+        <div class="bars compact" style="margin-top:.6em">
+          <div class="bar"><div class="nm">9/15〜22</div><div class="track"><div class="fill key" style="--w:100%"></div></div><div class="vl">19.8万</div></div>
+          <div class="bar"><div class="nm">翌週</div><div class="track"><div class="fill" style="--w:43.9%"></div></div><div class="vl">8.7万</div></div>
+          <div class="bar"><div class="nm">〜10/6</div><div class="track"><div class="fill" style="--w:37.4%"></div></div><div class="vl">7.4万</div></div>
+        </div>
+        <p style="margin-top:1em">1日のダウンロードも 9/24 のピーク約21.5万件から 10/6 には約17万件へ。<br><strong style="color:var(--ink)">増え方は3週間で6割減。</strong></p>
+      </div>
+      <div class="card">
+        <p class="chart-t">定着度と利用時間</p>
+        <p class="chart-s">調査会社で評価が割れる</p>
+        <table class="mini-tbl">
+          <tr><th>指標</th><th>Muse</th><th>比較</th></tr>
+          <tr><td>7日継続率<small>Sensor Tower</small></td><td class="k">30%</td><td>19%<small>競合平均</small></td></tr>
+          <tr><td>14日継続率<small>Sensor Tower</small></td><td class="k">23%</td><td>16%<small>競合平均</small></td></tr>
+          <tr><td>14日継続率<small>Similarweb・Android</small></td><td class="k">23.7%</td><td>28.6%<small>ChatGPT</small></td></tr>
+          <tr><td>1日の利用時間<small>Similarweb</small></td><td class="k">7.5分</td><td>23分<small>ChatGPT</small></td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="foot">広告の後押しも大きい：10月は Meta の広告予算の39%を Muse に（9月は23%）。利用者の95%以上が Facebook 利用者。MAU は公表されていない。Source: Similarweb（2026/10/27）、Sensor Tower、Hunterbrook／Benzinga（2026/10/9）、Apptopia、Meta Q3 決算説明会（2026/10/21）</p>
+  </div>
+</section>
+
+<!-- ============ 3. できること① 常駐・能動 ============ -->
+<section id="s3" data-note="<b>【約1分30秒】</b>何ができるのか。チャットAIとの違いは4つです。<br>1つ目、<b>閉じても働く。</b>長い作業はアプリを閉じた後も続けて、状況が変わったときや承認が要るときだけ戻ってきます。<br>2つ目、<b>頼む前に動く。</b>目標を伝えると計画に落とし、頼まれていなくても提案してきます。通知の頻度は調整できます。<br>3つ目、<b>覚えている。</b>一度言ったことを後で使う。覚えた内容はファイルとして見られて、消すこともできます。<br>4つ目、<b>大事な操作は止まる。</b>メールの送信や購入の前には承認カードが出て、やったことはすべて記録に残ります。<br>下の例が分かりやすいです。学校からのメールと学区のサイトを見張って、予定をカレンダーに入れ、必要な文房具をカートに揃え、締め切り前に注意してくれる。<b>人間の秘書がやっていたことに近い。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 連携先は Gmail、Googleカレンダー、Instagram、Stripe の Link（使い捨てカード番号を発行）、Shopify、Trip.com、Agoda など。日本向けにはメルカリ、マネーフォワード ME、チケットぴあとの連携を進めると発表。決済のパスワードやカード番号は Muse 自身からは見えない設計です。料金は基本無料（週ごとのトークン上限あり）、有料プランは月20ドルと100ドルと報じられています。</span>">
+  <div class="wrap">
+    <p class="kicker">できること ①　常駐して、能動的</p>
+    <h2>閉じても働く。<span class="pop">頼む前に動く。</span></h2>
+    <div class="layers">
+      <div class="ly hx1"><h3>常駐する</h3><p>アプリを閉じても長い作業を続ける。状況が変わったときや承認が要るときだけ戻ってくる。</p></div>
+      <div class="ly hx2"><h3>自分から動く</h3><p>目標を伝えると計画に落とす。頼まれていなくても提案する。通知の頻度は調整できる。</p></div>
+      <div class="ly hx3"><h3>覚えている</h3><p>一度言ったことを後で使う。覚えた内容はファイルとして見られ、忘れさせることもできる。</p></div>
+      <div class="ly hx4"><h3>大事な操作は止まる</h3><p>メール送信や購入の前に承認カード。過去と予定の行動をすべて記録に残す。</p></div>
+    </div>
+    <p class="example">例：学校のメールと学区のサイトを見張り、<b>予定をカレンダーに追加</b>、<b>必要な文房具をカートに準備</b>、<b>夕食を予約</b>し、<b>スポーツの入部テストの締め切り前に知らせた</b>。</p>
+    <p class="foot">人にメッセージを送る感覚で頼む。iOS・Android・Web（muse.ai）・WhatsApp から使える。Source: Meta「Introducing Muse」（2026/09/08）、TestingCatalog</p>
+  </div>
+</section>
+
+<!-- ============ 4. できること② 仮想環境で開発 ============ -->
+<section id="s4" class="alt" data-note="<b>【約1分20秒】</b>エンジニアとして面白いのはここです。Muse は自分のパソコンを持っているので、<b>その中で実験や開発ができます。</b><br>Qiita に、Muse の中で Claude Code を動かした記事があります。Muse に npm で Claude Code を入れてもらい、ログインのリンクだけ本人がスマホで承認する。そのあと Claude Code に1ファイルのWebページを作らせて、<b>Muse が自分で HTTP サーバーを立てて、200 が返ることを確認した。</b><br>作るのは Claude Code、確かめるのは Muse。<b>AIエージェントの中で、別のAIエージェントが動いている</b>わけです。ここまでの作業で、無料枠の使用量は3%だったそうです。<br>ただし、24時間公開するサーバーには向きません。公開用のIPやポート、常時稼働は保証されていないからです。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 記事では Claude Code のサブスクリプションでログインしています（有料プランが必要）。他社のVMに別サービスのログイン情報が残る点は、記事の著者も各自の判断としています。業務データで同じことをするのは、当然ながら社内規程の確認が先です。</span>">
+  <div class="wrap">
+    <p class="kicker">できること ②　自分のPCで、実験・開発</p>
+    <h2>Muse の中で、<span class="pop">Claude Code が動いた</span></h2>
+    <div class="grid2" style="margin-top:1em;align-items:start">
+      <div>
+<pre class="term"><span class="c"># Muse に頼んで VM 上で実行してもらった</span>
+<span class="p">$</span> npm install -g @anthropic-ai/claude-code
+<span class="p">$</span> claude auth login --claudeai
+<span class="c">  → 出てきたリンクを本人がスマホで承認</span>
+<span class="p">$</span> cd ~/workspace/claude_code_webpage
+<span class="p">$</span> claude -p "$(cat prompt.txt)" --permission-mode acceptEdits
+<span class="o">  index.html を作成（約1.4KB）</span>
+<span class="p">$</span> python3 -m http.server
+<span class="o">  HTTP 200 を確認</span></pre>
+        <div class="roles">
+          <div class="r"><b>Claude Code</b><span>作る</span></div>
+          <div class="r"><b>Muse</b><span>配信して確かめる</span></div>
+          <div class="r"><b>本人</b><span>ログインを承認</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card mini" style="margin-bottom:clamp(8px,1.2vh,14px)">
+          <h3>できたこと</h3>
+          <p>ファイル保存・コード実行・ブラウザ操作。文書、PDF、Webページ、ダッシュボードも作る。<strong style="color:var(--ink)">ここまでの作業で無料枠の3%</strong>。</p>
+        </div>
+        <div class="card mini">
+          <h3>向かないこと</h3>
+          <p>24時間公開するサーバー。公開IP・ポート・常時稼働は保証されない。2コア・メモリに余裕なしで、重い処理も厳しい。</p>
+        </div>
+      </div>
+    </div>
+    <p class="foot">Source: Qiita @hirokn「MetaのAIエージェント『Muse』の中身を覗いたら、ただのUbuntuマシンだった」（2026/10/26、確認日 10/26〜27）、TestingCatalog</p>
+  </div>
+</section>
+
+<!-- ============ 5. 裏側 ============ -->
+<section id="s5" data-note="<b>【約2分】</b>では裏側に何があるのか。左は、同じ記事の著者が Muse にコマンドを打たせて測った実測値です。<b>OS は Ubuntu 24.04、KVM 上の仮想マシン、CPU は AMD EPYC が2コア、メモリ約8GB、ホーム領域150GB。</b>ブラウザは Meta 独自の場所に入った Chromium で、Muse がWeb操作に使っているのはこれのようです。<br>見てほしいのはメモリで、<b>確認時点で7.7GiB中7.3GiBが使用中、スワップなし</b>です。あとで仮説のところで効いてきます。<br>右が構成です。1人に1台、Muse Secure VM という仮想マシンがあって、エージェント本体、ブラウザ、ファイル、ログイン情報の保管庫が入っている。外への通信は、<b>Sentinel という別のエージェントが許可したものだけ</b>出ていく。今後は、利用者だけが鍵を持つ暗号化VMも予定されています。<br>つまり Muse は、<b>チャット画面の裏に、利用者1人ずつのUbuntuマシンを持っている。</b>これが今日の後半の前提です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 公式は 2vCPU・8GB・100GB SSD と報じられていますが、記事の実測ではホーム領域が150GBでした。ルート（/）は7.5GBしかありません。ユーザー名は hatch、イメージ名は hatch-image。Tailscale クライアントも組み込まれていて、本人の承認があれば自分の tailnet に参加できます（外部からの接続受付や中継は不可）。いずれも1人の環境での値で、全員共通とは限りません。</span>">
+  <div class="wrap">
+    <p class="kicker">Muse の裏側　―　CPUとメモリ</p>
+    <h2>中身は、ただの Ubuntu。<span class="pop">それが1人1台</span></h2>
+    <div class="grid2" style="margin-top:.9em;align-items:start">
+      <div class="card">
+        <table class="spec">
+          <tr><td>OS</td><td>Ubuntu 24.04.5 LTS　<small>Linux 7.0.0（x86_64）</small></td></tr>
+          <tr><td>仮想化</td><td>KVM</td></tr>
+          <tr><td>CPU</td><td>AMD EPYC 9D25　<b>2 vCPU</b></td></tr>
+          <tr><td>メモリ</td><td><b>約7.7GiB</b>　スワップなし<small>確認時点で 7.3GiB 使用中</small></td></tr>
+          <tr><td>ディスク</td><td>ホーム <b>150GB</b>　／　ルート 7.5GB（overlay）</td></tr>
+          <tr><td>ソフト</td><td>Python 3.12、Node.js 24、git、Chromium<small>/opt/meta-chromium/chrome</small></td></tr>
+          <tr><td>その他</td><td>Tailscale（自分の tailnet に参加のみ）<small>ユーザー名 hatch</small></td></tr>
+        </table>
+        <p class="foot" style="margin-top:.6em">Qiita 記事の著者が <code>nproc</code>・<code>free -h</code>・<code>df -h</code> で実測（1人の環境での値）</p>
+      </div>
+      <div class="arch">
+        <div class="box"><b>利用者</b><small>iOS／Android／Web／WhatsApp</small></div>
+        <div class="dn">↓</div>
+        <div class="box vm">
+          <div class="lbl">Muse Secure VM　―　利用者1人に1台</div>
+          <div class="inner">
+            <div class="box"><b>Muse 本体</b><small>エージェント（Muse Spark）</small></div>
+            <div class="box"><b>専用ブラウザ</b><small>Chromium</small></div>
+            <div class="box"><b>ファイル</b><small>ターミナル・コード実行</small></div>
+            <div class="box"><b>保管庫</b><small>ログイン情報（Museからは見えない）</small></div>
+          </div>
+        </div>
+        <div class="dn">↓</div>
+        <div class="box gate"><b>Sentinel</b><small>同じ機械の上の別エージェント。許可した通信だけを外に出す</small></div>
+        <div class="dn">↓</div>
+        <div class="box"><b>インターネット・連携先</b><small>Gmail、カレンダー、Instagram、決済（Stripe Link）…</small></div>
+      </div>
+    </div>
+    <p class="foot">今後：VM 全体を利用者だけが鍵を持つ形で暗号化する「Muse Confidential VM」を予定。Source: Qiita @hirokn（2026/10/26）、Meta「Introducing Muse」</p>
+  </div>
+</section>
+
+<!-- ============ 6. 競合 ============ -->
+<section id="s6" class="alt" data-note="<b>【約1分50秒】</b>この「AIに1台渡す」作りは、Meta だけではありません。<br>OpenAI は9月29日に dots を出しました。ChatGPT の中で常時動くエージェントで、やはり<b>1体ごとに自分のクラウドPC</b>を持ちます。仕事がないときは、読み取り専用で利用者のアプリを下調べしている。xAI は8月に Grok Bot を出していて、こちらも1体ごとに専用のクラウドPCを持ち、夜間も作業を続けます。<br>開発者向けでは、Claude Code のクラウド機能と、OpenAI の Codex のクラウド版があります。どちらもタスクごとに隔離された環境を立ち上げる。Claude Code は<b>4コア・16GB・30GBと公開されていて、数分操作がないと一時停止します。</b>Codex はコンテナを最大12時間キャッシュします。<br>並べると違いが見えます。<b>消費者向けは常駐をうたい、開発者向けは使うときだけ起こして止める。</b>このあとの仮説1で、この差が効いてきます。<br><span class=qa>── ここから下は読み上げません（質疑用） ── dots は ChatGPT Pro と Business Premium に1体まで追加料金なしで付き、最初の1か月は利用枠を消費しない扱い。Grok Bot は SuperGrok Heavy・Cursor Ultra などの加入者向けベータ。dots と Grok Bot の環境スペックは公式には出ていません。Claude Code のクラウドVMは Ubuntu 24.04・x86_64 で、一時停止したVMは後で回収されることがあり、その場合は会話履歴だけが戻ります。</span>">
+  <div class="wrap">
+    <p class="kicker">競合・他社動向　―　AIに仮想環境を持たせるサービス</p>
+    <h2>他社も「AIに1台」へ。<span class="pop">違いは、止め方</span></h2>
+    <div class="card" style="margin-top:.9em">
+      <table class="svc">
+        <tr><th>サービス</th><th>動き方</th><th>持たせている環境</th><th>止まり方・提供範囲</th></tr>
+        <tr class="me"><td><b>Meta　Muse</b><small>2026/9/8 米・10/23 日本</small></td><td><span class="pill on">常駐・能動</span></td><td>1人1台のVM　2 vCPU・約8GB・150GB<small>実測（Qiita）</small></td><td>閉じても作業を続ける<small>基本無料</small></td></tr>
+        <tr><td><b>OpenAI　dots</b><small>2026/9/29</small></td><td><span class="pill on">常駐・能動</span></td><td>1体ごとに自分のクラウドPC<small>スペック非公開</small></td><td>常時稼働。空き時間は読み取り専用で下調べ<small>ChatGPT Pro・Business Premium</small></td></tr>
+        <tr><td><b>xAI　Grok Bot</b><small>2026/8/11 ベータ</small></td><td><span class="pill on">常駐</span></td><td>1体ごとに専用のクラウドPC<small>スペック非公開</small></td><td>夜間も作業。承認が要るときだけ戻る<small>SuperGrok Heavy 等</small></td></tr>
+        <tr class="sep"><td><b>Anthropic　Claude Code</b><small>クラウドセッション</small></td><td><span class="pill task">依頼ごと</span></td><td>セッションごとの隔離VM　4 vCPU・16GB・30GB<small>Ubuntu 24.04（公開値）</small></td><td>数分操作がないと一時停止、後で回収されうる<small>Pro・Max・Team 等</small></td></tr>
+        <tr><td><b>OpenAI　Codex</b><small>クラウド版</small></td><td><span class="pill task">依頼ごと</span></td><td>タスクごとのコンテナ<small>スペック非公開</small></td><td>コンテナを最大12時間キャッシュ</td></tr>
+      </table>
+    </div>
+    <p class="lead" style="margin-top:.8em"><strong style="color:var(--ink)">消費者向けは「常駐」をうたい、開発者向けは「使うときだけ起こして止める」。</strong></p>
+    <p class="foot">Source: SiliconANGLE（dots、2026/09/29）、Interesting Engineering（Grok Bot）、Claude Code Docs（Use Claude Code in the cloud／Configure cloud environments）、OpenAI Codex Cloud environments</p>
+  </div>
+</section>
+
+<!-- ============ 7. OS勢 ============ -->
+<section id="s7" data-note="<b>【約1分20秒】</b>もう一方の動きが、OS そのものに代理人が入ってくる流れです。<br>Apple は9月に Siri AI を出しました。画面に映っているものを理解して、アプリの中で操作し、メッセージやメールといった個人の文脈を使う。<b>日本語は10月27日、iOS 27.2 から</b>使えます。処理は端末内と、Apple のプライベートなクラウドの組み合わせです。<br>Google は5月に Gemini Intelligence を発表しました。アプリの上に乗るシステムの層として、複数のアプリをまたぐ作業を代わりにやる。アプリは裏で動くだけになる、という言い方をしています。<br>Microsoft は Windows に Agent Workspace を入れています。エージェント専用のアカウントとデスクトップを PC の中に作る。<b>フルの仮想マシンより軽い</b>と言っています。<br>3社に共通しているのは、<b>動く場所が利用者の端末</b>だということです。<br><span class=qa>── ここから下は読み上げません（質疑用） ── Siri AI はベータで、1日の利用上限があり、将来は有料で拡張とされています。EU と13歳未満は対象外。サードパーティアプリでの操作は iOS 27.3 で広がりました。Gemini Intelligence は対応端末から順次。Windows の Agent Workspace は各操作やデータ要求に利用者の承認が必要です。</span>">
+  <div class="wrap">
+    <p class="kicker">競合・他社動向　―　OS 勢</p>
+    <h2>OS も、<span class="pop">代理人になり始めた</span></h2>
+    <div class="grid3 os3" style="margin-top:1em">
+      <div class="card">
+        <h3>Apple　Siri AI<small>2026/9 英語β → 10/27 日本語（iOS 27.2）</small></h3>
+        <ul>
+          <li><b>画面を理解</b>して、その場で操作</li>
+          <li><b>アプリの中で操作</b>（他社アプリにも拡大中）</li>
+          <li>メッセージ・メールなど<b>個人の文脈</b>を使う</li>
+        </ul>
+        <p class="where">端末内 ＋ Private Cloud Compute</p>
+      </div>
+      <div class="card">
+        <h3>Google　Gemini Intelligence<small>2026/5 発表・対応端末から順次</small></h3>
+        <ul>
+          <li>アプリの<b>上に乗るシステム層</b></li>
+          <li><b>複数アプリをまたぐ</b>作業を代行</li>
+          <li>アプリが無ければ <b>Chrome で</b>Web操作</li>
+        </ul>
+        <p class="where">「OS から、インテリジェンス・システムへ」</p>
+      </div>
+      <div class="card">
+        <h3>Microsoft　Agent Workspace<small>Windows 11（プレビュー）</small></h3>
+        <ul>
+          <li>エージェント専用の<b>アカウントとデスクトップ</b></li>
+          <li>利用者が許したアプリ・ファイルだけ触る</li>
+          <li><b>フルVMより軽い</b>隔離</li>
+        </ul>
+        <p class="where">利用者の PC の中で動く</p>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1em;text-align:center"><strong style="color:var(--ink)">3社とも、代理人が動く場所は「利用者の端末」。</strong></p>
+    <p class="foot">Source: Apple Newsroom（2026/09）、gori.me（2026/10/27）、Business Standard（Gemini Intelligence、2026/05/13）、Petri（Windows Agent Workspace）</p>
+  </div>
+</section>
+
+<!-- ============ 8. 仮説1 試算 ============ -->
+<section id="s8" class="warn" data-note="<b>【約2分10秒】</b>ここから仮説です。1つ目。<b>1,000万人分のパソコンを用意して回すのは、相当大変なのではないか。</b><br>試算してみます。前提は、登録者1,000万人、アメリカのアプリのDAUが約290万人、1台あたり2コア・8GB。サーバー1台に128台詰めるとします。<br>登録者全員分を常時動かすと、2,000万コア、メモリ80ペタバイト、サーバー7万8千台。DAU分だけ常時動かすと23ペタ、2万3千台。DAUが1日1時間ずつ動くなら1ペタ弱、940台。アプリを触っている7.5分だけなら120台です。<br><b>上と下で660倍違います。</b>外部の試算が大きく割れているのも同じ理由で、1億人を想定して CPU 6.5万個と見積もる人もいれば、156万個と見積もる人もいる。<br>つまり、<b>大変かどうかは、同時に何台起きているかで決まります。</b>そして5枚目で見た通り、メモリは使用中で7.3GiB、スワップなし。<b>CPUは時間で分け合えても、メモリは分け合いにくい</b>かもしれません。ここが運用の勝負どころだと考えています。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 128台／サーバーは、2ソケット×128コア・1TB相当という Next Signal の置き方に合わせた仮定。DAU はアプリ単体の数字なので Web・WhatsApp 経由は含まず、実際はもう少し多い。平均値で計算しているので、ピーク時はこの数倍を見込む必要がある。メモリ使用中の観察は1人の環境の1時点の値です。ディスクは150GB×1,000万人で1.5EBの割り当てになるが、実際の使用量はずっと少ないはず（記事の環境では581MB）。</span>">
+  <div class="wrap">
+    <p class="kicker">主張・仮説 ①　この作りは、回し続けられるのか</p>
+    <h2>1,000万人分のPC。<br>大変かどうかは「<span class="gold">同時に何台起きているか</span>」で決まる</h2>
+    <div class="grid2" style="margin-top:.8em;align-items:start">
+      <div class="card">
+        <table>
+          <tr><th>シナリオ</th><th>同時稼働VM</th><th>メモリ</th><th>サーバー</th></tr>
+          <tr class="top"><td>A　登録者全員が常時稼働<small>1,000万人</small></td><td>1,000万台</td><td>80 PB</td><td>約78,000台</td></tr>
+          <tr><td>B　DAU分が常時稼働<small>米国アプリ DAU 約290万人</small></td><td>290万台</td><td>23 PB</td><td>約22,700台</td></tr>
+          <tr><td>C　DAUが1日1時間ずつ稼働</td><td>12万台</td><td>0.97 PB</td><td>約940台</td></tr>
+          <tr class="low"><td>D　アプリを触る7.5分だけ稼働</td><td>1.5万台</td><td>0.12 PB</td><td>約120台</td></tr>
+        </table>
+        <p class="foot">前提：1台 2 vCPU・8GB、サーバー1台に128台（2×128コア・1TB相当）。平均値で計算（ピークはこの数倍）。</p>
+      </div>
+      <div>
+        <div class="ratio"><span class="t">A と D の差</span><span class="n">約660倍</span></div>
+        <div class="ext">
+          <div class="card"><h3>外部試算（1億人想定）</h3><p>詰め込む前提：<b>CPU 6.5万個・DRAM 75PB</b>・約28億ドル<small style="display:block;margin-top:.3em">Daytona CEO</small></p></div>
+          <div class="card"><h3>外部試算（1億人想定）</h3><p>詰め込まない前提：<b>CPU 156万個・DRAM 800PB</b>・1.63GW<small style="display:block;margin-top:.3em">Next Signal</small></p></div>
+        </div>
+        <div class="card" style="margin-top:.8em"><h3>効いてくる観察</h3><p>実測で <b>7.7GiB 中 7.3GiB が使用中・スワップなし</b>。CPU は時間で分け合えても、<b>メモリは分け合いにくい</b>かもしれない。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. 仮説1 市況 ============ -->
+<section id="s9" data-note="<b>【約1分40秒】</b>では、実際にメモリやCPUの需要は増えているのか。<br>メモリは、DRAM の契約価格が今年4〜6月期に前の期から58〜63%上がり、サーバー向けDRAMは7〜9月期も13〜18%の上昇見込み。不足は2027年まで続くと TrendForce は見ています。<br>CPU は、サーバーCPUが3月から最大20%値上がりし、納期は約6か月。Intel は、GPU 8個にCPU 1個だった比率が1対4になり、<b>エージェント用途では1対1もありうる</b>と言っています。<br>Meta 自身も認めています。公開直後、利用は社内の想定の約10倍で、トークン上限をリセットして制限を足した。ザッカーバーグは決算で<b>計算資源を相当食う</b>と言い、来年中にコスト効率を10倍以上にすると言っています。<br>ただし、<b>値上がりを Muse のせいにはできません。</b>主因はAIサーバーとHBMへの生産の振り替えです。Muse 単体だと、全員常時稼働の80ペタでも年間DRAM供給の0.1%程度。<b>論点は、各社が1人1台を配り始めたときの合計</b>だと考えています。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 0.1%は、Next Signal の「800PB＝年間DRAMビット供給の約1%」から逆算した概算。Meta の2026年設備投資見通しは1,350〜1,450億ドル。Muse は公開2週間ほどで検索が落ちる等の劣化が報告され、120個のサブエージェント起動を頼んだ検証では33個しか立ち上がらなかったという報道もあります。</span>">
+  <div class="wrap">
+    <p class="kicker">主張・仮説 ①　メモリとCPUの需要は増えているか</p>
+    <h2>シグナルは揃っている。<span class="pop">ただし Muse のせいではない</span></h2>
+    <div class="grid3" style="margin-top:1em">
+      <div class="card">
+        <h3>メモリ</h3>
+        <p class="big-num">+58〜63<span class="unit">%</span></p>
+        <p>DRAM 契約価格（2026年4〜6月期、前期比）。サーバーDRAMは7〜9月期も <strong style="color:var(--ink)">+13〜18%</strong> 見込み。不足は2027年まで。</p>
+      </div>
+      <div class="card">
+        <h3>CPU</h3>
+        <p class="big-num">1:8 → 1:4</p>
+        <p>AIサーバーの CPU:GPU 比（Intel）。<strong style="color:var(--ink)">エージェント用途では 1:1 も</strong>。サーバーCPUは3月から最大+20%、納期約6か月。</p>
+      </div>
+      <div class="card" style="border-color:var(--blue);border-width:2px">
+        <h3>Meta 自身</h3>
+        <p class="big-num">約10<span class="unit">倍</span></p>
+        <p>公開直後の利用は社内想定の約10倍（Wang）。Zuckerberg：<strong style="color:var(--ink)">計算資源を相当食う</strong>。2027年にコスト効率10倍以上を目指す。</p>
+      </div>
+    </div>
+    <div class="numnote" style="margin-top:1em">
+      <p><strong>言えないこと：</strong>値上がりの主因は AI サーバー・HBM への生産振り替え。Muse 単体は全員常時稼働（80PB）でも年間DRAM供給の<span class="k">約0.1%</span>。<br><strong>言えること：</strong>論点は Muse 単体ではなく、<span class="k">各社が「1人1台」を配り始めたときの合計</span>。</p>
+    </div>
+    <p class="foot">Source: TrendForce（2026/03/31 ほか）、Tom's Hardware（2026/04/24）、財聯社（2026/09/25）、Meta Q3 決算説明会（2026/10/21）、Next Signal（2026/09/24）</p>
+  </div>
+</section>
+
+<!-- ============ 10. 仮説2 OS ============ -->
+<section id="s10" class="alt" data-note="<b>【約1分50秒】</b>仮説の2つ目。<b>Muse のようなアプリ型の常駐AIは、OS に組み込まれた常駐AIに駆逐されないか。</b><br>象徴的なのが日本の日付で、Muse が10月23日、Siri AI の日本語が10月27日。<b>同じ週に始まっています。</b><br>OS 型の強みは3つ。画面とアプリと個人データに最初から触れる。標準で入っているので配る費用がかからない。端末で動く分はサーバー代もかからない。8〜9枚目で見たコストの問題を、利用者の端末に押し付けられるわけです。<br>クラウドVM型の強みも3つ。端末を閉じても動き続ける。自分のブラウザとファイルを持っているので、長い作業や開発ができる。そしてOSをまたげる。<br>Meta は OS を持っていません。代わりに WhatsApp と、キーホルダー型の Muse Charm や AI グラスといった自前の入口を作ろうとしています。<br><b>駆逐されるのか、棲み分けるのか。</b>ここは皆さんの意見を聞きたいところです。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 棲み分けの案：その場の操作は OS、閉じた後も続く仕事はクラウド。逆に OS 側がクラウドの実行環境を持つ（Apple の Private Cloud Compute の延長）と、アプリ型の強みは薄れる。Muse Charm は12月出荷見込みと報道。Meta のアプリ群の DAU は36億人（2026年7〜9月期平均）。</span>">
+  <div class="wrap">
+    <p class="kicker">主張・仮説 ②　アプリ型は、OS 型に駆逐されるか</p>
+    <h2>端末の中の代理人か、<span class="pop">クラウドの代理人か</span></h2>
+    <div class="sameweek">
+      <span><em>10/23</em>Muse 日本で提供開始</span>
+      <span><em>10/27</em>Siri AI 日本語対応</span>
+    </div>
+    <div class="duel">
+      <div class="card os">
+        <h3>OS 型　Siri AI・Gemini・Windows</h3>
+        <ul>
+          <li><b>画面・アプリ・個人データ</b>に最初から触れる</li>
+          <li>標準搭載で、<b>配る費用がかからない</b></li>
+          <li>端末で動く分は<b>サーバー代がかからない</b></li>
+        </ul>
+      </div>
+      <div class="vsx">vs</div>
+      <div class="card cl">
+        <h3>クラウドVM 型　Muse・dots・Grok Bot</h3>
+        <ul>
+          <li>端末を閉じても<b>動き続ける</b></li>
+          <li>自分のブラウザ・ファイルで<b>長い作業や開発</b>ができる</li>
+          <li><b>OS をまたげる</b>（iOS・Android・Web・WhatsApp）</li>
+        </ul>
+      </div>
+    </div>
+    <p class="meta-note">Meta は OS を持たない。<b>WhatsApp</b>（アプリ群のDAU 36億人）と、<b>Muse Charm・AIグラス</b>という自前の入口で補おうとしている。</p>
+    <p class="ask">駆逐か、棲み分けか。</p>
+    <p class="foot">Source: Meta（2026/10/23）、gori.me（2026/10/27）、Meta Q3 決算、Windows Report（Muse Charm）</p>
+  </div>
+</section>
+
+<!-- ============ 11. まとめ ============ -->
+<section id="s11" data-note="<b>【約1分】</b>まとめます。Muse で起きたのは、<b>AIが話し相手から、自分のパソコンを持った代理人になった</b>ということです。AIアプリとして過去最速で広まり、OpenAI も xAI も同じ方向に来ています。<br>持ち帰っていただきたい問いは2つです。<b>その1台を、誰がいくらで回し続けるのか。</b>同時に何台起こしておくかの設計で、必要な計算資源は数百倍変わります。<b>そしてその1台は、クラウドに置くのか、手元の端末に置くのか。</b><br>ありがとうございました。質疑に移ります。">
+  <div class="wrap">
+    <p class="kicker">まとめ</p>
+    <h2>AI は「話し相手」から<br><span class="pop">「自分のPCを持った代理人」へ</span></h2>
+    <div class="grid2" style="margin-top:1em">
+      <div class="card">
+        <h3>起きたこと</h3>
+        <p>AIアプリとして過去最速の立ち上がり（40日で米国1,020万DL）。中身は利用者1人に1台の Ubuntu VM。OpenAI・xAI も同じ方向へ。</p>
+      </div>
+      <div class="card">
+        <h3>伸びと定着</h3>
+        <p>純増は3週間で6割減、利用時間は ChatGPT の3分の1。広告の後押しも大きい。<strong style="color:var(--ink)">定着するかは、まだ分からない。</strong></p>
+      </div>
+    </div>
+    <div class="closer">
+      <p class="c1">持ち帰っていただきたい問い</p>
+      <p class="c2">その1台を、誰が・いくらで回し続けるのか<span class="num">同時稼働の設計で数百倍変わる</span></p>
+      <p class="c3">その1台は、クラウドに置くのか、手元の端末に置くのか</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12. 参考：自分で試した記録（差し込み枠） ============ -->
+<section id="s12" class="alt" data-note="<b>【参考・任意】</b>（差し込み予定）自分で Muse を試した記録をここに入れる。素材を受け取ったら、このページのノートも書き直す。">
+  <div class="wrap">
+    <span class="badge">参考 ／ 時間が余れば</span>
+    <p class="kicker">自分で試した</p>
+    <h2>Muse に、<span class="pop">〔ここに試した内容〕</span></h2>
+    <div class="slot" style="margin-top:.9em">
+      <p><strong style="color:var(--ink)">差し込み予定</strong></p>
+      <p>スクリーンショットは <code>assets/</code> に置き、このページの枠を差し替える。</p>
+      <p>例：頼んだこと／かかった時間／承認を求められた場面／Muse 自身の説明</p>
+    </div>
+  </div>
+</section>
+
+<div class="dots" id="dots"></div>
+<div id="notes"></div>
+<div class="helpkey">↑↓ / PageUp・PageDown で送る　　N：発表者ノート表示</div>
+
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section'));
+  var dots = document.getElementById('dots');
+  var notes = document.getElementById('notes');
+  var cur = 0;
+
+  // 進行ドット
+  secs.forEach(function(s,i){
+    var d = document.createElement('i');
+    d.addEventListener('click', function(){ go(i); });
+    dots.appendChild(d);
+  });
+  var dotEls = Array.prototype.slice.call(dots.children);
+
+  function paint(i){
+    dotEls.forEach(function(d,j){ d.classList.toggle('on', j===i); });
+    var dark = secs[i].classList.contains('hero') || secs[i].classList.contains('warn');
+    dots.classList.toggle('ondark', dark);
+    notes.innerHTML = secs[i].getAttribute('data-note') || '';
+  }
+
+  function go(i){
+    i = Math.max(0, Math.min(secs.length-1, i));
+    secs[i].scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // 表示中セクションの検出＋アニメーション発火
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('in');
+      cur = secs.indexOf(e.target);
+      paint(cur);
+      // 動画は表示された時だけ再生（1スライドに複数動画がある場合も全部再生する）
+      e.target.querySelectorAll('video').forEach(function(v){
+        var p = v.play(); if(p && p.catch) p.catch(function(){});
+      });
+      // 大きい数字はカウントアップ（一度だけ）
+      e.target.querySelectorAll('[data-count-to]').forEach(function(el){
+        if(el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.getAttribute('data-count-to'));
+        var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        var dur = 900, t0 = performance.now();
+        function step(t){
+          var p = Math.min(1, (t - t0) / dur);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (target * eased).toFixed(dec);
+          if(p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    });
+  }, {threshold:0.55});
+  secs.forEach(function(s){ io.observe(s); });
+
+  // キー操作（投影中の誤爆を防ぐため最小限）
+  document.addEventListener('keydown', function(e){
+    var k = e.key;
+    if(k==='ArrowDown'||k==='PageDown'||k===' '||k==='ArrowRight'){ e.preventDefault(); go(cur+1); }
+    else if(k==='ArrowUp'||k==='PageUp'||k==='ArrowLeft'){ e.preventDefault(); go(cur-1); }
+    else if(k==='Home'){ e.preventDefault(); go(0); }
+    else if(k==='End'){ e.preventDefault(); go(secs.length-1); }
+    else if(k==='n'||k==='N'){ notes.classList.toggle('show'); }
+  });
+
+  // 操作ヒントの自動フェード（投影中の映り込み防止）
+  var help = document.querySelector('.helpkey'), ht;
+  function nudge(){
+    help.classList.remove('hide');
+    clearTimeout(ht);
+    ht = setTimeout(function(){ help.classList.add('hide'); }, 5000);
+  }
+  document.addEventListener('mousemove', nudge);
+  nudge();
+
+  secs[0].classList.add('in');
+  paint(0);
+})();
+</script>
+</body>
+</html>

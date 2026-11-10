@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta Muse ― ブリーフィング</title>
+<style>
+/* =========================================================
+   完全オフライン。外部リソース参照ゼロ。
+   フォントはWindows/Mac標準搭載のもののみ。
+   投影前提のため文字サイズは vw と vh の小さい方に追従させ、
+   16:9 の短い画面でも1枚に収まるようにしている。
+   ========================================================= */
+:root{
+  --ink:#1d1d1f;
+  --ink-2:#6e6e73;
+  --line:#d2d2d7;
+  --bg:#ffffff;
+  --bg-2:#f5f5f7;
+  --blue:#0066cc;
+  --blue-soft:#b8d4f0;
+  --amber:#8a6d1f;
+  --amber-bg:#fdf9ef;
+  --amber-line:#d9b85c;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:"Yu Gothic Medium","Yu Gothic",YuGothic,"Hiragino Sans","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+}
+section{
+  height:100vh;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:3.4vh 5vw;
+  position:relative;
+  overflow:hidden;
+}
+.wrap{width:100%;max-width:1240px;}
+    /* 行末に1文字だけ残る折り返しを避ける。語中で切りたくない語句は .nb で囲む */
+    p,td,th,li{text-wrap:pretty;}
+    .nb{white-space:nowrap;}
+.center{text-align:center;}
+
+/* ---------- タイポ ---------- */
+h2{
+  font-size:clamp(26px,min(3.15vw,5.35vh),52px);
+  line-height:1.25;
+  letter-spacing:-0.02em;
+  margin:0 0 .38em;
+  font-weight:700;
+}
+.kicker{
+  font-size:clamp(13px,min(1.12vw,1.9vh),19px);
+  letter-spacing:0.18em;
+  color:var(--ink-2);
+  margin:0 0 .6em;
+  font-weight:600;
+}
+.lead{font-size:clamp(16px,min(1.45vw,2.45vh),26px);line-height:1.65;color:var(--ink-2);margin:0;}
+.pop{color:var(--blue);}
+.tight{letter-spacing:-0.03em;}
+
+/* ---------- Hero ---------- */
+.hero{background:#000;color:#fff;}
+.hero .huge{
+  font-size:clamp(40px,min(8.6vw,15vh),132px);
+  font-weight:700;
+  letter-spacing:-0.045em;
+  line-height:1;
+  margin:0;
+  white-space:nowrap;
+}
+.hero .arrowbig{color:#5a5a5f;padding:0 .12em;}
+.hero .sub{
+  font-size:clamp(16px,min(1.72vw,2.92vh),30px);
+  color:#a1a1a6;
+  margin-top:1em;
+  letter-spacing:.02em;
+  line-height:1.6;
+}
+.hero .ctx{
+  font-size:clamp(13px,min(1.1vw,1.88vh),19px);
+  color:#6e6e73;
+  margin-top:2.4em;
+  line-height:1.8;
+}
+/* 表紙 */
+    .hero .cover-kicker{font-size:clamp(12px,min(1.1vw,1.88vh),20px);color:#6e6e73;letter-spacing:.2em;font-weight:600;margin:0 0 1.7em;}
+    .hero .cover-title{font-size:clamp(30px,min(5.2vw,8.8vh),92px);font-weight:700;letter-spacing:-.035em;line-height:1.18;margin:0;}
+    .hero .cover-lead{font-size:clamp(14px,min(1.5vw,2.55vh),26px);color:#a1a1a6;line-height:1.75;margin:1.9em auto 0;max-width:42em;font-weight:500;}
+    .hero .q{
+  font-size:clamp(17px,min(1.82vw,3.1vh),32px);
+  color:#a1a1a6;font-weight:700;line-height:1.5;margin:0 0 1.2em;
+}
+.scrollhint{
+  position:absolute;bottom:4vh;left:50%;transform:translateX(-50%);
+  color:#6e6e73;font-size:13px;letter-spacing:.1em;
+  animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,7px);}}
+
+/* ---------- 汎用パーツ ---------- */
+.alt{background:var(--bg-2);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,36px);align-items:stretch;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(11px,1.5vw,24px);align-items:stretch;}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:clamp(12px,min(1.45vw,2.45vh),22px);
+}
+.card h3{font-size:clamp(16px,min(1.42vw,2.42vh),25px);margin:0 0 .6em;font-weight:700;}
+.card p{margin:0;font-size:clamp(14px,min(1.15vw,1.95vh),22px);line-height:1.7;color:var(--ink-2);}
+/* .card p より詳細度を上げる（これが無いと大きい数字が本文サイズに潰れる） */
+.big-num,.card p.big-num{
+  font-size:clamp(32px,min(4.3vw,7.3vh),72px);font-weight:700;letter-spacing:-0.03em;line-height:1;
+  color:var(--ink);
+}
+.unit{font-size:.42em;font-weight:600;color:var(--ink-2);margin-left:.15em;}
+.foot{
+  margin-top:.85em;font-size:clamp(12px,min(.95vw,1.6vh),18px);color:#86868b;line-height:1.7;
+}
+/* 入れ子カード（1枚に複数情報を載せる密度用） */
+.mini{padding:clamp(9px,min(1vw,1.7vh),15px);}
+.mini .big-num,.mini p.big-num{font-size:clamp(24px,min(3vw,5.1vh),48px);}
+.mini p{font-size:clamp(14px,min(1.2vw,2.05vh),22px);line-height:1.55;}
+
+/* ---------- ファネル図 ---------- */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:6px;margin:.8em 0 .3em;}
+.funnel-band{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#fff;font-weight:700;border-radius:9px;padding:10px 14px;width:100%;
+  font-size:clamp(13px,min(1.12vw,1.9vh),19px);line-height:1.35;
+  opacity:0;transform:translateY(10px) scaleX(.94);transform-origin:center;
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,.9,.28,1);
+}
+.in .funnel-band{opacity:1;transform:translateY(0) scaleX(1);}
+.funnel-band small{display:block;font-weight:500;opacity:.85;font-size:.84em;margin-top:3px;}
+.funnel-arrow{color:var(--ink-2);font-size:13px;line-height:1;opacity:0;transition:opacity .4s ease .15s;}
+.in .funnel-arrow{opacity:1;}
+
+/* 大きい数字のカウントアップ */
+[data-count]{font-variant-numeric:tabular-nums;}
+
+/* ---------- バーチャート ---------- */
+.bars{display:flex;flex-direction:column;gap:clamp(7px,min(1vw,1.7vh),14px);}
+.bar{display:grid;grid-template-columns:minmax(120px,14vw) 1fr minmax(66px,6vw);align-items:center;gap:clamp(8px,1vw,16px);}
+.bar .nm{font-size:clamp(12px,min(1.08vw,1.85vh),19px);text-align:right;line-height:1.3;}
+.bar .nm small{display:block;color:var(--ink-2);font-size:.84em;font-weight:400;}
+.track{background:#e3e3e6;border-radius:99px;height:clamp(14px,min(1.7vw,2.9vh),28px);overflow:hidden;}
+.fill{
+  height:100%;border-radius:99px;background:var(--blue-soft);
+  width:0;transition:width 1.15s cubic-bezier(.22,.9,.28,1);
+}
+.fill.key{background:var(--blue);}
+.fill.nil{background:#9ea3ab;}
+/* 満点＝基準点の行。実測値ではないので塗らず、破線の枠だけで示す */
+    .bar.ref .track{background:transparent;border:1px dashed #b9b9c0;}
+    .bar.ref .nm,.bar.ref .vl{color:var(--ink-2);font-weight:500;}
+    /* Astra の2行を強調（この2本が本題なので、他社・人間の行と差をつける） */
+.bar.hl{background:rgba(0,102,204,.07);border-radius:9px;padding:5px 7px;margin:-5px -7px;}
+.bar.hl .nm{font-weight:700;color:var(--ink);}
+.bar.hl .nm small{color:var(--blue);font-weight:600;}
+.bar.hl .vl{color:var(--blue);}
+.bar .vl{font-size:clamp(15px,min(1.28vw,2.18vh),24px);font-weight:700;white-space:nowrap;}
+.in .fill{width:var(--w);}
+/* 半カラムに収める圧縮版 */
+.bars.compact .bar{grid-template-columns:minmax(80px,8vw) 1fr minmax(50px,4.6vw);gap:8px;}
+.bars.compact .nm{font-size:clamp(11px,min(.95vw,1.62vh),17px);}
+.bars.compact .vl{font-size:clamp(13px,min(1.12vw,1.92vh),21px);}
+.bars.compact .track{height:clamp(12px,min(1.4vw,2.4vh),22px);}
+
+/* ---------- 比較テーブル ---------- */
+table{width:100%;border-collapse:collapse;font-size:clamp(13px,min(1.1vw,1.88vh),21px);}
+th,td{padding:.5em .4em;border-bottom:1px solid var(--line);text-align:right;}
+th:first-child,td:first-child{text-align:left;}
+th{font-size:.85em;color:var(--ink-2);font-weight:600;border-bottom:1.5px solid #b9b9be;}
+td.g{color:var(--blue);font-weight:700;}
+/* 表内の見出し行（知識／自律作業の区切り） */
+tr.grp td{
+  font-size:.85em;font-weight:700;color:var(--ink-2);
+  padding-top:.95em;border-bottom:1px solid var(--line);text-align:left;
+}
+tr.grp td .hint2{font-weight:600;}
+/* 英語の評価名だけでは伝わらないため、下に日本語の補足を添える */
+td small,th small{display:block;color:var(--ink-2);font-size:.8em;font-weight:400;line-height:1.3;margin-top:.15em;}
+.tag{
+  display:inline-block;border:1px solid var(--line);border-radius:99px;
+  padding:.3em .85em;font-size:clamp(12px,min(1.05vw,1.8vh),19px);color:var(--ink-2);margin:.18em .2em;
+}
+
+/* ---------- 動画 ---------- */
+.vid{
+  position:relative;width:100%;aspect-ratio:16/10;border-radius:14px;overflow:hidden;
+  background:#111;border:1px solid #2a2a2e;
+}
+.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.vid .hint{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  color:#8a8a90;font-size:clamp(12px,min(1.05vw,1.8vh),18px);line-height:1.9;text-align:center;padding:1em;
+}
+.vid .hint code{background:#1e1e22;color:#c9c9cf;padding:.15em .5em;border-radius:5px;font-size:.95em;}
+.caption{margin-top:.7em;font-size:clamp(14px,min(1.2vw,2.05vh),22px);line-height:1.55;}
+
+/* ---------- 制約セクション（トーン切替） ---------- */
+.warn{background:#17171a;color:#f5f5f7;}
+.warn h2{color:#fff;}
+.warn .kicker{color:#c8a24a;}
+.warn .card{background:#212126;border-color:#35353c;}
+.warn .card h3{color:#e8c979;}
+.warn .card p{color:#a1a1a6;}
+.warn .big-num,.warn .card p.big-num{color:#fff;}
+.warn .unit{color:#8a8a90;}
+.warn .foot{color:#75757c;}
+.warn .lead{color:#c7c7cc;}
+
+/* ---------- 予測セクション（意図的に未完成な見た目） ---------- */
+.fc .card.dash{border:2px dashed #b0b0b6;background:#fafafa;box-shadow:none;}
+.fc .card.dash h3{color:var(--ink-2);}
+.badge{
+  display:inline-block;background:#6e6e73;color:#fff;border-radius:7px;
+  padding:.24em .9em;font-size:clamp(12px,min(1.05vw,1.8vh),19px);font-weight:700;letter-spacing:.1em;
+  margin-bottom:.9em;
+}
+/* 62.7% と 99.9% の測り方の違いを説明する注記 */
+.numnote{
+  border:1px solid var(--line);border-radius:12px;background:var(--bg-2);
+  padding:clamp(9px,min(1.05vw,1.8vh),16px) clamp(12px,1.4vw,20px);
+  margin-top:clamp(7px,1.1vh,13px);
+}
+.numnote p{margin:0;font-size:clamp(12px,min(1.08vw,1.85vh),19px);line-height:1.7;color:var(--ink-2);}
+.numnote strong{color:var(--ink);}
+.numnote .k{color:var(--blue);font-weight:700;}
+
+/* 「予測ではなく事実」の枠。年月を左に揃えて並べ、進み方の速さを見せる */
+.factbox p{color:var(--ink);margin-top:.45em;}
+.factbox p:first-child{margin-top:0;}
+.factbox .when{color:var(--blue);font-weight:700;margin-right:.4em;}
+.factbox .cav{color:var(--ink-2);font-size:.9em;margin-top:.7em;line-height:1.6;}
+
+/* 締めの黒帯（冒頭の黒画面と呼応させる） */
+.closer{
+  background:#17171a;color:#fff;border-radius:14px;text-align:center;
+  padding:clamp(12px,min(1.5vw,2.6vh),24px) 1.2em;margin-top:clamp(12px,1.6vh,22px);
+}
+.closer p{margin:0;font-weight:700;line-height:1.45;font-size:clamp(18px,min(2.05vw,3.5vh),36px);}
+/* 締めは「変わらなかった側」と「変わった側」を対比させる */
+.closer .c1{font-size:clamp(13px,min(1.18vw,2vh),21px);color:#a1a1a6;font-weight:600;}
+.closer .c2{font-size:clamp(17px,min(1.85vw,3.15vh),32px);margin-top:.35em;}
+.closer .c3{font-size:clamp(15px,min(1.58vw,2.7vh),28px);margin-top:.6em;color:#c7c7cc;}
+.closer .num{font-size:.72em;font-weight:600;color:#8a8a90;margin-left:.4em;}
+
+/* ---------- 進行ドット ---------- */
+.dots{
+  position:fixed;right:20px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:11px;z-index:50;
+}
+.dots i{
+  width:7px;height:7px;border-radius:50%;background:#c7c7cc;display:block;
+  transition:.35s;cursor:pointer;
+}
+.dots i.on{background:var(--blue);transform:scale(1.55);}
+.dots.ondark i{background:#4a4a51;}
+.dots.ondark i.on{background:#fff;}
+
+/* ---------- 発表者ノート（既定OFF / Nキー） ---------- */
+#notes{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
+  background:rgba(12,12,14,.95);color:#e8e8ed;padding:18px 26px;
+  font-size:15px;line-height:1.75;max-height:38vh;overflow:auto;
+  border-top:2px solid var(--blue);
+}
+#notes.show{display:block;}
+#notes b{color:#7ab5f0;}
+#notes .qa{display:block;margin-top:.7em;padding-top:.6em;border-top:1px solid #3a3a42;color:#9a9aa2;font-size:.93em;}
+/* 操作ヒントは投影中に映り込まないよう数秒で消す（マウスを動かすと再表示） */
+.helpkey{
+  position:fixed;left:16px;bottom:14px;z-index:55;color:#b8b8be;font-size:11.5px;
+  letter-spacing:.04em;transition:opacity .8s;pointer-events:none;
+}
+.helpkey.hide{opacity:0;}
+
+/* ---------- 印刷（PDFバックアップ用） ---------- */
+@media print{
+  body{overflow:visible;scroll-snap-type:none;}
+  section{height:auto;min-height:0;page-break-after:always;padding:26px 30px;}
+  .scrollhint,.dots,#notes,.helpkey{display:none!important;}
+  .hero,.warn{background:#fff!important;color:#000!important;}
+  .hero .huge,.hero .q,.warn h2,.warn .big-num{color:#000!important;}
+  .hero .sub,.hero .ctx,.warn .card p,.warn .lead{color:#444!important;}
+  .warn .card{background:#fff!important;border-color:#999!important;}
+  .closer{background:#fff!important;color:#000!important;border:1.5px solid #999;}
+  .closer p{color:#000!important;}
+  .fill{width:var(--w)!important;transition:none!important;}
+  .funnel-band,.funnel-arrow{opacity:1!important;transform:none!important;transition:none!important;}
+}
+@media (max-width:900px){
+  .grid2,.grid3{grid-template-columns:1fr;}
+  .bar{grid-template-columns:110px 1fr 58px;}
+}
+
+
+/* =========================================================
+   ここから下は Muse 版で追加した分。
+   ========================================================= */
+code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
+
+/* 2〜3枚目：小見出しつきの図カード */
+.chart-t{font-size:clamp(14px,min(1.25vw,2.1vh),22px);font-weight:700;margin:0 0 .15em;}
+.chart-s{font-size:clamp(11px,min(.95vw,1.62vh),17px);color:var(--ink-2);margin:0 0 .8em;}
+.mini-tbl td,.mini-tbl th{padding:.38em .3em;}
+.mini-tbl td.k{color:var(--blue);font-weight:700;}
+
+/* 3枚目：DAU の折れ線（外部ライブラリを使わず SVG を直書き） */
+.lc{width:100%;height:auto;display:block;}
+.lc .gl{stroke:#e3e3e6;stroke-width:1;}
+.lc .ax{fill:#86868b;font-size:11px;}
+.lc .ln{fill:none;stroke:var(--blue);stroke-width:3;stroke-linejoin:round;stroke-linecap:round;}
+.lc .ar{fill:rgba(0,102,204,.08);}
+.lc .pt{fill:var(--blue);stroke:#fff;stroke-width:2;}
+.lc .lb{fill:var(--ink);font-size:13px;font-weight:700;}
+
+/* 4枚目：4つの性質を上罫だけで並べる */
+.layers{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,34px);margin-top:1.1em;}
+.layers .ly{border-top:4px solid var(--acc);padding-top:.65em;}
+.layers .ly h3{margin:0 0 .35em;color:var(--acc);font-weight:700;font-size:clamp(16px,min(1.62vw,2.75vh),29px);}
+.layers .ly p{margin:0;color:var(--ink-2);line-height:1.6;font-size:clamp(12px,min(1.2vw,2.05vh),22px);}
+.hx1{--acc:#0066cc;} .hx2{--acc:#00875a;} .hx3{--acc:#b5540a;} .hx4{--acc:#6b3fa0;}
+.example{margin-top:clamp(12px,2vh,26px);border-left:4px solid var(--line);padding:.2em 0 .2em 1em;
+  font-size:clamp(13px,min(1.2vw,2.05vh),22px);line-height:1.7;color:var(--ink);}
+.example b{color:var(--blue);}
+
+/* 5枚目：ターミナルの抜粋 */
+.term{background:#111114;color:#d7d7dc;border-radius:12px;padding:clamp(10px,1.4vh,18px) clamp(12px,1.3vw,22px);
+  font-size:clamp(11px,min(1vw,1.7vh),17px);line-height:1.65;margin:0;white-space:pre-wrap;overflow:hidden;}
+.term .c{color:#7a7a82;}
+.term .p{color:#7ab5f0;}
+.term .o{color:#9fd8a4;}
+.roles{display:flex;gap:clamp(8px,1vw,16px);margin-top:.9em;}
+.roles .r{flex:1;border:1px solid var(--line);border-radius:12px;padding:.6em .8em;text-align:center;}
+.roles .r b{display:block;font-size:clamp(15px,min(1.45vw,2.45vh),26px);}
+.roles .r span{font-size:clamp(11px,min(1vw,1.7vh),17px);color:var(--ink-2);}
+
+/* 6枚目：実測スペック表と構成図 */
+.spec td{text-align:left;padding:.42em .5em;}
+.spec td:first-child{color:var(--ink-2);font-weight:600;white-space:nowrap;width:28%;}
+.spec td b{color:var(--blue);}
+.arch{display:flex;flex-direction:column;gap:clamp(6px,1vh,12px);}
+.arch .box{border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:.55em .8em;
+  font-size:clamp(12px,min(1.1vw,1.88vh),20px);line-height:1.45;}
+.arch .box b{display:block;font-size:1.08em;}
+.arch .box small{color:var(--ink-2);}
+.arch .vm{border:2px solid var(--blue);background:rgba(0,102,204,.04);padding:.6em .8em .8em;}
+.arch .vm>.lbl{font-weight:700;color:var(--blue);font-size:clamp(12px,min(1.1vw,1.88vh),20px);margin-bottom:.45em;}
+.arch .inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,.8vw,10px);}
+.arch .gate{border-color:#b5540a;background:#fdf6ef;}
+.arch .gate b{color:#b5540a;}
+.arch .dn{text-align:center;color:#a1a1a6;font-size:clamp(12px,1.1vw,18px);line-height:1;}
+
+/* 7枚目：各社比較（左寄せの表） */
+.svc td,.svc th{text-align:left;vertical-align:top;}
+.svc td:first-child b{display:block;}
+.svc tr.me td{background:rgba(0,102,204,.06);}
+.svc tr.sep td{border-top:1.5px solid #b9b9be;}
+.pill{display:inline-block;border-radius:99px;padding:.12em .7em;font-size:.82em;font-weight:700;white-space:nowrap;}
+.pill.on{background:#e6f0fa;color:#0058b0;}
+.pill.task{background:#f1f1f3;color:#58585e;}
+
+/* 8枚目：OS勢の3列 */
+.os3 .card h3 small{display:block;font-size:.66em;color:var(--ink-2);font-weight:600;margin-top:.3em;}
+.os3 ul{margin:.3em 0 0;padding-left:1.1em;}
+.os3 li{font-size:clamp(13px,min(1.12vw,1.9vh),21px);line-height:1.6;color:var(--ink-2);margin:.15em 0;}
+.os3 li b{color:var(--ink);}
+.os3 .where{margin-top:.7em;padding-top:.55em;border-top:1px solid var(--line);font-weight:700;
+  font-size:clamp(12px,min(1.05vw,1.8vh),19px);}
+
+/* 9枚目：試算（暗いトーン） */
+.warn table th{color:#a1a1a6;border-bottom-color:#4a4a52;}
+.warn table td{border-bottom-color:#35353c;color:#e8e8ed;}
+.warn table td small{color:#8a8a90;}
+.warn table tr.top td{color:#fff;font-weight:700;}
+.warn table tr.low td{color:#8fc0f0;font-weight:700;}
+.ratio{display:flex;align-items:baseline;justify-content:center;gap:.4em;margin:.35em 0 0;}
+.ratio .n{font-size:clamp(40px,min(6vw,10vh),104px);font-weight:700;letter-spacing:-.04em;color:#fff;line-height:1;}
+.ratio .t{font-size:clamp(13px,min(1.2vw,2.05vh),22px);color:#c7c7cc;font-weight:600;}
+.ext{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1vw,16px);margin-top:.9em;}
+.ext .card p{font-size:clamp(12px,min(1.05vw,1.8vh),19px);}
+.ext .card p b{color:#fff;}
+
+/* 11枚目：OS型とクラウドVM型の対置 */
+.duel{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(10px,1.6vw,28px);align-items:stretch;margin-top:.9em;}
+.duel .vsx{align-self:center;color:#c7c7cc;font-weight:700;font-size:clamp(16px,1.6vw,28px);}
+.duel h3{margin:0 0 .45em;font-size:clamp(17px,min(1.6vw,2.7vh),28px);}
+.duel ul{margin:0;padding-left:1.1em;}
+.duel li{font-size:clamp(13px,min(1.2vw,2.05vh),22px);line-height:1.6;color:var(--ink-2);margin:.2em 0;}
+.duel li b{color:var(--ink);}
+.duel .os h3{color:#6b3fa0;}
+.duel .cl h3{color:var(--blue);}
+.sameweek{display:flex;justify-content:center;gap:clamp(10px,2vw,36px);margin:.3em 0 0;flex-wrap:wrap;}
+.sameweek span{font-size:clamp(14px,min(1.35vw,2.3vh),24px);font-weight:700;}
+.sameweek em{font-style:normal;color:var(--blue);margin-right:.35em;}
+.meta-note{margin-top:.9em;text-align:center;font-size:clamp(13px,min(1.2vw,2.05vh),22px);color:var(--ink-2);line-height:1.6;}
+.meta-note b{color:var(--ink);}
+
+/* 暗いページ（.warn）で白く見せる強調と金色の見出し。印刷では白背景になるので濃い色に戻す */
+.warn .hi{color:#fff;}
+.gold{color:#e8c979;}
+@media print{
+  .warn .hi{color:#000!important;}
+  .warn .card h3,.warn .kicker,.gold{color:#8a6d1f!important;}
+  .warn table th,.warn table tr.low td{color:#444!important;}
+}
+
+/* 問いで締める1行 */
+.ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
+  font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
+
+/* 参考：自分で試した記録の差し込み枠 */
+.slot{border:2px dashed #b0b0b6;border-radius:16px;background:#fafafa;min-height:38vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:1.2em;color:var(--ink-2);}
+.slot p{margin:.25em 0;font-size:clamp(13px,min(1.2vw,2.05vh),22px);line-height:1.6;}
+.slot code{background:#ececef;border-radius:5px;padding:.1em .45em;font-size:.92em;}
+
+@media (max-width:900px){
+  .layers{grid-template-columns:1fr 1fr;}
+  .duel{grid-template-columns:1fr;}
+  .duel .vsx{display:none;}
+  .ext,.arch .inner{grid-template-columns:1fr;}
+}
+@media print{
+  .warn table td,.warn table tr.top td,.ratio .n,.ext .card p b{color:#000!important;}
+  .layers .ly{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 0. 表紙 ============ -->
+<section class="hero" data-note="<b>【約30秒】</b>本日は、Meta が9月に出した Muse というAIの話をします。日本でも10月23日から使えます。一言でいうと、<b>AIが話し相手から、自分のパソコンを持った代理人になりました。</b>どれだけ広まっているか、何が新しいのか、そして論点を2つ、5分ほどでご説明します。">
+  <div class="wrap center">
+    <p class="cover-kicker">ブリーフィング　／　2026年11月</p>
+    <h1 class="cover-title">AI が、<br>自分のパソコンを持ち始めた</h1>
+    <p class="cover-lead">Meta のパーソナルAIエージェント「Muse」― 何が新しく、何が論点か。</p>
+  </div>
+  <div class="scrollhint">↓ &nbsp; SCROLL</div>
+</section>
+
+<!-- ============ 1. 流行具合 ============ -->
+<section data-note="<b>【約50秒】</b>まず広まり方です。公開から40日間のアメリカでのダウンロード数は1,020万件。同じ期間でChatGPTは370万件でしたので、<b>約3倍のペース</b>です。40日で1,000万を超えたアプリは過去に12本しかなく、AIアプリとしては過去最速です。<br>ただし、右に書いた通り、<b>伸びはすでに鈍っています。</b>1日の利用時間はChatGPTの3分の1ほどで、Meta が広告予算の4割をつぎ込んだ効果も大きい。定着するかどうかは、まだ分かりません。<br><span class=qa>── ここから下は読み上げません（質疑用） ── Meta は10月21日の決算で、登録者は1,000万人超、そのうち約25%が毎日使っていると説明。数字は Sensor Tower・Similarweb などの推計で、会社ごとに差があります。月間利用者数は公表されていません。</span>">
+  <div class="wrap">
+    <p class="kicker">流行具合</p>
+    <h2>40日で1,000万ダウンロード。<br><span class="pop">ChatGPT の約3倍のペース</span></h2>
+    <div class="grid2" style="margin-top:1em">
+      <div class="card">
+        <p class="chart-t">公開後40日間の米国ダウンロード数</p>
+        <p class="chart-s">Sensor Tower 推計</p>
+        <div class="bars">
+          <div class="bar hl"><div class="nm">Muse</div><div class="track"><div class="fill key" style="--w:100%"></div></div><div class="vl">1,020万</div></div>
+          <div class="bar"><div class="nm">ChatGPT</div><div class="track"><div class="fill" style="--w:36.3%"></div></div><div class="vl">370万</div></div>
+          <div class="bar"><div class="nm">Grok</div><div class="track"><div class="fill" style="--w:4.9%"></div></div><div class="vl">50万</div></div>
+          <div class="bar"><div class="nm">Claude</div><div class="track"><div class="fill" style="--w:2%"></div></div><div class="vl">20万</div></div>
+        </div>
+        <p style="margin-top:.9em">40日で1,000万を超えたアプリは過去に<strong style="color:var(--ink)">12本だけ</strong>。</p>
+      </div>
+      <div class="card">
+        <h3>ただし</h3>
+        <div class="grid2" style="gap:12px">
+          <div class="card mini"><p class="big-num">6<span class="unit">割減</span></p><p>1日の利用者の増え方（3週間で）</p></div>
+          <div class="card mini"><p class="big-num">1/3</p><p>1日の利用時間（ChatGPT 比）</p></div>
+        </div>
+        <p style="margin-top:.9em">Meta は10月の広告予算の<strong style="color:var(--ink)">39%</strong>を Muse に投入。<br><strong style="color:var(--ink)">定着するかは、まだ分からない。</strong></p>
+      </div>
+    </div>
+    <p class="foot">Source: Sensor Tower（TechCrunch 2026/10/20）、Similarweb（2026/10/27）、Hunterbrook（2026/10/9）、Meta Q3 決算説明会（2026/10/21）</p>
+  </div>
+</section>
+
+<!-- ============ 2. できること ============ -->
+<section class="alt" data-note="<b>【約45秒】</b>何が新しいのか。これまでのチャットAIは、聞かれたことに答えるだけでした。Muse は違います。<b>アプリを閉じても仕事を続け、頼む前に提案し、一度聞いたことを覚えています。</b>そして送金やメール送信のような大事な操作の前には、必ず承認を求めます。<br>例えば、学校のメールを見張って予定をカレンダーに入れ、必要なものをカートに揃え、締め切り前に知らせる。<b>人間の秘書がやっていた仕事に近づいています。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 日本ではメルカリ、マネーフォワード ME、チケットぴあとの連携を進めると発表されています。決済はカード番号を見せない使い捨て番号方式。基本は無料で、有料プランは月20ドルと100ドルと報じられています。</span>">
+  <div class="wrap">
+    <p class="kicker">できること</p>
+    <h2>答えるAI から、<span class="pop">代わりに動くAI へ</span></h2>
+    <div class="layers">
+      <div class="ly hx1"><h3>閉じても働く</h3><p>アプリを閉じても長い仕事を続け、必要なときだけ戻ってくる。</p></div>
+      <div class="ly hx2"><h3>頼む前に動く</h3><p>目標から計画を立て、頼まれていなくても提案する。</p></div>
+      <div class="ly hx3"><h3>覚えている</h3><p>一度聞いたことを、後の仕事に使う。</p></div>
+      <div class="ly hx4"><h3>大事な操作は止まる</h3><p>購入やメール送信の前に、必ず本人の承認を求める。</p></div>
+    </div>
+    <p class="example">例：学校のメールを見張り、<b>予定をカレンダーに追加</b>、<b>必要な文房具をカートに準備</b>し、<b>締め切り前に知らせた</b>。</p>
+    <p class="foot">Source: Meta「Introducing Muse」（2026/09/08）、TestingCatalog</p>
+  </div>
+</section>
+
+<!-- ============ 3. 裏側 ============ -->
+<section data-note="<b>【約45秒】</b>なぜそれができるのか。Muse は、<b>利用者1人ひとりに、クラウド上のパソコンを1台ずつ渡しています。</b>中身は普通の Linux のパソコンで、2コア、メモリ8GB、保存領域150GB。そこで Muse がブラウザを開き、ファイルを作り、プログラムまで動かします。外へ出る通信は、別の見張り役のAIが許可したものだけです。<br>これが登録者1,000万人分あります。<b>この作りを回し続けられるのか、</b>というのが後半の論点の1つ目です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── スペックは利用者が Muse にコマンドを打たせて測った実測値（Qiita、2026/10/26）。公式報道は 2vCPU・8GB・100GB。Muse の仮想マシンの中で、別会社のAI（Claude Code）を動かしてWebページを作らせた例も報告されています。</span>">
+  <div class="wrap">
+    <p class="kicker">裏側</p>
+    <h2>チャットの裏に、<span class="pop">1人1台のパソコン</span></h2>
+    <div class="grid3" style="margin-top:1.1em">
+      <div class="card center"><h3>CPU</h3><p class="big-num">2<span class="unit">コア</span></p><p>AMD EPYC（サーバー向け）</p></div>
+      <div class="card center"><h3>メモリ</h3><p class="big-num">8<span class="unit">GB</span></p><p>実測で7.7GB中7.3GBが使用中</p></div>
+      <div class="card center"><h3>保存領域</h3><p class="big-num">150<span class="unit">GB</span></p><p>中身は普通の Ubuntu（Linux）</p></div>
+    </div>
+    <p class="ask">これが、<span class="pop">登録者1,000万人分</span>。</p>
+    <p class="foot" style="text-align:center">外への通信は、別の見張り役のAI「Sentinel」が許可したものだけ。Source: Qiita @hirokn（2026/10/26、実測）、Meta「Introducing Muse」</p>
+  </div>
+</section>
+
+<!-- ============ 4. 他社動向 ============ -->
+<section class="alt" data-note="<b>【約45秒】</b>この方向は Meta だけではありません。OpenAI は9月末に、やはり1体ごとにクラウドのパソコンを持つエージェントを出しました。xAI も8月に同じものを出しています。<br>一方で、<b>OS の側も代理人になり始めました。</b>Apple の新しい Siri は画面を理解してアプリを操作し、日本語には10月27日に対応しました。Google も Microsoft も同じ方向です。こちらは<b>利用者の端末の中で動く</b>のが特徴です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 開発者向けには Anthropic の Claude Code、OpenAI の Codex もクラウド上の隔離環境で動きますが、こちらは使うときだけ起動して止める作りです。</span>">
+  <div class="wrap">
+    <p class="kicker">他社動向</p>
+    <h2>AI に1台渡す流れと、<span class="pop">OS に組み込む流れ</span></h2>
+    <div class="duel">
+      <div class="card cl">
+        <h3>クラウドに1台</h3>
+        <ul>
+          <li><b>Meta　Muse</b>　2026/9（日本 10/23）</li>
+          <li><b>OpenAI　dots</b>　2026/9</li>
+          <li><b>xAI　Grok Bot</b>　2026/8</li>
+        </ul>
+        <p class="where" style="margin-top:.7em;padding-top:.55em;border-top:1px solid var(--line);font-weight:700">端末を閉じても動き続ける</p>
+      </div>
+      <div class="vsx">vs</div>
+      <div class="card os">
+        <h3>端末の中で</h3>
+        <ul>
+          <li><b>Apple　Siri AI</b>　日本語 2026/10/27</li>
+          <li><b>Google　Gemini Intelligence</b>　2026/5 発表</li>
+          <li><b>Microsoft　Windows Agent Workspace</b></li>
+        </ul>
+        <p class="where" style="margin-top:.7em;padding-top:.55em;border-top:1px solid var(--line);font-weight:700">画面・アプリ・個人データに最初から触れる</p>
+      </div>
+    </div>
+    <p class="foot">Source: SiliconANGLE（2026/09/29）、Interesting Engineering、Apple Newsroom、gori.me（2026/10/27）、Business Standard（2026/05/13）、Petri</p>
+  </div>
+</section>
+
+<!-- ============ 5. 論点 ============ -->
+<section class="warn" data-note="<b>【約1分】</b>論点は2つです。<br>1つ目は<b>コスト</b>です。1,000万人分のパソコンをずっと動かしておくと、メモリだけで80ペタバイト、サーバー8万台近く。逆に、使っている時間だけ動かすなら百数十台で済みます。<b>同時に何台動かしておくかの設計で、必要な設備は数百倍変わります。</b>Meta 自身も、計算資源を相当食うと認め、来年中にコスト効率を10倍にすると言っています。メモリの価格も4〜6月期に6割上がっています。<br>2つ目は<b>居場所</b>です。Apple や Google の代理人は端末の中で動くので、サーバー代がかかりません。<b>OS を持たない Meta の代理人は、OS に組み込まれた代理人に置き換えられないのか。</b>ここはまだ答えが出ていません。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 試算の前提：1台 2コア・8GB、サーバー1台に128台。登録者1,000万人全員が常時稼働で80PB・約7.8万台、アプリ利用の7.5分だけなら0.12PB・約120台。メモリの値上がりの主因はAIサーバー向けの生産振り替えで、Muse 単体のせいではありません。当社として見ておくべき点としては、社員が個人で使うエージェントに業務データやログイン情報を渡さないルールの確認があります（Muse の仮想マシンは Meta 側にあります）。</span>">
+  <div class="wrap">
+    <p class="kicker">論点</p>
+    <h2>回し続けられるか。<span class="gold">置き換えられないか。</span></h2>
+    <div class="grid2" style="margin-top:1em">
+      <div class="card">
+        <h3>1　コスト</h3>
+        <p class="big-num">数百<span class="unit">倍</span></p>
+        <p>同時に何台動かすかで、必要な設備が変わる。全員常時稼働ならメモリ80PB・サーバー約8万台、使う時間だけなら約120台。Meta も<strong class="hi">「計算資源を相当食う」</strong>と認める。メモリ価格は4〜6月期に <strong class="hi">+58〜63%</strong>。</p>
+      </div>
+      <div class="card">
+        <h3>2　居場所</h3>
+        <p class="big-num" style="font-size:clamp(26px,min(3.2vw,5.4vh),54px)">OS 対 アプリ</p>
+        <p>端末の中の代理人（Siri・Gemini）はサーバー代がかからず、画面やアプリに最初から触れる。<strong class="hi">OS を持たない Meta の代理人は、置き換えられないか。</strong></p>
+      </div>
+    </div>
+    <p class="foot">試算：1台 2コア・8GB、サーバー1台に128台。登録者1,000万人、米国アプリ利用者 約290万人/日、利用 7.5分/日。Source: Similarweb、Meta Q3 決算説明会、TrendForce</p>
+  </div>
+</section>
+
+<!-- ============ 6. まとめ ============ -->
+<section data-note="<b>【約30秒】</b>まとめます。AIは、<b>話し相手から、自分のパソコンを持った代理人</b>になりました。Muse はその最初の大ヒットですが、定着するかはまだ分かりません。<br>見ておくべき問いは2つ。<b>その1台を、誰がいくらで回し続けるのか。そしてその1台は、クラウドに置くのか、手元の端末に置くのか。</b>以上です。">
+  <div class="wrap">
+    <p class="kicker">まとめ</p>
+    <h2>AI は「話し相手」から<br><span class="pop">「自分のPCを持った代理人」へ</span></h2>
+    <div class="closer">
+      <p class="c1">これから見ておくべき問い</p>
+      <p class="c2">その1台を、誰が・いくらで回し続けるのか</p>
+      <p class="c3">その1台は、クラウドに置くのか、手元の端末に置くのか</p>
+    </div>
+  </div>
+</section>
+
+<div class="dots" id="dots"></div>
+<div id="notes"></div>
+<div class="helpkey">↑↓ / PageUp・PageDown で送る　　N：発表者ノート表示</div>
+
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section'));
+  var dots = document.getElementById('dots');
+  var notes = document.getElementById('notes');
+  var cur = 0;
+
+  // 進行ドット
+  secs.forEach(function(s,i){
+    var d = document.createElement('i');
+    d.addEventListener('click', function(){ go(i); });
+    dots.appendChild(d);
+  });
+  var dotEls = Array.prototype.slice.call(dots.children);
+
+  function paint(i){
+    dotEls.forEach(function(d,j){ d.classList.toggle('on', j===i); });
+    var dark = secs[i].classList.contains('hero') || secs[i].classList.contains('warn');
+    dots.classList.toggle('ondark', dark);
+    notes.innerHTML = secs[i].getAttribute('data-note') || '';
+  }
+
+  function go(i){
+    i = Math.max(0, Math.min(secs.length-1, i));
+    secs[i].scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // 表示中セクションの検出＋アニメーション発火
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('in');
+      cur = secs.indexOf(e.target);
+      paint(cur);
+      // 動画は表示された時だけ再生（1スライドに複数動画がある場合も全部再生する）
+      e.target.querySelectorAll('video').forEach(function(v){
+        var p = v.play(); if(p && p.catch) p.catch(function(){});
+      });
+      // 大きい数字はカウントアップ（一度だけ）
+      e.target.querySelectorAll('[data-count-to]').forEach(function(el){
+        if(el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.getAttribute('data-count-to'));
+        var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        var dur = 900, t0 = performance.now();
+        function step(t){
+          var p = Math.min(1, (t - t0) / dur);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (target * eased).toFixed(dec);
+          if(p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    });
+  }, {threshold:0.55});
+  secs.forEach(function(s){ io.observe(s); });
+
+  // キー操作（投影中の誤爆を防ぐため最小限）
+  document.addEventListener('keydown', function(e){
+    var k = e.key;
+    if(k==='ArrowDown'||k==='PageDown'||k===' '||k==='ArrowRight'){ e.preventDefault(); go(cur+1); }
+    else if(k==='ArrowUp'||k==='PageUp'||k==='ArrowLeft'){ e.preventDefault(); go(cur-1); }
+    else if(k==='Home'){ e.preventDefault(); go(0); }
+    else if(k==='End'){ e.preventDefault(); go(secs.length-1); }
+    else if(k==='n'||k==='N'){ notes.classList.toggle('show'); }
+  });
+
+  // 操作ヒントの自動フェード（投影中の映り込み防止）
+  var help = document.querySelector('.helpkey'), ht;
+  function nudge(){
+    help.classList.remove('hide');
+    clearTimeout(ht);
+    ht = setTimeout(function(){ help.classList.add('hide'); }, 5000);
+  }
+  document.addEventListener('mousemove', nudge);
+  nudge();
+
+  secs[0].classList.add('in');
+  paint(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "muse-agent-briefing-tools",
+  "private": true,
+  "type": "module",
+  "description": "Muse ブリーフィング資料の目視検証・PDF書き出し用スクリプト",
+  "scripts": {
+    "shots": "node render_screenshots.mjs engineer_muse_briefing.html && node render_screenshots.mjs exec_muse_briefing.html",
+    "pdf": "node export_pdf.mjs exec_muse_briefing.html && node export_pdf.mjs engineer_muse_briefing.html"
+  },
+  "dependencies": {
+    "playwright": "^1.47.0"
+  }
+}
