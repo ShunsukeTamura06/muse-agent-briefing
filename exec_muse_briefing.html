@@ -420,6 +420,35 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
   .warn table th,.warn table tr.low td{color:#444!important;}
 }
 
+/* 役員版 2ページ目：「ただし」の3項目を、指標名・数字・中身の3列で読ませる */
+.facts{display:flex;flex-direction:column;gap:clamp(8px,1.3vh,16px);margin-top:.3em;}
+.facts .f{display:grid;grid-template-columns:minmax(0,1fr);gap:.15em;padding-bottom:clamp(8px,1.3vh,16px);border-bottom:1px solid var(--line);}
+.facts .f:last-child{border-bottom:0;padding-bottom:0;}
+.facts .lbl{font-size:clamp(12px,min(1.05vw,1.8vh),19px);color:var(--ink-2);font-weight:700;letter-spacing:.04em;}
+.facts .val{font-size:clamp(17px,min(1.75vw,2.95vh),31px);font-weight:700;line-height:1.35;color:var(--ink);}
+.facts .val em{font-style:normal;color:var(--blue);}
+.facts .val .from{color:var(--ink-2);font-weight:600;}
+.facts .sub{font-size:clamp(12px,min(1.05vw,1.8vh),19px);color:var(--ink-2);line-height:1.5;}
+
+/* 役員版 4ページ目：スペックを「何に使うか」「身近なものだと」で言い換える */
+.spec3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(11px,1.5vw,24px);margin-top:1em;}
+.spec3 .card{display:flex;flex-direction:column;gap:.5em;}
+.spec3 .hd{display:flex;align-items:center;gap:.6em;}
+.spec3 .hd svg{width:clamp(28px,2.6vw,44px);height:auto;flex:none;color:var(--blue);}
+.spec3 .hd .nm{font-size:clamp(13px,min(1.1vw,1.9vh),20px);color:var(--ink-2);font-weight:700;}
+.spec3 .hd .v{font-size:clamp(24px,min(2.9vw,4.9vh),48px);font-weight:700;letter-spacing:-.02em;line-height:1;}
+.spec3 .role{font-size:clamp(15px,min(1.4vw,2.4vh),25px);font-weight:700;color:var(--ink);line-height:1.4;margin:0;}
+.spec3 .like{margin:0;padding-top:.5em;border-top:1px solid var(--line);font-size:clamp(12px,min(1.1vw,1.88vh),20px);color:var(--ink-2);line-height:1.55;}
+.spec3 .like b{color:var(--ink);}
+.times{display:flex;align-items:center;justify-content:center;gap:clamp(10px,1.6vw,26px);flex-wrap:wrap;
+  margin-top:clamp(14px,2.2vh,28px);background:var(--bg-2);border-radius:14px;padding:clamp(10px,1.6vh,20px) 1.2em;}
+.times svg{width:clamp(44px,4.4vw,72px);height:auto;color:var(--ink);}
+.times .x{font-size:clamp(22px,2.4vw,40px);color:var(--ink-2);font-weight:700;}
+.times .n{font-size:clamp(26px,min(3.3vw,5.6vh),56px);font-weight:700;color:var(--blue);letter-spacing:-.02em;}
+.times .t{font-size:clamp(14px,min(1.35vw,2.3vh),24px);font-weight:700;line-height:1.45;}
+.times .t small{display:block;font-weight:600;color:var(--ink-2);font-size:.75em;}
+@media (max-width:900px){ .spec3{grid-template-columns:1fr;} }
+
 /* 問いで締める1行 */
 .ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
   font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
@@ -455,7 +484,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 1. 流行具合 ============ -->
-<section data-note="<b>【約50秒】</b>まず広まり方です。公開から40日間のアメリカでのダウンロード数は1,020万件。同じ期間でChatGPTは370万件でしたので、<b>約3倍のペース</b>です。40日で1,000万を超えたアプリは過去に12本しかなく、AIアプリとしては過去最速です。<br>ただし、右に書いた通り、<b>伸びはすでに鈍っています。</b>1日の利用時間はChatGPTの3分の1ほどで、Meta が広告予算の4割をつぎ込んだ効果も大きい。定着するかどうかは、まだ分かりません。<br><span class=qa>── ここから下は読み上げません（質疑用） ── Meta は10月21日の決算で、登録者は1,000万人超、そのうち約25%が毎日使っていると説明。数字は Sensor Tower・Similarweb などの推計で、会社ごとに差があります。月間利用者数は公表されていません。</span>">
+<section data-note="<b>【約50秒】</b>まず広まり方です。公開から40日間のアメリカでのダウンロード数は1,020万件。同じ期間でChatGPTは370万件でしたので、<b>約3倍のペース</b>です。40日で1,000万を超えたアプリは過去に12本しかなく、AIアプリとしては過去最速です。<br>ただし右側の通り、<b>勢いは落ち着きつつあります。</b>毎日使う人は今も増えていますが、その増え方が9月中旬の1日約20万人から、10月初めには約7万人に落ちました。1日に使う時間も7.5分で、ChatGPTの3分の1ほどです。そしてMetaは10月の広告予算の4割近くをMuseの宣伝に使っています。<b>定着するかどうかは、まだ分かりません。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── Meta は10月21日の決算で、登録者は1,000万人超、そのうち約25%が毎日使っていると説明。数字は Sensor Tower・Similarweb などの推計で、会社ごとに差があります。月間利用者数は公表されていません。</span>">
   <div class="wrap">
     <p class="kicker">流行具合</p>
     <h2>40日で1,000万ダウンロード。<br><span class="pop">ChatGPT の約3倍のペース</span></h2>
@@ -472,12 +501,24 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
         <p style="margin-top:.9em">40日で1,000万を超えたアプリは過去に<strong style="color:var(--ink)">12本だけ</strong>。</p>
       </div>
       <div class="card">
-        <h3>ただし</h3>
-        <div class="grid2" style="gap:12px">
-          <div class="card mini"><p class="big-num">6<span class="unit">割減</span></p><p>1日の利用者の増え方（3週間で）</p></div>
-          <div class="card mini"><p class="big-num">1/3</p><p>1日の利用時間（ChatGPT 比）</p></div>
+        <h3>ただし、勢いは落ち着きつつある</h3>
+        <div class="facts">
+          <div class="f">
+            <span class="lbl">毎日使う人の増え方（1日あたり）</span>
+            <span class="val"><span class="from">9月中旬 約20万人</span> → 10月初め <em>約7万人</em></span>
+            <span class="sub">3週間で6割減。まだ増えてはいるが、増えるペースが落ちた。</span>
+          </div>
+          <div class="f">
+            <span class="lbl">1日に使う時間</span>
+            <span class="val">Muse <em>7.5分</em>　<span class="from">ChatGPT 23分</span></span>
+            <span class="sub">ChatGPT の約3分の1。毎日長く使う道具には、まだなっていない。</span>
+          </div>
+          <div class="f">
+            <span class="lbl">広告の後押し</span>
+            <span class="val">Meta の10月の広告予算の <em>39%</em> を Muse に</span>
+            <span class="sub">急な立ち上がりには、Meta 自身の宣伝が大きく効いている。</span>
+          </div>
         </div>
-        <p style="margin-top:.9em">Meta は10月の広告予算の<strong style="color:var(--ink)">39%</strong>を Muse に投入。<br><strong style="color:var(--ink)">定着するかは、まだ分からない。</strong></p>
       </div>
     </div>
     <p class="foot">Source: Sensor Tower（TechCrunch 2026/10/20）、Similarweb（2026/10/27）、Hunterbrook（2026/10/9）、Meta Q3 決算説明会（2026/10/21）</p>
@@ -501,17 +542,34 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 3. 裏側 ============ -->
-<section data-note="<b>【約45秒】</b>なぜそれができるのか。Muse は、<b>利用者1人ひとりに、クラウド上のパソコンを1台ずつ渡しています。</b>中身は普通の Linux のパソコンで、2コア、メモリ8GB、保存領域150GB。そこで Muse がブラウザを開き、ファイルを作り、プログラムまで動かします。外へ出る通信は、別の見張り役のAIが許可したものだけです。<br>これが登録者1,000万人分あります。<b>この作りを回し続けられるのか、</b>というのが後半の論点の1つ目です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── スペックは利用者が Muse にコマンドを打たせて測った実測値（Qiita、2026/10/26）。公式報道は 2vCPU・8GB・100GB。Muse の仮想マシンの中で、別会社のAI（Claude Code）を動かしてWebページを作らせた例も報告されています。</span>">
+<section data-note="<b>【約50秒】</b>なぜそれができるのか。Muse は、<b>利用者1人ひとりに、クラウド上のパソコンを1台ずつ渡しています。</b>性能は、ひと昔前の事務用ノートパソコン1台分ほどです。<br>頭脳にあたるCPUが2コアで、ブラウザを開いたりプログラムを動かしたりする。作業机にあたるメモリが8GBで、実際に測った人の環境では<b>ほぼ満杯で動いていました。</b>ファイルの置き場は150GBで、スマホの写真なら3万枚ほどです。外へ出る通信は、別の見張り役のAIが許可したものだけです。<br>このノートパソコンが、<b>登録者1,000万人分</b>。Meta がクラウドで預かって動かしています。これを回し続けられるのか、というのが後半の論点の1つ目です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── スペックは利用者が Muse にコマンドを打たせて測った実測値（Qiita、2026/10/26）。CPU はサーバー向けの AMD EPYC、OS は普通の Ubuntu（Linux）。公式報道は 2vCPU・8GB・100GB。写真3万枚は1枚5MBとしての概算。Muse の仮想マシンの中で、別会社のAI（Claude Code）を動かしてWebページを作らせた例も報告されています。</span>">
   <div class="wrap">
     <p class="kicker">裏側</p>
-    <h2>チャットの裏に、<span class="pop">1人1台のパソコン</span></h2>
-    <div class="grid3" style="margin-top:1.1em">
-      <div class="card center"><h3>CPU</h3><p class="big-num">2<span class="unit">コア</span></p><p>AMD EPYC（サーバー向け）</p></div>
-      <div class="card center"><h3>メモリ</h3><p class="big-num">8<span class="unit">GB</span></p><p>実測で7.7GB中7.3GBが使用中</p></div>
-      <div class="card center"><h3>保存領域</h3><p class="big-num">150<span class="unit">GB</span></p><p>中身は普通の Ubuntu（Linux）</p></div>
+    <h2>チャットの裏に、<span class="pop">1人1台のノートPC</span></h2>
+    <div class="spec3">
+      <div class="card">
+        <div class="hd"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><rect x="9" y="9" width="22" height="22" rx="3"/><rect x="15" y="15" width="10" height="10" rx="1"/><path d="M15 3v6M25 3v6M15 31v6M25 31v6M3 15h6M3 25h6M31 15h6M31 25h6"/></svg><div><div class="nm">CPU</div><div class="v">2コア</div></div></div>
+        <p class="role">作業をこなす頭脳</p>
+        <p class="like">ブラウザを開き、プログラムを動かす。<b>事務用ノートPCより少し控えめ。</b></p>
+      </div>
+      <div class="card">
+        <div class="hd"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><rect x="3" y="12" width="34" height="16" rx="2"/><path d="M9 17v6M15 17v6M21 17v6M27 17v6M8 28v5M32 28v5"/></svg><div><div class="nm">メモリ</div><div class="v">8GB</div></div></div>
+        <p class="role">同時に広げておける作業机</p>
+        <p class="like">一般的なノートPCと同じくらい。<b>実測では 7.7GB 中 7.3GB を使っていて、ほぼ満杯。</b></p>
+      </div>
+      <div class="card">
+        <div class="hd"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 12a3 3 0 0 1 3-3h8l3 4h13a3 3 0 0 1 3 3v15a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z"/></svg><div><div class="nm">保存領域</div><div class="v">150GB</div></div></div>
+        <p class="role">ファイルの置き場</p>
+        <p class="like">作った資料やダウンロードを置いておく。<b>スマホの写真なら約3万枚分。</b></p>
+      </div>
     </div>
-    <p class="ask">これが、<span class="pop">登録者1,000万人分</span>。</p>
-    <p class="foot" style="text-align:center">外への通信は、別の見張り役のAI「Sentinel」が許可したものだけ。Source: Qiita @hirokn（2026/10/26、実測）、Meta「Introducing Muse」</p>
+    <div class="times">
+      <svg viewBox="0 0 64 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="3" width="44" height="29" rx="3"/><path d="M3 38h58l-4 4H7z"/></svg>
+      <span class="x">×</span>
+      <span class="n">1,000万人分</span>
+      <span class="t">Meta がクラウドで預かって、動かしている<small>外への通信は、見張り役の別のAI「Sentinel」が許可したものだけ</small></span>
+    </div>
+    <p class="foot">性能は、ひと昔前の事務用ノートPC 1台分ほど。写真の枚数は1枚5MBとしての概算。Source: Qiita @hirokn（2026/10/26、実測）、Meta「Introducing Muse」</p>
   </div>
 </section>
 
