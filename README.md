@@ -16,7 +16,7 @@ Meta のパーソナルAIエージェント「Muse」（2026年9月8日 米国�
 5. 裏側　なぜクラウドに1台要るのか、実測スペック（2 vCPU・約8GB・150GB）と構成図
 6. 他社動向　AIの稼働環境をクラウドに持たせるサービス（dots・Grok Bot・Claude Duet・Claude Code・Codex）
 7. 仮説 ①　必要な計算資源の試算（控えめに見ても約12万台が同時に動く）
-8. 仮説 ①　メモリ・CPUの需要増。常駐AIはその一因では？
+8. 仮説 ①　メモリ・CPUの需要増。常駐AIも一因になっている可能性がある
 9. 仮説 ②　Meta は先行投資を負っている（設備投資・無料・広告）
 10. 仮説 ②　一方で OS 勢（Siri AI・Gemini Intelligence・Windows Agent Workspace）
 11. 仮説 ②　アプリ型は OS 型に駆逐されないか。その時 Meta は？
