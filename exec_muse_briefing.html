@@ -688,7 +688,34 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
   </div>
 </section>
 
-<!-- ============ 4. 他社動向 ============ -->
+<!-- ============ 4. 論点① コスト ============ -->
+<section class="warn">
+  <div class="wrap">
+    <p class="kicker">論点 ①　コスト</p>
+    <h2>1,000万人分のPCを、<span class="gold">回し続けられるか</span></h2>
+    <div class="grid2" style="margin-top:1em">
+      <div class="card">
+        <h3>どれだけ動かすことになるか（試算）</h3>
+        <div class="facts">
+          <div class="f"><span class="lbl">全員つけっぱなしにすると</span><span class="val"><em>1,000万台</em>が同時に動く</span><span class="sub">CPU 2,000万コア、メモリ 8,000万GB。</span></div>
+          <div class="f"><span class="lbl">毎日使う人の分を、1日1時間ずつに絞っても</span><span class="val">それでも<em>約12万台</em>が同時に動く</span><span class="sub">画面を開くのは1日7.5分でも、Muse は閉じた後も働くので、実際に動く時間はもっと長いはず。</span></div>
+          <div class="f"><span class="concl">「閉じても働く」が売りなので、止めて節約するほど売りが弱まる。</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Meta 自身も認めている</h3>
+        <div class="facts">
+          <div class="f"><span class="lbl">提供している国</span><span class="val">今も <em>5か国だけ</em></span><span class="sub">世界に広げていない主な理由は「計算資源」と Zuckerberg が説明。</span></div>
+          <div class="f"><span class="lbl">設備投資（2026年7〜9月期）</span><span class="val">四半期で過去最高の <em>349億ドル</em></span><span class="sub">AI 全体の数字（Muse 単体は非公開）。それでも Muse は基本無料で、10月の広告予算の39%を宣伝に。</span></div>
+          <div class="f"><span class="concl">Meta は Muse に、大きな先行投資を負っている。</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="foot">試算：1台 2コア・8GB。登録者1,000万人、米国アプリの1日の利用者 約290万人。1日1時間は仮定、平均値での概算（ピークはこの数倍）。Source: Similarweb、Meta 2026年7〜9月期決算・説明会（2026/10/21）、Sensor Tower</p>
+  </div>
+</section>
+
+<!-- ============ 5. 他社動向 ============ -->
 <section class="alt">
   <div class="wrap">
     <p class="kicker">他社動向</p>
@@ -711,40 +738,56 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
         </ul>
       </div>
     </div>
-    <p class="ask">常駐型は、<span class="pop">この3か月で4つ</span>出そろった。</p>
-    <p class="foot">Source: Interesting Engineering、Meta、SiliconANGLE（2026/09/29）、TechCrunch（2026/10/22）、Claude Code Docs、OpenAI</p>
+    <div class="grid3" style="margin-top:1em">
+      <div class="card mini"><h3>常駐型 AI</h3><p class="big-num">3か月で4つ</p><p>各社が「1人1台」をクラウドに配り始めた。</p></div>
+      <div class="card mini"><h3>メモリの契約価格</h3><p class="big-num">+58〜63<span class="unit">%</span></p><p>2026年4〜6月期、前期比。</p></div>
+      <div class="card mini"><h3>AI サーバーの CPU と GPU の比</h3><p class="big-num">1:8 → 1:4</p><p>Intel。エージェント用途では 1:1 も。</p></div>
+    </div>
+    <p class="ask">常駐AIの広がりは、<span class="pop">メモリや CPU の需要増の一因では？</span></p>
+    <p class="foot">Source: Interesting Engineering、Meta、SiliconANGLE（2026/09/29）、TechCrunch（2026/10/22）、Claude Code Docs、OpenAI、TrendForce（2026/03/31）、Tom's Hardware（2026/04/24）。値上がりの主因は AI サーバー向けの生産振り替えで、常駐AIは一因にとどまる可能性がある。</p>
   </div>
 </section>
 
-<!-- ============ 5. 論点 ============ -->
-<section class="warn">
+<!-- ============ 6. 論点② 競合リスク ============ -->
+<section>
   <div class="wrap">
-    <p class="kicker">論点</p>
-    <h2>回し続けられるか。<span class="gold">OS に置き換えられないか。</span></h2>
-    <div class="grid2" style="margin-top:1em">
-      <div class="card">
-        <h3>1　コスト：回し続けられるか</h3>
-        <div class="facts">
-          <div class="f"><span class="lbl">1,000万人分のPCを、全員つけっぱなしにすると</span><span class="val"><em>1,000万台</em>が同時に動く</span><span class="sub">CPU 2,000万コア、メモリ 8,000万GB。</span></div>
-          <div class="f"><span class="lbl">毎日使う人の分を、1日1時間ずつに絞っても</span><span class="val">それでも<em>約12万台</em>が同時に動く</span><span class="sub">画面を開くのは1日7.5分でも、Muse は閉じた後も働くので、実際はもっと長いはず。</span></div>
-          <div class="f"><span class="concl">Meta 自身、世界展開しない主因は「計算資源」と説明（提供は今も5か国だけ）。各社も同じことを始めた。メモリや CPU の需要が増えている一因ではないか。</span></div>
-        </div>
+    <p class="kicker">論点 ②　競合リスク</p>
+    <h2>先行投資を負った Muse は、<span class="pop">OS に置き換えられないか</span></h2>
+    <div class="sameweek">
+      <span><em>10/23</em>Muse 日本で提供開始</span>
+      <span><em>10/27</em>Siri AI 日本語対応</span>
+    </div>
+    <div class="duel">
+      <div class="card os">
+        <h3>OS の代理人　Siri AI・Gemini・Windows</h3>
+        <ul>
+          <li>スマホや PC に<b>最初から入っている</b></li>
+          <li><b>画面・アプリ・個人データ</b>に最初から触れる</li>
+          <li>端末で動く分は<b>サーバー代がかからない</b></li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>2　居場所：OS に置き換えられないか</h3>
-        <div class="facts">
-          <div class="f"><span class="lbl">Meta は Muse を基本無料で配り、先行投資を負っている</span><span class="val">設備投資は四半期 <em>349億ドル</em></span><span class="sub">設備投資は AI 全体の数字。広告予算の39%も Muse の宣伝に。</span></div>
-          <div class="f"><span class="lbl">そこへ、OS にも代理人が入り始めた（Siri AI・Gemini・Windows）</span><span class="val">最初から入っていて、<em>画面やアプリに触れる</em></span><span class="sub">端末で動く分は、提供側のサーバー代もかからない。</span></div>
-          <div class="f"><span class="concl">OS を持たない Meta の代理人が置き換えられたら、その時 Meta は…？</span></div>
-        </div>
+      <div class="vsx">vs</div>
+      <div class="card cl">
+        <h3>クラウドの代理人　Muse</h3>
+        <ul>
+          <li>端末を閉じても<b>動き続ける</b></li>
+          <li>iPhone・Android・Web と<b>OS をまたげる</b></li>
+          <li>1人1台の<b>費用は Meta 持ち</b></li>
+        </ul>
       </div>
     </div>
-    <p class="foot">試算：1台 2コア・8GB。登録者1,000万人、米国アプリ利用者 約290万人/日。1日1時間は仮定、平均値での概算（ピークはこの数倍）。Source: Similarweb、Meta 2026年7〜9月期決算・説明会、Apple Newsroom</p>
+    <p class="paths-t">OS を持たない Meta。置き換えられたら、その時 Meta は…？</p>
+    <div class="paths">
+      <div><b>自前の入口で粘る</b>WhatsApp（アプリ群の1日の利用者 36億人）と、自社デバイス（Muse Charm・AIグラス）。</div>
+      <div><b>OS の上の一アプリとして残る</b>閉じた後も続く長い仕事に絞って、OS の代理人と棲み分ける。</div>
+      <div><b>先行投資が重荷になる</b>無料で配った1人1台の費用を、回収できないまま抱える。</div>
+    </div>
+    <p class="foot">Source: Meta 日本（2026/10/23）、gori.me（2026/10/27）、Apple Newsroom、Business Standard（2026/05/13）、Petri、Meta 2026年7〜9月期決算</p>
   </div>
 </section>
 
-<!-- ============ 6. まとめ ============ -->
-<section>
+<!-- ============ 7. まとめ ============ -->
+<section class="alt">
   <div class="wrap">
     <p class="kicker">まとめ</p>
     <h2>AI は「話し相手」から<br><span class="pop">「自分のPCを持った代理人」へ</span></h2>
