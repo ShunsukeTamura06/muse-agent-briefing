@@ -33,7 +33,7 @@ Meta のパーソナルAIエージェント「Muse」（2026年9月8日 米国�
 | ファイル | 対象 | 読み上げ時間 |
 |---|---|---|
 | `engineer_briefing_script.md` | エンジニア版 14ページ | 約20分 |
-| `exec_briefing_script.md` | 役員版 7ページ | 約5分半 |
+| `exec_briefing_script.md` | 役員版 7ページ | 約6分 |
 
 ```bash
 uv run tools/extract_script.py engineer_muse_briefing.html engineer_briefing_script.md
@@ -57,6 +57,7 @@ uv run tools/extract_script.py exec_muse_briefing.html     exec_briefing_script.
 ## 数値の扱い
 
 - ダウンロード数・DAU・継続率は **調査会社の推計**（Sensor Tower・Similarweb・Apptopia・TickerTrends）。同じ時期の累計でも会社ごとにかなり差があるので、スライドにも出典を併記してある。
+- 利用者数の公式発表は「米国・カナダで1,000万人超（2026/10/21、公開43日）」だけ。その後の日本（10/23）・シンガポール（10月末）・メキシコ（11/5）公開後の数字は未公表なので、スライドでは「さらに増えていると考えられる」と推測であることが分かる書き方にしている。
 - Muse の **MAU（月間アクティブユーザー）は Meta も調査会社も公表していない**。代わりに DAU と継続率で比較している。
 - VM のスペックは Qiita 記事の著者が1人の環境で実測した値（2026/10/26〜27）。公式報道は 2 vCPU・8GB・100GB。
 - 9枚目の試算は概算。前提（1台 2 vCPU・8GB、平均値で計算、稼働時間は仮定）はスライドと構成メモに明記してある。

@@ -530,6 +530,25 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 .svcs li b{color:var(--ink);} .svcs li span{color:var(--ink-2);font-size:.85em;white-space:nowrap;}
 @media (max-width:900px){ .paths,.svcs{grid-template-columns:1fr;} }
 
+/* 流行具合：公開からの時系列 */
+.tl{margin-top:clamp(12px,1.8vh,22px);}
+.tl ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(6px,.8vw,12px);margin:0;padding:0;list-style:none;}
+.tl li{border-top:3px solid var(--line);padding-top:.45em;font-size:clamp(11px,min(1vw,1.7vh),18px);line-height:1.45;color:var(--ink-2);}
+.tl li b{display:block;color:var(--ink);font-size:1.05em;}
+.tl li em{font-style:normal;color:var(--blue);font-weight:700;}
+.tl li.key{border-top-color:var(--blue);}
+.tl li.key b{color:var(--blue);}
+.tl .after{margin:.7em 0 0;font-size:clamp(12px,min(1.12vw,1.9vh),20px);line-height:1.6;color:var(--ink-2);}
+.tl .after strong{color:var(--ink);}
+.tl.v{margin-top:.7em;}
+.tl.v ol{grid-template-columns:1fr;gap:0;}
+.tl.v li{display:grid;grid-template-columns:4.2em minmax(0,1fr);gap:.6em;border-top:0;border-bottom:1px solid var(--line);padding:.22em .3em;}
+.tl.v li:last-child{border-bottom:0;}
+.tl.v li b{display:inline;font-size:1em;}
+.tl.v li br{display:none;}
+.tl.v li.key{background:rgba(0,102,204,.06);}
+@media (max-width:900px){ .tl ol{grid-template-columns:1fr 1fr;} }
+
 /* 問いで締める1行 */
 .ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
   font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
@@ -565,21 +584,30 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 1. 流行具合 ============ -->
-<section data-note="<b>【約50秒】</b>まず広まり方です。公開から40日間のアメリカでのダウンロード数は1,020万件。同じ期間でChatGPTは370万件でしたので、<b>約3倍のペース</b>です。40日で1,000万を超えたアプリは過去に12本しかなく、AIアプリとしては過去最速です。<br>ただし右側の通り、<b>勢いは落ち着きつつあります。</b>毎日使う人は今も増えていますが、その増え方が9月中旬の1日約20万人から、10月初めには約7万人に落ちました。1日に使う時間も7.5分で、ChatGPTの3分の1ほどです。そしてMetaは10月の広告予算の4割近くをMuseの宣伝に使っています。<b>定着するかどうかは、まだ分かりません。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── Meta は10月21日の決算で、登録者は1,000万人超、そのうち約25%が毎日使っていると説明。数字は Sensor Tower・Similarweb などの推計で、会社ごとに差があります。月間利用者数は公表されていません。</span>">
+<section data-note="<b>【約1分10秒】</b>まず広まり方です。<b>米国とカナダだけで、公開43日で利用者が1,000万人を超えました。</b>アメリカでの最初の40日のダウンロード数はChatGPTの約3倍で、AIアプリとしては過去最速です。<br>その後、日本、シンガポール、メキシコでも公開され、日本ではApp Storeの無料アプリで1位になりました。その後の利用者数は公表されていませんが、<b>1,000万人からさらに増えていると考えられます。</b>国を絞っている理由は計算資源だと、Meta自身が説明しています。<br>ただし右側の通り、<b>勢いは落ち着きつつあります。</b>毎日使う人は今も増えていますが、その増え方が9月中旬の1日約20万人から、10月初めには約7万人に落ちました。1日に使う時間も7.5分で、ChatGPTの3分の1ほどです。そしてMetaは10月の広告予算の4割近くをMuseの宣伝に使っています。<b>定着するかどうかは、まだ分かりません。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── Meta は10月21日の決算で、米国・カナダで1,000万人超が使い始め、そのうち約25%が毎日使っていると説明。日本・シンガポール・メキシコ公開後の利用者数は未公表。数字は Sensor Tower・Similarweb などの推計で、会社ごとに差があります。月間利用者数は公表されていません。</span>">
   <div class="wrap">
     <p class="kicker">流行具合</p>
-    <h2>40日で1,000万ダウンロード。<br><span class="pop">ChatGPT の約3倍のペース</span></h2>
-    <div class="grid2" style="margin-top:1em">
+    <h2>北米だけで43日、1,000万人。<br><span class="pop">日本でも App Store 1位</span></h2>
+    <div class="grid2" style="margin-top:.8em">
       <div class="card">
         <p class="chart-t">公開後40日間の米国ダウンロード数</p>
         <p class="chart-s">Sensor Tower 推計</p>
-        <div class="bars">
+        <div class="bars compact">
           <div class="bar hl"><div class="nm">Muse</div><div class="track"><div class="fill key" style="--w:100%"></div></div><div class="vl">1,020万</div></div>
           <div class="bar"><div class="nm">ChatGPT</div><div class="track"><div class="fill" style="--w:36.3%"></div></div><div class="vl">370万</div></div>
           <div class="bar"><div class="nm">Grok</div><div class="track"><div class="fill" style="--w:4.9%"></div></div><div class="vl">50万</div></div>
           <div class="bar"><div class="nm">Claude</div><div class="track"><div class="fill" style="--w:2%"></div></div><div class="vl">20万</div></div>
         </div>
-        <p style="margin-top:.9em">40日で1,000万を超えたアプリは過去に<strong style="color:var(--ink)">12本だけ</strong>。</p>
+        <div class="tl v">
+          <ol>
+            <li><b>9/8</b><span>米国で公開（カナダは9月中）</span></li>
+            <li class="key"><b>10/21</b><span>米国・カナダだけで <em>利用者1,000万人超</em></span></li>
+            <li><b>10/23</b><span>日本で公開、10/25 App Store 無料<em>1位</em></span></li>
+            <li><b>10月末</b><span>シンガポールで公開</span></li>
+            <li><b>11/5</b><span>メキシコで公開</span></li>
+          </ol>
+          <p class="after">その後の利用者数は未公表。<strong>1,000万人からさらに増えていると考えられる</strong>。国を絞る理由は<strong>計算資源</strong>（Meta）。</p>
+        </div>
       </div>
       <div class="card">
         <h3>ただし、勢いは落ち着きつつある</h3>
@@ -602,7 +630,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
         </div>
       </div>
     </div>
-    <p class="foot">Source: Sensor Tower（TechCrunch 2026/10/20）、Similarweb（2026/10/27）、Hunterbrook（2026/10/9）、Meta Q3 決算説明会（2026/10/21）</p>
+    <p class="foot">Source: Meta 決算説明会（2026/10/21）、Sensor Tower（TechCrunch 2026/10/20）、Similarweb（2026/10/27）、Hunterbrook（2026/10/9）、Impress Watch（2026/10/26）</p>
   </div>
 </section>
 

@@ -501,6 +501,18 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 .svcs li b{color:var(--ink);} .svcs li span{color:var(--ink-2);font-size:.85em;white-space:nowrap;}
 @media (max-width:900px){ .paths,.svcs{grid-template-columns:1fr;} }
 
+/* 流行具合：公開からの時系列 */
+.tl{margin-top:clamp(12px,1.8vh,22px);}
+.tl ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(6px,.8vw,12px);margin:0;padding:0;list-style:none;}
+.tl li{border-top:3px solid var(--line);padding-top:.45em;font-size:clamp(11px,min(1vw,1.7vh),18px);line-height:1.45;color:var(--ink-2);}
+.tl li b{display:block;color:var(--ink);font-size:1.05em;}
+.tl li em{font-style:normal;color:var(--blue);font-weight:700;}
+.tl li.key{border-top-color:var(--blue);}
+.tl li.key b{color:var(--blue);}
+.tl .after{margin:.7em 0 0;font-size:clamp(12px,min(1.12vw,1.9vh),20px);line-height:1.6;color:var(--ink-2);}
+.tl .after strong{color:var(--ink);}
+@media (max-width:900px){ .tl ol{grid-template-columns:1fr 1fr;} }
+
 /* 問いで締める1行 */
 .ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
   font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
@@ -537,11 +549,11 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 1. 流行具合① 立ち上がり ============ -->
-<section id="s1" data-note="<b>【約1分20秒】</b>まず、どれだけ流行っているか。左は、公開から40日間のアメリカでのダウンロード数です。Muse が1,020万件。同じ40日でChatGPTは370万件、Grokは50万件、Claudeは20万件でした。<br>右は、500万ダウンロードに届くまでの日数で、短いほど速い。Muse は22日。ChatGPTは56日、Grokは103日、Claudeは492日かかっています。<br>40日で1,000万を超えたアプリは、Sensor Tower が数え始めた2015年以降で<b>Muse を含めて12本しかなく</b>、大半はポケモンGOやフォートナイトのようなゲームです。ゲーム以外では Threads と Disney+ に続く3本目。<b>AIアプリとしては過去最速の立ち上がり</b>と言ってよいと思います。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 世界全体では40日で1,090万件。世界で比べるとChatGPTは40日で約1,500万件で、Museを上回ります。ただしMuseは当時、米国とカナダだけでの提供でした。数字はすべて調査会社の推計で、同じ時期の累計でも Sensor Tower 340万、Apptopia 430万、Appfigures 約230万と会社ごとにかなり差があります。</span>">
+<section id="s1" data-note="<b>【約1分50秒】</b>まず、どれだけ流行っているか。左は、公開から40日間のアメリカでのダウンロード数です。Muse が1,020万件。同じ40日でChatGPTは370万件、Grokは50万件、Claudeは20万件でした。<br>右は、500万ダウンロードに届くまでの日数で、短いほど速い。Muse は22日。ChatGPTは56日、Grokは103日、Claudeは492日かかっています。<br>40日で1,000万を超えたアプリは、Sensor Tower が数え始めた2015年以降で<b>Muse を含めて12本しかなく</b>、大半はポケモンGOやフォートナイトのようなゲームです。ゲーム以外では Threads と Disney+ に続く3本目。<b>AIアプリとしては過去最速の立ち上がり</b>と言ってよいと思います。<br>下の時系列を見てください。<b>米国とカナダだけで、公開43日で利用者1,000万人を超えました。</b>これは Meta 自身の発表です。その後、10月23日に日本、10月末にシンガポール、11月5日にメキシコで公開され、日本では App Store の無料アプリで1位になりました。その後の利用者数は公表されていませんが、<b>1,000万人からさらに増えていると考えられます。</b>そして、国を5か国に絞っている理由を、Meta は<b>計算資源</b>だと説明しています。これは後半の仮説の裏付けになります。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 世界全体では40日で1,090万件。世界で比べるとChatGPTは40日で約1,500万件で、Museを上回ります。ただしMuseは当時、米国とカナダだけでの提供でした。数字はすべて調査会社の推計で、同じ時期の累計でも Sensor Tower 340万、Apptopia 430万、Appfigures 約230万と会社ごとにかなり差があります。</span>">
   <div class="wrap">
     <p class="kicker">流行具合 ①　立ち上がり</p>
-    <h2>40日で1,000万ダウンロード。<br><span class="pop">AIアプリで過去最速</span></h2>
-    <div class="grid2" style="margin-top:1em">
+    <h2>米国・カナダだけで、43日で1,000万人。<br><span class="pop">AIアプリで過去最速</span></h2>
+    <div class="grid2" style="margin-top:.8em">
       <div class="card">
         <p class="chart-t">公開後40日間の米国ダウンロード数</p>
         <p class="chart-s">Sensor Tower 推計</p>
@@ -563,8 +575,17 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
         </div>
       </div>
     </div>
-    <p class="lead" style="margin-top:1em">40日で1,000万を超えたアプリは2015年以降で<strong style="color:var(--ink)">12本だけ</strong>。ゲーム以外では Threads、Disney+ に続く3本目。</p>
-    <p class="foot">Muse は 2026年9月8日に米国で公開（9月18日にカナダ追加）。数値は調査会社の推計で、会社ごとに差がある。Source: Sensor Tower（TechCrunch 2026/10/20、9to5Mac）</p>
+    <div class="tl">
+      <ol>
+        <li><b>9/8</b>米国で公開<br>（カナダは9月中）</li>
+        <li class="key"><b>10/21</b>米国・カナダだけで<br><em>利用者1,000万人超</em>（公開43日）</li>
+        <li><b>10/23</b>日本で公開<br>10/25 App Store 無料<em>1位</em></li>
+        <li><b>10月末</b>シンガポールで公開</li>
+        <li><b>11/5</b>メキシコで公開</li>
+      </ol>
+      <p class="after">その後の利用者数は未公表。5か国に広がり、<strong>1,000万人からさらに増えていると考えられる</strong>。国を絞っている理由は<strong>計算資源</strong>と、Meta 自身が説明している。</p>
+    </div>
+    <p class="foot">40日で米国1,000万DLを超えたアプリは2015年以降で12本だけ。DL数は調査会社の推計、利用者数は Meta 発表。Source: Sensor Tower（TechCrunch 2026/10/20）、Meta 決算説明会（2026/10/21）、Meta 日本（2026/10/23）、Impress Watch（2026/10/26）、e27（2026/10/28）、Mexico News Daily（2026/11/05）</p>
   </div>
 </section>
 
