@@ -420,6 +420,69 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
   .warn table th,.warn table tr.low td{color:#444!important;}
 }
 
+/* ===== ブラッシュアップ（11/11）===== */
+/* 投影時の読みやすさ：中身全体を1割大きくする */
+.wrap{zoom:1.1;}
+/* 大きい数字と直後の本文が重ならないようにする */
+.big-num,.card p.big-num{line-height:1.15;margin-bottom:.12em;}
+
+/* 表紙：今日の流れ */
+.agenda{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(8px,1.2vw,20px);margin:2.2em 0 0;padding:0;list-style:none;}
+.agenda li{font-size:clamp(12px,min(1.15vw,1.95vh),20px);color:#c7c7cc;font-weight:600;border:1px solid #3a3a42;border-radius:99px;padding:.35em 1em;}
+.agenda li b{color:#fff;margin-right:.5em;}
+
+/* できること：4つの性質（左）とやり取りのイメージ図（右） */
+.demo{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(16px,2.6vw,44px);align-items:center;margin-top:.9em;}
+.demo .layers{grid-template-columns:1fr 1fr;margin-top:0;row-gap:clamp(12px,2vh,24px);}
+.phone{border:2px solid var(--ink);border-radius:26px;background:#fff;padding:clamp(10px,1.4vh,16px) clamp(10px,1vw,14px);
+  display:flex;flex-direction:column;gap:clamp(4px,.7vh,8px);max-width:400px;margin:0 auto;width:100%;}
+.phone p{margin:0;font-size:clamp(11px,min(.98vw,1.66vh),17px);line-height:1.5;}
+.phone .me,.phone .ai{padding:.45em .8em;border-radius:14px;max-width:88%;}
+.phone .me{align-self:flex-end;background:var(--blue);color:#fff;}
+.phone .ai{align-self:flex-start;background:var(--bg-2);color:var(--ink);}
+.phone .gap{align-self:center;color:var(--ink-2);font-size:.8em;font-weight:600;padding:.2em 0;}
+.phone .ok{align-self:stretch;border:1.5px solid var(--ink);border-radius:14px;padding:.55em .8em;}
+.phone .ok b{display:block;}
+.phone .ok .btns{display:flex;gap:.5em;margin-top:.45em;}
+.phone .ok .btns span{flex:1;text-align:center;border-radius:99px;padding:.25em 0;font-weight:700;border:1.5px solid var(--ink);}
+.phone .ok .btns span:first-child{background:var(--ink);color:#fff;}
+.phone .tg{align-self:flex-start;color:var(--acc);font-weight:700;font-size:.82em;padding-left:.3em;}
+.phone .tg::before{content:"↑ ";}
+.phone-cap{text-align:center;color:var(--ink-2);font-size:clamp(11px,min(.9vw,1.55vh),16px);margin:.6em 0 0;}
+
+/* 試算：必要なサーバー台数を対数目盛の棒で見せる */
+.lg{display:flex;flex-direction:column;gap:clamp(6px,1vh,11px);}
+.lg .r,.lg .axis{display:grid;grid-template-columns:1.6em minmax(0,1fr) 5.6em;gap:.6em;align-items:center;}
+.lg .r span{font-size:clamp(12px,min(1.1vw,1.88vh),20px);font-weight:700;color:#e8e8ed;}
+.lg .r .v{text-align:right;white-space:nowrap;}
+.lg .tr{height:clamp(12px,1.9vh,20px);background:#2c2c33;border-radius:5px;overflow:hidden;}
+.lg .tr i{display:block;height:100%;width:var(--w);background:#8fc0f0;border-radius:0 5px 5px 0;}
+.lg .r.a .tr i{background:#e8c979;}
+.lg .ticks{position:relative;height:1.3em;}
+.lg .ticks span{position:absolute;transform:translateX(-50%);font-size:clamp(10px,min(.85vw,1.45vh),15px);color:#8a8a90;white-space:nowrap;}
+.lg .ticks span:last-child{transform:translateX(-100%);}
+.lg-hd{display:flex;justify-content:space-between;align-items:baseline;gap:1em;margin-bottom:.6em;}
+.lg-hd .x{font-size:clamp(22px,min(2.6vw,4.4vh),44px);font-weight:700;color:#fff;letter-spacing:-.02em;white-space:nowrap;}
+.lg-hd .x small{font-size:.45em;color:#a1a1a6;font-weight:600;margin-right:.5em;letter-spacing:0;}
+.warn .chart-t{color:#e8c979;}
+.warn .chart-s{color:#8a8a90;margin-bottom:0;}
+.warn .card p b{color:#fff;}
+
+/* 役員版 論点：暗いページでの .facts */
+.warn .facts .f{border-bottom-color:#35353c;}
+.warn .facts .lbl,.warn .facts .sub{color:#a1a1a6;}
+.warn .facts .val{color:#fff;}
+.warn .facts .val em{color:#8fc0f0;}
+.warn .facts .concl{color:#e8e8ed;font-weight:700;font-size:clamp(13px,min(1.15vw,1.95vh),21px);line-height:1.55;}
+
+@media (max-width:900px){ .demo{grid-template-columns:1fr;} }
+@media print{
+  .phone .me{background:#fff!important;color:#000!important;border:1.5px solid #000;}
+  .lg .r span,.lg-hd .x,.warn .facts .val,.warn .facts .concl,.warn .card p b{color:#000!important;}
+  .lg .tr{background:#ddd!important;} .lg .tr i{background:#555!important;}
+  .agenda li,.agenda li b{color:#000!important;}
+}
+
 /* 問いで締める1行 */
 .ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
   font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
@@ -450,6 +513,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
     <p class="cover-kicker">エンジニア勉強会　／　2026年11月</p>
     <h1 class="cover-title">Muse は、<br>1人に1台パソコンを配った</h1>
     <p class="cover-lead">Meta のパーソナルAIエージェント「Muse」― 流行り方、できること、裏側の仮想マシン、<br>他社とOSの動き、そして「この作りは回し続けられるのか」という仮説までを扱います。</p>
+    <ol class="agenda"><li><b>1</b>流行具合</li><li><b>2</b>できること</li><li><b>3</b>裏側</li><li><b>4</b>他社とOS</li><li><b>5</b>仮説</li></ol>
   </div>
   <div class="scrollhint">↓ &nbsp; SCROLL</div>
 </section>
@@ -545,17 +609,35 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 3. できること① 常駐・能動 ============ -->
-<section id="s3" data-note="<b>【約1分30秒】</b>何ができるのか。チャットAIとの違いは4つです。<br>1つ目、<b>閉じても働く。</b>長い作業はアプリを閉じた後も続けて、状況が変わったときや承認が要るときだけ戻ってきます。<br>2つ目、<b>頼む前に動く。</b>目標を伝えると計画に落とし、頼まれていなくても提案してきます。通知の頻度は調整できます。<br>3つ目、<b>覚えている。</b>一度言ったことを後で使う。覚えた内容はファイルとして見られて、消すこともできます。<br>4つ目、<b>大事な操作は止まる。</b>メールの送信や購入の前には承認カードが出て、やったことはすべて記録に残ります。<br>下の例が分かりやすいです。学校からのメールと学区のサイトを見張って、予定をカレンダーに入れ、必要な文房具をカートに揃え、締め切り前に注意してくれる。<b>人間の秘書がやっていたことに近い。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 連携先は Gmail、Googleカレンダー、Instagram、Stripe の Link（使い捨てカード番号を発行）、Shopify、Trip.com、Agoda など。日本向けにはメルカリ、マネーフォワード ME、チケットぴあとの連携を進めると発表。決済のパスワードやカード番号は Muse 自身からは見えない設計です。料金は基本無料（週ごとのトークン上限あり）、有料プランは月20ドルと100ドルと報じられています。</span>">
+<section id="s3" data-note="<b>【約1分30秒】</b>何ができるのか。チャットAIとの違いは4つです。<br>1つ目、<b>閉じても働く。</b>長い作業はアプリを閉じた後も続けて、状況が変わったときや承認が要るときだけ戻ってきます。<br>2つ目、<b>頼む前に動く。</b>目標を伝えると計画に落とし、頼まれていなくても提案してきます。通知の頻度は調整できます。<br>3つ目、<b>覚えている。</b>一度言ったことを後で使う。覚えた内容はファイルとして見られて、消すこともできます。<br>4つ目、<b>大事な操作は止まる。</b>メールの送信や購入の前には承認カードが出て、やったことはすべて記録に残ります。<br>右はやり取りのイメージ図です。出張の宿を頼んでアプリを閉じると、2時間後に候補が届く。予約の前には承認を求められ、頼んでいない帰りの新幹線まで提案してくる。<b>人間の秘書がやっていたことに近い。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 連携先は Gmail、Googleカレンダー、Instagram、Stripe の Link（使い捨てカード番号を発行）、Shopify、Trip.com、Agoda など。日本向けにはメルカリ、マネーフォワード ME、チケットぴあとの連携を進めると発表。決済のパスワードやカード番号は Muse 自身からは見えない設計です。料金は基本無料（週ごとのトークン上限あり）、有料プランは月20ドルと100ドルと報じられています。</span>">
   <div class="wrap">
     <p class="kicker">できること ①　常駐して、能動的</p>
     <h2>閉じても働く。<span class="pop">頼む前に動く。</span></h2>
-    <div class="layers">
-      <div class="ly hx1"><h3>常駐する</h3><p>アプリを閉じても長い作業を続ける。状況が変わったときや承認が要るときだけ戻ってくる。</p></div>
-      <div class="ly hx2"><h3>自分から動く</h3><p>目標を伝えると計画に落とす。頼まれていなくても提案する。通知の頻度は調整できる。</p></div>
-      <div class="ly hx3"><h3>覚えている</h3><p>一度言ったことを後で使う。覚えた内容はファイルとして見られ、忘れさせることもできる。</p></div>
-      <div class="ly hx4"><h3>大事な操作は止まる</h3><p>メール送信や購入の前に承認カード。過去と予定の行動をすべて記録に残す。</p></div>
+    <div class="demo">
+      <div>
+        <div class="layers">
+          <div class="ly hx1"><h3>常駐する</h3><p>アプリを閉じても長い作業を続ける。状況が変わったときや承認が要るときだけ戻ってくる。</p></div>
+          <div class="ly hx2"><h3>自分から動く</h3><p>目標を伝えると計画に落とす。頼まれていなくても提案する。通知の頻度は調整できる。</p></div>
+          <div class="ly hx3"><h3>覚えている</h3><p>一度言ったことを後で使う。覚えた内容はファイルとして見られ、忘れさせることもできる。</p></div>
+          <div class="ly hx4"><h3>大事な操作は止まる</h3><p>メール送信や購入の前に承認カード。過去と予定の行動をすべて記録に残す。</p></div>
+        </div>
+        <p class="example">Meta の紹介例：学校のメールと学区のサイトを見張り、<b>予定をカレンダーに追加</b>、<b>文房具をカートに準備</b>、<b>締め切り前に知らせた</b>。</p>
+      </div>
+      <div>
+        <div class="phone" role="img" aria-label="Muse とのやり取りのイメージ図。出張の宿を頼んでアプリを閉じると、2時間後に候補が届き、予約の前に承認を求められ、帰りの新幹線も提案される">
+          <p class="me">来週の大阪出張、宿を予約しておいて</p>
+          <p class="ai">探しておきます。アプリは閉じて大丈夫です。</p>
+          <p class="gap">― 2時間後、通知が届く ―</p>
+          <p class="tg hx1">閉じても働く</p>
+          <p class="ai">会場から徒歩5分の宿が見つかりました。</p>
+          <p class="ok"><b>承認が必要です</b>ホテルを予約（1泊 12,800円）<span class="btns"><span>承認する</span><span>やめる</span></span></p>
+          <p class="tg hx4">大事な操作は止まる</p>
+          <p class="ai">前回と同じ禁煙室にしました。帰りの新幹線も探しますか？</p>
+          <p class="tg hx2">覚えている・頼む前に動く</p>
+        </div>
+        <p class="phone-cap">やり取りのイメージ図（実際の画面ではありません）</p>
+      </div>
     </div>
-    <p class="example">例：学校のメールと学区のサイトを見張り、<b>予定をカレンダーに追加</b>、<b>必要な文房具をカートに準備</b>、<b>夕食を予約</b>し、<b>スポーツの入部テストの締め切り前に知らせた</b>。</p>
     <p class="foot">人にメッセージを送る感覚で頼む。iOS・Android・Web（muse.ai）・WhatsApp から使える。Source: Meta「Introducing Muse」（2026/09/08）、TestingCatalog</p>
   </div>
 </section>
@@ -697,11 +779,12 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 8. 仮説1 試算 ============ -->
-<section id="s8" class="warn" data-note="<b>【約2分10秒】</b>ここから仮説です。1つ目。<b>1,000万人分のパソコンを用意して回すのは、相当大変なのではないか。</b><br>試算してみます。前提は、登録者1,000万人、アメリカのアプリのDAUが約290万人、1台あたり2コア・8GB。サーバー1台に128台詰めるとします。<br>登録者全員分を常時動かすと、2,000万コア、メモリ80ペタバイト、サーバー7万8千台。DAU分だけ常時動かすと23ペタ、2万3千台。DAUが1日1時間ずつ動くなら1ペタ弱、940台。アプリを触っている7.5分だけなら120台です。<br><b>上と下で660倍違います。</b>外部の試算が大きく割れているのも同じ理由で、1億人を想定して CPU 6.5万個と見積もる人もいれば、156万個と見積もる人もいる。<br>つまり、<b>大変かどうかは、同時に何台起きているかで決まります。</b>そして5枚目で見た通り、メモリは使用中で7.3GiB、スワップなし。<b>CPUは時間で分け合えても、メモリは分け合いにくい</b>かもしれません。ここが運用の勝負どころだと考えています。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 128台／サーバーは、2ソケット×128コア・1TB相当という Next Signal の置き方に合わせた仮定。DAU はアプリ単体の数字なので Web・WhatsApp 経由は含まず、実際はもう少し多い。平均値で計算しているので、ピーク時はこの数倍を見込む必要がある。メモリ使用中の観察は1人の環境の1時点の値です。ディスクは150GB×1,000万人で1.5EBの割り当てになるが、実際の使用量はずっと少ないはず（記事の環境では581MB）。</span>">
+<section id="s8" class="warn" data-note="<b>【約2分10秒】</b>ここから仮説です。1つ目。<b>1,000万人分のパソコンを用意して回すのは、相当大変なのではないか。</b><br>試算してみます。前提は、登録者1,000万人、アメリカのアプリのDAUが約290万人、1台あたり2コア・8GB。サーバー1台に128台詰めるとします。<br>登録者全員分を常時動かすと、2,000万コア、メモリ80ペタバイト、サーバー7万8千台。DAU分だけ常時動かすと23ペタ、2万3千台。DAUが1日1時間ずつ動くなら1ペタ弱、940台。アプリを触っている7.5分だけなら120台です。<br>右の棒は対数目盛で、1目盛りで10倍です。<b>上と下で660倍違います。</b>外部の試算が大きく割れているのも同じ理由で、1億人を想定して CPU 6.5万個と見積もる人もいれば、156万個と見積もる人もいる。<br>つまり、<b>大変かどうかは、同時に何台起きているかで決まります。</b>そして5枚目で見た通り、メモリは使用中で7.3GiB、スワップなし。<b>CPUは時間で分け合えても、メモリは分け合いにくい</b>かもしれません。しかも Muse は「閉じても働く」が売りなので、止めれば止めるほど売りが弱まる。ここが運用の勝負どころだと考えています。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 128台／サーバーは、2ソケット×128コア・1TB相当という Next Signal の置き方に合わせた仮定。DAU はアプリ単体の数字なので Web・WhatsApp 経由は含まず、実際はもう少し多い。平均値で計算しているので、ピーク時はこの数倍を見込む必要がある。メモリ使用中の観察は1人の環境の1時点の値です。ディスクは150GB×1,000万人で1.5EBの割り当てになるが、実際の使用量はずっと少ないはず（記事の環境では581MB）。</span>">
   <div class="wrap">
     <p class="kicker">主張・仮説 ①　この作りは、回し続けられるのか</p>
     <h2>1,000万人分のPC。<br>大変かどうかは「<span class="gold">同時に何台起きているか</span>」で決まる</h2>
     <div class="grid2" style="margin-top:.8em;align-items:start">
+      <div>
       <div class="card">
         <table>
           <tr><th>シナリオ</th><th>同時稼働VM</th><th>メモリ</th><th>サーバー</th></tr>
@@ -712,13 +795,20 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
         </table>
         <p class="foot">前提：1台 2 vCPU・8GB、サーバー1台に128台（2×128コア・1TB相当）。平均値で計算（ピークはこの数倍）。</p>
       </div>
+        <div class="card" style="margin-top:.7em"><h3>外部試算も同じ理由で割れる（1億人想定）</h3><p>詰め込む前提で <b>CPU 6.5万個</b>（Daytona CEO）、詰め込まない前提で <b>CPU 156万個</b>（Next Signal）。</p></div>
+      </div>
       <div>
-        <div class="ratio"><span class="t">A と D の差</span><span class="n">約660倍</span></div>
-        <div class="ext">
-          <div class="card"><h3>外部試算（1億人想定）</h3><p>詰め込む前提：<b>CPU 6.5万個・DRAM 75PB</b>・約28億ドル<small style="display:block;margin-top:.3em">Daytona CEO</small></p></div>
-          <div class="card"><h3>外部試算（1億人想定）</h3><p>詰め込まない前提：<b>CPU 156万個・DRAM 800PB</b>・1.63GW<small style="display:block;margin-top:.3em">Next Signal</small></p></div>
+        <div class="card">
+          <div class="lg-hd"><div><p class="chart-t">必要なサーバー台数</p><p class="chart-s">対数目盛（1目盛りで10倍）</p></div><div class="x"><small>A と D の差</small>約660倍</div></div>
+          <div class="lg">
+            <div class="r a"><span>A</span><div class="tr"><i style="--w:96.9%"></i></div><span class="v">約78,000台</span></div>
+            <div class="r"><span>B</span><div class="tr"><i style="--w:81.6%"></i></div><span class="v">約22,700台</span></div>
+            <div class="r"><span>C</span><div class="tr"><i style="--w:42.1%"></i></div><span class="v">約940台</span></div>
+            <div class="r"><span>D</span><div class="tr"><i style="--w:16.6%"></i></div><span class="v">約120台</span></div>
+            <div class="axis"><span></span><div class="ticks"><span style="left:14.3%">100</span><span style="left:42.9%">1,000</span><span style="left:71.4%">1万</span><span style="left:100%">10万台</span></div><span></span></div>
+          </div>
         </div>
-        <div class="card" style="margin-top:.8em"><h3>効いてくる観察</h3><p>実測で <b>7.7GiB 中 7.3GiB が使用中・スワップなし</b>。CPU は時間で分け合えても、<b>メモリは分け合いにくい</b>かもしれない。</p></div>
+        <div class="card" style="margin-top:.7em"><h3>勝負どころ</h3><p>「閉じても働く」が売りなので、<b>止めるほど売りが弱まる</b>。しかも実測では <b>7.7GiB 中 7.3GiB が使用中</b>。CPU は時間で分け合えても、<b>メモリは分け合いにくい</b>かもしれない。</p></div>
       </div>
     </div>
   </div>

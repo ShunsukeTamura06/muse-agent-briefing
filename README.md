@@ -49,6 +49,10 @@ uv run tools/extract_script.py exec_muse_briefing.html     exec_briefing_script.
 2. `<div class="slot">…</div>` を画像などに差し替え、見出しの〔ここに試した内容〕を書き換える
 3. そのページの `data-note`（発表者ノート）を書き直し、発表原稿を再生成する
 
+## 図について
+
+「できること」のページにあるスマホ画面は、やり取りの流れを説明するための**イメージ図**（実際の Muse の画面ではない）。実物のスクリーンショットが手に入ったら差し替える。
+
 ## 数値の扱い
 
 - ダウンロード数・DAU・継続率は **調査会社の推計**（Sensor Tower・Similarweb・Apptopia・TickerTrends）。同じ時期の累計でも会社ごとにかなり差があるので、スライドにも出典を併記してある。

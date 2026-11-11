@@ -449,6 +449,69 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 .times .t small{display:block;font-weight:600;color:var(--ink-2);font-size:.75em;}
 @media (max-width:900px){ .spec3{grid-template-columns:1fr;} }
 
+/* ===== ブラッシュアップ（11/11）===== */
+/* 投影時の読みやすさ：中身全体を1割大きくする */
+.wrap{zoom:1.1;}
+/* 大きい数字と直後の本文が重ならないようにする */
+.big-num,.card p.big-num{line-height:1.15;margin-bottom:.12em;}
+
+/* 表紙：今日の流れ */
+.agenda{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(8px,1.2vw,20px);margin:2.2em 0 0;padding:0;list-style:none;}
+.agenda li{font-size:clamp(12px,min(1.15vw,1.95vh),20px);color:#c7c7cc;font-weight:600;border:1px solid #3a3a42;border-radius:99px;padding:.35em 1em;}
+.agenda li b{color:#fff;margin-right:.5em;}
+
+/* できること：4つの性質（左）とやり取りのイメージ図（右） */
+.demo{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(16px,2.6vw,44px);align-items:center;margin-top:.9em;}
+.demo .layers{grid-template-columns:1fr 1fr;margin-top:0;row-gap:clamp(12px,2vh,24px);}
+.phone{border:2px solid var(--ink);border-radius:26px;background:#fff;padding:clamp(10px,1.4vh,16px) clamp(10px,1vw,14px);
+  display:flex;flex-direction:column;gap:clamp(4px,.7vh,8px);max-width:400px;margin:0 auto;width:100%;}
+.phone p{margin:0;font-size:clamp(11px,min(.98vw,1.66vh),17px);line-height:1.5;}
+.phone .me,.phone .ai{padding:.45em .8em;border-radius:14px;max-width:88%;}
+.phone .me{align-self:flex-end;background:var(--blue);color:#fff;}
+.phone .ai{align-self:flex-start;background:var(--bg-2);color:var(--ink);}
+.phone .gap{align-self:center;color:var(--ink-2);font-size:.8em;font-weight:600;padding:.2em 0;}
+.phone .ok{align-self:stretch;border:1.5px solid var(--ink);border-radius:14px;padding:.55em .8em;}
+.phone .ok b{display:block;}
+.phone .ok .btns{display:flex;gap:.5em;margin-top:.45em;}
+.phone .ok .btns span{flex:1;text-align:center;border-radius:99px;padding:.25em 0;font-weight:700;border:1.5px solid var(--ink);}
+.phone .ok .btns span:first-child{background:var(--ink);color:#fff;}
+.phone .tg{align-self:flex-start;color:var(--acc);font-weight:700;font-size:.82em;padding-left:.3em;}
+.phone .tg::before{content:"↑ ";}
+.phone-cap{text-align:center;color:var(--ink-2);font-size:clamp(11px,min(.9vw,1.55vh),16px);margin:.6em 0 0;}
+
+/* 試算：必要なサーバー台数を対数目盛の棒で見せる */
+.lg{display:flex;flex-direction:column;gap:clamp(6px,1vh,11px);}
+.lg .r,.lg .axis{display:grid;grid-template-columns:1.6em minmax(0,1fr) 5.6em;gap:.6em;align-items:center;}
+.lg .r span{font-size:clamp(12px,min(1.1vw,1.88vh),20px);font-weight:700;color:#e8e8ed;}
+.lg .r .v{text-align:right;white-space:nowrap;}
+.lg .tr{height:clamp(12px,1.9vh,20px);background:#2c2c33;border-radius:5px;overflow:hidden;}
+.lg .tr i{display:block;height:100%;width:var(--w);background:#8fc0f0;border-radius:0 5px 5px 0;}
+.lg .r.a .tr i{background:#e8c979;}
+.lg .ticks{position:relative;height:1.3em;}
+.lg .ticks span{position:absolute;transform:translateX(-50%);font-size:clamp(10px,min(.85vw,1.45vh),15px);color:#8a8a90;white-space:nowrap;}
+.lg .ticks span:last-child{transform:translateX(-100%);}
+.lg-hd{display:flex;justify-content:space-between;align-items:baseline;gap:1em;margin-bottom:.6em;}
+.lg-hd .x{font-size:clamp(22px,min(2.6vw,4.4vh),44px);font-weight:700;color:#fff;letter-spacing:-.02em;white-space:nowrap;}
+.lg-hd .x small{font-size:.45em;color:#a1a1a6;font-weight:600;margin-right:.5em;letter-spacing:0;}
+.warn .chart-t{color:#e8c979;}
+.warn .chart-s{color:#8a8a90;margin-bottom:0;}
+.warn .card p b{color:#fff;}
+
+/* 役員版 論点：暗いページでの .facts */
+.warn .facts .f{border-bottom-color:#35353c;}
+.warn .facts .lbl,.warn .facts .sub{color:#a1a1a6;}
+.warn .facts .val{color:#fff;}
+.warn .facts .val em{color:#8fc0f0;}
+.warn .facts .concl{color:#e8e8ed;font-weight:700;font-size:clamp(13px,min(1.15vw,1.95vh),21px);line-height:1.55;}
+
+@media (max-width:900px){ .demo{grid-template-columns:1fr;} }
+@media print{
+  .phone .me{background:#fff!important;color:#000!important;border:1.5px solid #000;}
+  .lg .r span,.lg-hd .x,.warn .facts .val,.warn .facts .concl,.warn .card p b{color:#000!important;}
+  .lg .tr{background:#ddd!important;} .lg .tr i{background:#555!important;}
+  .agenda li,.agenda li b{color:#000!important;}
+}
+
 /* 問いで締める1行 */
 .ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
   font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
@@ -526,17 +589,32 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 2. できること ============ -->
-<section class="alt" data-note="<b>【約45秒】</b>何が新しいのか。これまでのチャットAIは、聞かれたことに答えるだけでした。Muse は違います。<b>アプリを閉じても仕事を続け、頼む前に提案し、一度聞いたことを覚えています。</b>そして送金やメール送信のような大事な操作の前には、必ず承認を求めます。<br>例えば、学校のメールを見張って予定をカレンダーに入れ、必要なものをカートに揃え、締め切り前に知らせる。<b>人間の秘書がやっていた仕事に近づいています。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 日本ではメルカリ、マネーフォワード ME、チケットぴあとの連携を進めると発表されています。決済はカード番号を見せない使い捨て番号方式。基本は無料で、有料プランは月20ドルと100ドルと報じられています。</span>">
+<section class="alt" data-note="<b>【約45秒】</b>何が新しいのか。これまでのチャットAIは、聞かれたことに答えるだけでした。Muse は違います。<b>アプリを閉じても仕事を続け、頼む前に提案し、一度聞いたことを覚えています。</b>そして送金やメール送信のような大事な操作の前には、必ず承認を求めます。<br>右はやり取りのイメージ図です。出張の宿を頼んでアプリを閉じると、2時間後に候補が届く。予約の前には承認を求められ、頼んでいない帰りの新幹線まで提案してくる。<b>人間の秘書がやっていたことに近い。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 日本ではメルカリ、マネーフォワード ME、チケットぴあとの連携を進めると発表されています。決済はカード番号を見せない使い捨て番号方式。基本は無料で、有料プランは月20ドルと100ドルと報じられています。</span>">
   <div class="wrap">
     <p class="kicker">できること</p>
     <h2>答えるAI から、<span class="pop">代わりに動くAI へ</span></h2>
-    <div class="layers">
-      <div class="ly hx1"><h3>閉じても働く</h3><p>アプリを閉じても長い仕事を続け、必要なときだけ戻ってくる。</p></div>
-      <div class="ly hx2"><h3>頼む前に動く</h3><p>目標から計画を立て、頼まれていなくても提案する。</p></div>
-      <div class="ly hx3"><h3>覚えている</h3><p>一度聞いたことを、後の仕事に使う。</p></div>
-      <div class="ly hx4"><h3>大事な操作は止まる</h3><p>購入やメール送信の前に、必ず本人の承認を求める。</p></div>
+    <div class="demo">
+      <div class="layers">
+        <div class="ly hx1"><h3>閉じても働く</h3><p>アプリを閉じても長い仕事を続け、必要なときだけ戻ってくる。</p></div>
+        <div class="ly hx2"><h3>頼む前に動く</h3><p>目標から計画を立て、頼まれていなくても提案する。</p></div>
+        <div class="ly hx3"><h3>覚えている</h3><p>一度聞いたことを、後の仕事に使う。</p></div>
+        <div class="ly hx4"><h3>大事な操作は止まる</h3><p>購入やメール送信の前に、必ず本人の承認を求める。</p></div>
+      </div>
+      <div>
+        <div class="phone" role="img" aria-label="Muse とのやり取りのイメージ図。出張の宿を頼んでアプリを閉じると、2時間後に候補が届き、予約の前に承認を求められ、帰りの新幹線も提案される">
+          <p class="me">来週の大阪出張、宿を予約しておいて</p>
+          <p class="ai">探しておきます。アプリは閉じて大丈夫です。</p>
+          <p class="gap">― 2時間後、通知が届く ―</p>
+          <p class="tg hx1">閉じても働く</p>
+          <p class="ai">会場から徒歩5分の宿が見つかりました。</p>
+          <p class="ok"><b>承認が必要です</b>ホテルを予約（1泊 12,800円）<span class="btns"><span>承認する</span><span>やめる</span></span></p>
+          <p class="tg hx4">大事な操作は止まる</p>
+          <p class="ai">前回と同じ禁煙室にしました。帰りの新幹線も探しますか？</p>
+          <p class="tg hx2">覚えている・頼む前に動く</p>
+        </div>
+        <p class="phone-cap">やり取りのイメージ図（実際の画面ではありません）</p>
+      </div>
     </div>
-    <p class="example">例：学校のメールを見張り、<b>予定をカレンダーに追加</b>、<b>必要な文房具をカートに準備</b>し、<b>締め切り前に知らせた</b>。</p>
     <p class="foot">Source: Meta「Introducing Muse」（2026/09/08）、TestingCatalog</p>
   </div>
 </section>
@@ -599,28 +677,34 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
         <p class="where" style="margin-top:.7em;padding-top:.55em;border-top:1px solid var(--line);font-weight:700">画面・アプリ・個人データに最初から触れる</p>
       </div>
     </div>
+    <p class="ask">同じ「代理人」でも、<span class="pop">置く場所が違う</span>。</p>
     <p class="foot">Source: SiliconANGLE（2026/09/29）、Interesting Engineering、Apple Newsroom、gori.me（2026/10/27）、Business Standard（2026/05/13）、Petri</p>
   </div>
 </section>
 
 <!-- ============ 5. 論点 ============ -->
-<section class="warn" data-note="<b>【約1分】</b>論点は2つです。<br>1つ目は<b>コスト</b>です。1,000万人分のパソコンをずっと動かしておくと、メモリだけで80ペタバイト、サーバー8万台近く。逆に、使っている時間だけ動かすなら百数十台で済みます。<b>同時に何台動かしておくかの設計で、必要な設備は数百倍変わります。</b>Meta 自身も、計算資源を相当食うと認め、来年中にコスト効率を10倍にすると言っています。メモリの価格も4〜6月期に6割上がっています。<br>2つ目は<b>居場所</b>です。Apple や Google の代理人は端末の中で動くので、サーバー代がかかりません。<b>OS を持たない Meta の代理人は、OS に組み込まれた代理人に置き換えられないのか。</b>ここはまだ答えが出ていません。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 試算の前提：1台 2コア・8GB、サーバー1台に128台。登録者1,000万人全員が常時稼働で80PB・約7.8万台、アプリ利用の7.5分だけなら0.12PB・約120台。メモリの値上がりの主因はAIサーバー向けの生産振り替えで、Muse 単体のせいではありません。当社として見ておくべき点としては、社員が個人で使うエージェントに業務データやログイン情報を渡さないルールの確認があります（Muse の仮想マシンは Meta 側にあります）。</span>">
+<section class="warn" data-note="<b>【約1分】</b>論点は2つです。<br>1つ目は<b>コスト</b>です。1,000万人分のパソコンを全員つけっぱなしにすると、サーバーが8万台近く要ります。逆に、使っている間だけ動かすなら百数十台で済みます。<b>動かし方で、必要な設備は約660倍変わります。</b>ただ Muse は「閉じても働く」が売りなので、止めれば止めるほど売りが弱まる。Meta 自身も、計算資源を相当食うと認め、来年中にコスト効率を10倍にすると言っています。<br>2つ目は<b>居場所</b>です。Apple や Google の代理人は端末に最初から入っていて、端末で動く分はサーバー代もかかりません。<b>OS を持たない Meta の代理人は、OS に組み込まれた代理人に置き換えられないのか。</b>ここはまだ答えが出ていません。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 試算の前提：1台 2コア・8GB、サーバー1台に128台。登録者1,000万人全員が常時稼働で80PB・約7.8万台、アプリ利用の7.5分だけなら0.12PB・約120台。メモリ価格は4〜6月期に58〜63%上がっていますが、主因はAIサーバー向けの生産振り替えで、Muse 単体のせいではありません。当社として見ておくべき点としては、社員が個人で使うエージェントに業務データやログイン情報を渡さないルールの確認があります（Muse の仮想マシンは Meta 側にあります）。</span>">
   <div class="wrap">
     <p class="kicker">論点</p>
     <h2>回し続けられるか。<span class="gold">置き換えられないか。</span></h2>
     <div class="grid2" style="margin-top:1em">
       <div class="card">
-        <h3>1　コスト</h3>
-        <p class="big-num">数百<span class="unit">倍</span></p>
-        <p>同時に何台動かすかで、必要な設備が変わる。全員常時稼働ならメモリ80PB・サーバー約8万台、使う時間だけなら約120台。Meta も<strong class="hi">「計算資源を相当食う」</strong>と認める。メモリ価格は4〜6月期に <strong class="hi">+58〜63%</strong>。</p>
+        <h3>1　コスト：回し続けられるか</h3>
+        <div class="facts">
+          <div class="f"><span class="lbl">1,000万人分のPCを、全員つけっぱなしにすると</span><span class="val">サーバー <em>約7.8万台</em></span></div>
+          <div class="f"><span class="lbl">使っている間だけ動かすと</span><span class="val">サーバー <em>約120台</em></span></div>
+          <div class="f"><span class="concl">動かし方で約660倍の差。ただし「閉じても働く」が売りなので、止めるほど売りが弱まる。Meta も「計算資源を相当食う」と認めている。</span></div>
+        </div>
       </div>
       <div class="card">
-        <h3>2　居場所</h3>
-        <p class="big-num" style="font-size:clamp(26px,min(3.2vw,5.4vh),54px)">OS 対 アプリ</p>
-        <p>端末の中の代理人（Siri・Gemini）はサーバー代がかからず、画面やアプリに最初から触れる。<strong class="hi">OS を持たない Meta の代理人は、置き換えられないか。</strong></p>
+        <h3>2　居場所：置き換えられないか</h3>
+        <div class="facts">
+          <div class="f"><span class="lbl">端末の中の代理人（Siri AI・Gemini）</span><span class="val">最初から入っていて、<em>画面やアプリに触れる</em></span><span class="sub">端末で動く分は、提供側のサーバー代もかからない。</span></div>
+          <div class="f"><span class="lbl">クラウドの代理人（Muse）</span><span class="val">閉じても動くが、<em>費用は Meta 持ち</em></span><span class="sub">OS を持たない Meta は、WhatsApp と自社デバイスを入口にしようとしている。</span></div>
+        </div>
       </div>
     </div>
-    <p class="foot">試算：1台 2コア・8GB、サーバー1台に128台。登録者1,000万人、米国アプリ利用者 約290万人/日、利用 7.5分/日。Source: Similarweb、Meta Q3 決算説明会、TrendForce</p>
+    <p class="foot">試算：1台 2コア・8GB、サーバー1台に128台。登録者1,000万人、米国アプリ利用者 約290万人/日、利用 7.5分/日（平均値での概算）。Source: Similarweb、Meta Q3 決算説明会</p>
   </div>
 </section>
 
@@ -629,6 +713,10 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
   <div class="wrap">
     <p class="kicker">まとめ</p>
     <h2>AI は「話し相手」から<br><span class="pop">「自分のPCを持った代理人」へ</span></h2>
+    <div class="grid2" style="margin-top:1em">
+      <div class="card"><h3>起きたこと</h3><p>AIアプリとして過去最速の立ち上がり。裏では、利用者1人に1台のPCをクラウドで動かしている。OpenAI・xAI も同じ方向へ。</p></div>
+      <div class="card"><h3>まだ分からないこと</h3><p>伸びは鈍り、利用時間は ChatGPT の3分の1。<strong style="color:var(--ink)">定着するかは、これから。</strong></p></div>
+    </div>
     <div class="closer">
       <p class="c1">これから見ておくべき問い</p>
       <p class="c2">その1台を、誰が・いくらで回し続けるのか</p>
