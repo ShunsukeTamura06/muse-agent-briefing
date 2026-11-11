@@ -1,6 +1,6 @@
 # Muse ― 1人1台のPCを持ったAI　ブリーフィング資料
 
-Meta のパーソナルAIエージェント「Muse」（2026年9月8日 米国公開、10月23日 日本提供開始）を題材にした発表資料。対象別に2本ある。どちらもブラウザで開けばそのまま発表でき、`↓`/`PageDown` で送り、`N` キーで発表者ノートを表示する。外部リソースは読み込まないので、オフラインでも開ける。
+Meta のパーソナルAIエージェント「Muse」（2026年9月8日 米国公開、10月23日 日本提供開始）を題材にした発表資料。対象別に2本ある。どちらもブラウザで開けばそのまま発表でき、`↓`/`PageDown` で送る。外部リソースは読み込まないので、オフラインでも開ける。
 
 | ファイル | 対象 | 枚数 | 時間 | 主張 |
 |---|---|---|---|---|
@@ -26,20 +26,6 @@ Meta のパーソナルAIエージェント「Muse」（2026年9月8日 米国�
 
 構成の理由、試算の前提、言わないことにした点、出典の一覧は `engineer_briefing_outline.md` にまとめてある。
 
-## 発表原稿
-
-読み上げ用に、発表者ノートだけを切り出したテキストを置いてある。**手で編集せず、資料を直したら再生成すること。**
-
-| ファイル | 対象 | 読み上げ時間 |
-|---|---|---|
-| `engineer_briefing_script.md` | エンジニア版 14ページ | 約20分 |
-| `exec_briefing_script.md` | 役員版 7ページ | 約6分 |
-
-```bash
-uv run tools/extract_script.py engineer_muse_briefing.html engineer_briefing_script.md
-uv run tools/extract_script.py exec_muse_briefing.html     exec_briefing_script.md
-```
-
 `*_backup.pdf` は表示が崩れた場合の保険（`node tools/export_pdf.mjs <html>` で再生成）。
 
 ## 自分で試した記録の差し込み方
@@ -48,7 +34,6 @@ uv run tools/extract_script.py exec_muse_briefing.html     exec_briefing_script.
 
 1. スクリーンショットや音声を `assets/` に置く
 2. `<div class="slot">…</div>` を画像などに差し替え、見出しの〔ここに試した内容〕を書き換える
-3. そのページの `data-note`（発表者ノート）を書き直し、発表原稿を再生成する
 
 ## 図について
 

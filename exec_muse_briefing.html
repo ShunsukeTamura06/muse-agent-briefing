@@ -272,16 +272,6 @@ td small,th small{display:block;color:var(--ink-2);font-size:.8em;font-weight:40
 .dots.ondark i{background:#4a4a51;}
 .dots.ondark i.on{background:#fff;}
 
-/* ---------- 発表者ノート（既定OFF / Nキー） ---------- */
-#notes{
-  position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;
-  background:rgba(12,12,14,.95);color:#e8e8ed;padding:18px 26px;
-  font-size:15px;line-height:1.75;max-height:38vh;overflow:auto;
-  border-top:2px solid var(--blue);
-}
-#notes.show{display:block;}
-#notes b{color:#7ab5f0;}
-#notes .qa{display:block;margin-top:.7em;padding-top:.6em;border-top:1px solid #3a3a42;color:#9a9aa2;font-size:.93em;}
 /* 操作ヒントは投影中に映り込まないよう数秒で消す（マウスを動かすと再表示） */
 .helpkey{
   position:fixed;left:16px;bottom:14px;z-index:55;color:#b8b8be;font-size:11.5px;
@@ -293,7 +283,7 @@ td small,th small{display:block;color:var(--ink-2);font-size:.8em;font-weight:40
 @media print{
   body{overflow:visible;scroll-snap-type:none;}
   section{height:auto;min-height:0;page-break-after:always;padding:26px 30px;}
-  .scrollhint,.dots,#notes,.helpkey{display:none!important;}
+  .scrollhint,.dots,.helpkey{display:none!important;}
   .hero,.warn{background:#fff!important;color:#000!important;}
   .hero .huge,.hero .q,.warn h2,.warn .big-num{color:#000!important;}
   .hero .sub,.hero .ctx,.warn .card p,.warn .lead{color:#444!important;}
@@ -574,7 +564,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 <body>
 
 <!-- ============ 0. 表紙 ============ -->
-<section class="hero" data-note="<b>【約30秒】</b>本日は、Meta が9月に出した Muse というAIの話をします。日本でも10月23日から使えます。一言でいうと、<b>AIが話し相手から、自分のパソコンを持った代理人になりました。</b>どれだけ広まっているか、何が新しいのか、そして論点を2つ、5分ほどでご説明します。">
+<section class="hero">
   <div class="wrap center">
     <p class="cover-kicker">ブリーフィング　／　2026年11月</p>
     <h1 class="cover-title">AI が、<br>自分のパソコンを持ち始めた</h1>
@@ -584,7 +574,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 1. 流行具合 ============ -->
-<section data-note="<b>【約1分10秒】</b>まず広まり方です。<b>米国とカナダだけで、公開43日で利用者が1,000万人を超えました。</b>アメリカでの最初の40日のダウンロード数はChatGPTの約3倍で、AIアプリとしては過去最速です。<br>その後、日本、シンガポール、メキシコでも公開され、日本ではApp Storeの無料アプリで1位になりました。その後の利用者数は公表されていませんが、<b>1,000万人からさらに増えていると考えられます。</b>国を絞っている理由は計算資源だと、Meta自身が説明しています。<br>ただし右側の通り、<b>勢いは落ち着きつつあります。</b>毎日使う人は今も増えていますが、その増え方が9月中旬の1日約20万人から、10月初めには約7万人に落ちました。1日に使う時間も7.5分で、ChatGPTの3分の1ほどです。そしてMetaは10月の広告予算の4割近くをMuseの宣伝に使っています。<b>定着するかどうかは、まだ分かりません。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── Meta は10月21日の決算で、米国・カナダで1,000万人超が使い始め、そのうち約25%が毎日使っていると説明。日本・シンガポール・メキシコ公開後の利用者数は未公表。数字は Sensor Tower・Similarweb などの推計で、会社ごとに差があります。月間利用者数は公表されていません。</span>">
+<section>
   <div class="wrap">
     <p class="kicker">流行具合</p>
     <h2>北米だけで43日、1,000万人。<br><span class="pop">日本でも App Store 1位</span></h2>
@@ -635,7 +625,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 2. できること ============ -->
-<section class="alt" data-note="<b>【約45秒】</b>何が新しいのか。これまでのチャットAIは、聞かれたことに答えるだけでした。Muse は違います。<b>アプリを閉じても仕事を続け、頼む前に提案し、一度聞いたことを覚えています。</b>そして送金やメール送信のような大事な操作の前には、必ず承認を求めます。<br>右はやり取りのイメージ図です。出張の宿を頼んでアプリを閉じると、2時間後に候補が届く。予約の前には承認を求められ、頼んでいない帰りの新幹線まで提案してくる。<b>人間の秘書がやっていたことに近い。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 日本ではメルカリ、マネーフォワード ME、チケットぴあとの連携を進めると発表されています。決済はカード番号を見せない使い捨て番号方式。基本は無料で、有料プランは月20ドルと100ドルと報じられています。</span>">
+<section class="alt">
   <div class="wrap">
     <p class="kicker">できること</p>
     <h2>答えるAI から、<span class="pop">代わりに動くAI へ</span></h2>
@@ -666,7 +656,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 3. 裏側 ============ -->
-<section data-note="<b>【約55秒】</b>なぜそれができるのか。閉じても働いて自分から動くには、作業用のパソコンが要ります。スマホは閉じれば止まるので、クラウドに置くしかない。そこで Muse は、<b>利用者1人ひとりに、クラウド上のパソコンを1台ずつ渡しています。</b>性能は、ひと昔前の事務用ノートパソコン1台分ほどです。<br>頭脳にあたるCPUが2コアで、ブラウザを開いたりプログラムを動かしたりする。作業机にあたるメモリが8GBで、実際に測った人の環境では<b>ほぼ満杯で動いていました。</b>ファイルの置き場は150GBで、スマホの写真なら3万枚ほどです。外へ出る通信は、別の見張り役のAIが許可したものだけです。<br>このノートパソコンが、<b>登録者1,000万人分</b>。Meta がクラウドで預かって動かしています。これを回し続けられるのか、というのが後半の論点の1つ目です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── スペックは利用者が Muse にコマンドを打たせて測った実測値（Qiita、2026/10/26）。CPU はサーバー向けの AMD EPYC、OS は普通の Ubuntu（Linux）。公式報道は 2vCPU・8GB・100GB。写真3万枚は1枚5MBとしての概算。Muse の仮想マシンの中で、別会社のAI（Claude Code）を動かしてWebページを作らせた例も報告されています。</span>">
+<section>
   <div class="wrap">
     <p class="kicker">裏側</p>
     <h2>チャットの裏に、<span class="pop">1人1台のノートPC</span></h2>
@@ -699,7 +689,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 4. 他社動向 ============ -->
-<section class="alt" data-note="<b>【約45秒】</b>この作りは Meta だけではありません。<b>AI の稼働環境をクラウドに持たせるサービスが、この3か月で一気に増えました。</b>xAI が8月、Meta が9月、OpenAI が9月末、Anthropic が10月。どれも、1体ごとにクラウド上のパソコンを持ち、閉じても働きます。開発者向けには、Claude Code や Codex のクラウド機能が先にありました。<br>つまり、<b>各社が同じ方向に走り出しています。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 開発者向けの2つは、使うときだけ起動して止める作りで、常駐ではありません。Claude Duet は仕事・小規模事業者向けで、Pro・Max 加入者向けの研究プレビュー（順番待ち）。dots は ChatGPT Pro・Business Premium、Grok Bot は SuperGrok Heavy などの加入者向けです。</span>">
+<section class="alt">
   <div class="wrap">
     <p class="kicker">他社動向</p>
     <h2>AI の稼働環境をクラウドに。<span class="pop">各社が同じ方向へ</span></h2>
@@ -727,7 +717,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 5. 論点 ============ -->
-<section class="warn" data-note="<b>【約1分15秒】</b>論点は2つです。<br>1つ目は<b>コスト</b>です。1,000万人分のパソコンを全員つけっぱなしにすると、1,000万台が同時に動きます。Muse は画面を閉じた後も働くので、使うときだけに絞るのも限界があり、控えめに1日1時間ずつと置いても<b>約12万台が同時に動き続けます。</b>実際、Meta 自身が、世界展開していない一番の理由は計算資源だと言っていて、<b>提供は今も5か国だけ</b>です。しかも各社が同じことを始めました。<b>メモリやCPUの需要が増えている一因ではないか</b>、と見ています。<br>2つ目は<b>居場所</b>です。Meta はこの Muse を基本無料で配り、設備投資は四半期で349億ドルと過去最高です。<b>先行投資の負担はほぼ間違いなく重い。</b>そこへ、Apple の Siri や Google の Gemini のように、OS そのものに代理人が入り始めました。日本語の Siri AI は10月27日からです。こちらは端末に最初から入っていて、画面やアプリに触れます。<b>OS を持たない Meta の代理人が置き換えられたら、その時 Meta はどうするのか。</b>ここはまだ答えが出ていません。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 試算の前提：1台 2コア・8GB。登録者1,000万人全員が常時稼働で1,000万台（メモリ80PB＝8,000万GB）。米国アプリの1日の利用者約290万人が1日1時間ずつなら約12万台（24万コア・メモリ約100万GB）。1日1時間は仮定で、平均値での計算（ピークはこの数倍）。メモリ価格は4〜6月期に58〜63%上がっていますが、主因はAIサーバー向けの生産振り替えで、Muse 単体では年間供給の0.1%程度です。設備投資349億ドルは2026年7〜9月期で、AI 全体の数字です（Muse 単体は非公開）。フリーキャッシュフローは21億ドルのマイナスでした。当社として見ておくべき点としては、社員が個人で使うエージェントに業務データやログイン情報を渡さないルールの確認があります（Muse の仮想マシンは Meta 側にあります）。</span>">
+<section class="warn">
   <div class="wrap">
     <p class="kicker">論点</p>
     <h2>回し続けられるか。<span class="gold">OS に置き換えられないか。</span></h2>
@@ -754,7 +744,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 6. まとめ ============ -->
-<section data-note="<b>【約30秒】</b>まとめます。AIは、<b>話し相手から、自分のパソコンを持った代理人</b>になりました。Muse はその最初の大ヒットですが、定着するかはまだ分かりません。<br>見ておくべき問いは2つ。<b>その1台を、誰がいくらで回し続けるのか。そして、OS の代理人が広まったとき、Meta の先行投資はどうなるのか。</b>以上です。">
+<section>
   <div class="wrap">
     <p class="kicker">まとめ</p>
     <h2>AI は「話し相手」から<br><span class="pop">「自分のPCを持った代理人」へ</span></h2>
@@ -771,14 +761,12 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <div class="dots" id="dots"></div>
-<div id="notes"></div>
-<div class="helpkey">↑↓ / PageUp・PageDown で送る　　N：発表者ノート表示</div>
+<div class="helpkey">↑↓ / PageUp・PageDown で送る</div>
 
 <script>
 (function(){
   var secs = Array.prototype.slice.call(document.querySelectorAll('section'));
   var dots = document.getElementById('dots');
-  var notes = document.getElementById('notes');
   var cur = 0;
 
   // 進行ドット
@@ -793,7 +781,6 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
     dotEls.forEach(function(d,j){ d.classList.toggle('on', j===i); });
     var dark = secs[i].classList.contains('hero') || secs[i].classList.contains('warn');
     dots.classList.toggle('ondark', dark);
-    notes.innerHTML = secs[i].getAttribute('data-note') || '';
   }
 
   function go(i){
@@ -838,7 +825,6 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
     else if(k==='ArrowUp'||k==='PageUp'||k==='ArrowLeft'){ e.preventDefault(); go(cur-1); }
     else if(k==='Home'){ e.preventDefault(); go(0); }
     else if(k==='End'){ e.preventDefault(); go(secs.length-1); }
-    else if(k==='n'||k==='N'){ notes.classList.toggle('show'); }
   });
 
   // 操作ヒントの自動フェード（投影中の映り込み防止）
