@@ -779,33 +779,33 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 8. 仮説1 試算 ============ -->
-<section id="s8" class="warn" data-note="<b>【約2分10秒】</b>ここから仮説です。1つ目。<b>1,000万人分のパソコンを用意して回すのは、相当大変なのではないか。</b><br>試算してみます。前提は、登録者1,000万人、アメリカのアプリのDAUが約290万人、1台あたり2コア・8GB。サーバー1台に128台詰めるとします。<br>登録者全員分を常時動かすと、2,000万コア、メモリ80ペタバイト、サーバー7万8千台。DAU分だけ常時動かすと23ペタ、2万3千台。DAUが1日1時間ずつ動くなら1ペタ弱、940台。アプリを触っている7.5分だけなら120台です。<br>右の棒は対数目盛で、1目盛りで10倍です。<b>上と下で660倍違います。</b>外部の試算が大きく割れているのも同じ理由で、1億人を想定して CPU 6.5万個と見積もる人もいれば、156万個と見積もる人もいる。<br>つまり、<b>大変かどうかは、同時に何台起きているかで決まります。</b>そして5枚目で見た通り、メモリは使用中で7.3GiB、スワップなし。<b>CPUは時間で分け合えても、メモリは分け合いにくい</b>かもしれません。しかも Muse は「閉じても働く」が売りなので、止めれば止めるほど売りが弱まる。ここが運用の勝負どころだと考えています。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 128台／サーバーは、2ソケット×128コア・1TB相当という Next Signal の置き方に合わせた仮定。DAU はアプリ単体の数字なので Web・WhatsApp 経由は含まず、実際はもう少し多い。平均値で計算しているので、ピーク時はこの数倍を見込む必要がある。メモリ使用中の観察は1人の環境の1時点の値です。ディスクは150GB×1,000万人で1.5EBの割り当てになるが、実際の使用量はずっと少ないはず（記事の環境では581MB）。</span>">
+<section id="s8" class="warn" data-note="<b>【約2分10秒】</b>ここから仮説です。1つ目。<b>1,000万人分のパソコンを用意して回すのは、相当大変なのではないか。</b><br>試算してみます。前提は、登録者1,000万人、アメリカのアプリのDAUが約290万人、1台あたり2コア・8GBです。<br>登録者全員分を常時動かすと、<b>1,000万台が同時に動きます。2,000万コア、メモリ80ペタバイト</b>です。毎日使う人の分だけ常時動かしても290万台、23ペタ。<br>では使うときだけ起こせば済むかというと、そうもいきません。画面を開いているのは1日7.5分ですが、<b>Muse は閉じた後も働き、自分から提案し、予約したタスクも実行します。</b>動いている時間はそれよりずっと長いはずです。仮に1日3時間なら36万台、控えめに1日1時間と置いても<b>12万台が同時に動き、24万コア、メモリ約1ペタバイト</b>です。しかもこれは平均で、ピークはこの数倍になります。<br>つまり、<b>どれだけ止めて節約しても、十万台規模のパソコンが同時に動き続ける。</b>そして5枚目で見た通り、メモリは7.7GiB中7.3GiBが使用中でした。<b>CPUは時間で分け合えても、メモリは分け合いにくい</b>かもしれません。しかも「閉じても働く」が売りなので、止めれば止めるほど売りが弱まる。ここが運用の勝負どころだと考えています。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 1日あたりの稼働時間（3時間・1時間）は仮定で、公開データはありません。Qiita の記事では常時稼働は保証されないとされており、Meta が止めたり起こしたりしている可能性は高い。サーバー台数に直すと、1台に128VM（2ソケット×128コア・1TB相当）詰める仮定で、A 約7.8万台、B 約2.3万台、C 約2,800台、D 約940台。DAU はアプリ単体の数字なので Web・WhatsApp 経由は含まず、実際はもう少し多い。外部試算は1億人想定で、詰め込む前提だと CPU 6.5万個（Daytona CEO）、詰め込まない前提だと CPU 156万個・DRAM 800PB・1.63GW（Next Signal）。メモリ使用中の観察は1人の環境の1時点の値です。</span>">
   <div class="wrap">
     <p class="kicker">主張・仮説 ①　この作りは、回し続けられるのか</p>
-    <h2>1,000万人分のPC。<br>大変かどうかは「<span class="gold">同時に何台起きているか</span>」で決まる</h2>
+    <h2>1,000万人分のPC。<br>止めて節約しても「<span class="gold">十万台規模が同時に動く</span>」</h2>
     <div class="grid2" style="margin-top:.8em;align-items:start">
       <div>
-      <div class="card">
-        <table>
-          <tr><th>シナリオ</th><th>同時稼働VM</th><th>メモリ</th><th>サーバー</th></tr>
-          <tr class="top"><td>A　登録者全員が常時稼働<small>1,000万人</small></td><td>1,000万台</td><td>80 PB</td><td>約78,000台</td></tr>
-          <tr><td>B　DAU分が常時稼働<small>米国アプリ DAU 約290万人</small></td><td>290万台</td><td>23 PB</td><td>約22,700台</td></tr>
-          <tr><td>C　DAUが1日1時間ずつ稼働</td><td>12万台</td><td>0.97 PB</td><td>約940台</td></tr>
-          <tr class="low"><td>D　アプリを触る7.5分だけ稼働</td><td>1.5万台</td><td>0.12 PB</td><td>約120台</td></tr>
-        </table>
-        <p class="foot">前提：1台 2 vCPU・8GB、サーバー1台に128台（2×128コア・1TB相当）。平均値で計算（ピークはこの数倍）。</p>
-      </div>
-        <div class="card" style="margin-top:.7em"><h3>外部試算も同じ理由で割れる（1億人想定）</h3><p>詰め込む前提で <b>CPU 6.5万個</b>（Daytona CEO）、詰め込まない前提で <b>CPU 156万個</b>（Next Signal）。</p></div>
+        <div class="card">
+          <table>
+            <tr><th>シナリオ</th><th>同時に動くPC</th><th>CPU</th><th>メモリ</th></tr>
+            <tr class="top"><td>A　登録者全員が常時稼働<small>1,000万人</small></td><td>1,000万台</td><td>2,000万コア</td><td>80 PB</td></tr>
+            <tr><td>B　毎日使う人の分が常時稼働<small>米国アプリ DAU 約290万人</small></td><td>290万台</td><td>580万コア</td><td>23 PB</td></tr>
+            <tr><td>C　毎日使う人が1日3時間ずつ<small>仮定</small></td><td>約36万台</td><td>72万コア</td><td>2.9 PB</td></tr>
+            <tr class="low"><td>D　毎日使う人が1日1時間ずつ<small>控えめな仮定</small></td><td>約12万台</td><td>24万コア</td><td>約1 PB</td></tr>
+          </table>
+          <p class="foot">前提：1台 2 vCPU・8GB。平均値で計算（ピークはこの数倍）。稼働時間は仮定。</p>
+        </div>
+        <div class="card" style="margin-top:.7em"><h3>「画面を開く 7.5分」は下限にならない</h3><p>Muse は<b>閉じた後も働き、自分から提案し、予約したタスクも実行する</b>。動いている時間は、画面を開いている時間よりずっと長いはず。</p></div>
       </div>
       <div>
         <div class="card">
-          <div class="lg-hd"><div><p class="chart-t">必要なサーバー台数</p><p class="chart-s">対数目盛（1目盛りで10倍）</p></div><div class="x"><small>A と D の差</small>約660倍</div></div>
+          <div class="lg-hd"><div><p class="chart-t">同時に動くPCの台数</p><p class="chart-s">対数目盛（1目盛りで10倍）</p></div><div class="x"><small>控えめな D でも</small>約12万台</div></div>
           <div class="lg">
-            <div class="r a"><span>A</span><div class="tr"><i style="--w:96.9%"></i></div><span class="v">約78,000台</span></div>
-            <div class="r"><span>B</span><div class="tr"><i style="--w:81.6%"></i></div><span class="v">約22,700台</span></div>
-            <div class="r"><span>C</span><div class="tr"><i style="--w:42.1%"></i></div><span class="v">約940台</span></div>
-            <div class="r"><span>D</span><div class="tr"><i style="--w:16.6%"></i></div><span class="v">約120台</span></div>
-            <div class="axis"><span></span><div class="ticks"><span style="left:14.3%">100</span><span style="left:42.9%">1,000</span><span style="left:71.4%">1万</span><span style="left:100%">10万台</span></div><span></span></div>
+            <div class="r a"><span>A</span><div class="tr"><i style="--w:100%"></i></div><span class="v">1,000万台</span></div>
+            <div class="r"><span>B</span><div class="tr"><i style="--w:82.1%"></i></div><span class="v">290万台</span></div>
+            <div class="r"><span>C</span><div class="tr"><i style="--w:52%"></i></div><span class="v">約36万台</span></div>
+            <div class="r"><span>D</span><div class="tr"><i style="--w:36.1%"></i></div><span class="v">約12万台</span></div>
+            <div class="axis"><span></span><div class="ticks"><span style="left:0%;transform:none">1万</span><span style="left:33.3%">10万</span><span style="left:66.7%">100万</span><span style="left:100%">1,000万台</span></div><span></span></div>
           </div>
         </div>
         <div class="card" style="margin-top:.7em"><h3>勝負どころ</h3><p>「閉じても働く」が売りなので、<b>止めるほど売りが弱まる</b>。しかも実測では <b>7.7GiB 中 7.3GiB が使用中</b>。CPU は時間で分け合えても、<b>メモリは分け合いにくい</b>かもしれない。</p></div>
@@ -878,7 +878,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 11. まとめ ============ -->
-<section id="s11" data-note="<b>【約1分】</b>まとめます。Muse で起きたのは、<b>AIが話し相手から、自分のパソコンを持った代理人になった</b>ということです。AIアプリとして過去最速で広まり、OpenAI も xAI も同じ方向に来ています。<br>持ち帰っていただきたい問いは2つです。<b>その1台を、誰がいくらで回し続けるのか。</b>同時に何台起こしておくかの設計で、必要な計算資源は数百倍変わります。<b>そしてその1台は、クラウドに置くのか、手元の端末に置くのか。</b><br>ありがとうございました。質疑に移ります。">
+<section id="s11" data-note="<b>【約1分】</b>まとめます。Muse で起きたのは、<b>AIが話し相手から、自分のパソコンを持った代理人になった</b>ということです。AIアプリとして過去最速で広まり、OpenAI も xAI も同じ方向に来ています。<br>持ち帰っていただきたい問いは2つです。<b>その1台を、誰がいくらで回し続けるのか。</b>どれだけ止めて節約しても、十万台規模のパソコンが同時に動き続けます。<b>そしてその1台は、クラウドに置くのか、手元の端末に置くのか。</b><br>ありがとうございました。質疑に移ります。">
   <div class="wrap">
     <p class="kicker">まとめ</p>
     <h2>AI は「話し相手」から<br><span class="pop">「自分のPCを持った代理人」へ</span></h2>
@@ -894,7 +894,7 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
     </div>
     <div class="closer">
       <p class="c1">持ち帰っていただきたい問い</p>
-      <p class="c2">その1台を、誰が・いくらで回し続けるのか<span class="num">同時稼働の設計で数百倍変わる</span></p>
+      <p class="c2">その1台を、誰が・いくらで回し続けるのか<span class="num">節約しても十万台規模が同時に動く</span></p>
       <p class="c3">その1台は、クラウドに置くのか、手元の端末に置くのか</p>
     </div>
   </div>

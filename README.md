@@ -17,7 +17,7 @@ Meta のパーソナルAIエージェント「Muse」（2026年9月8日 米国�
 6. 裏側　実測スペック（2 vCPU・約8GB・150GB）と構成図
 7. 競合　dots・Grok Bot・Claude Code（クラウド）・Codex（クラウド）
 8. 競合　OS勢（Siri AI・Gemini Intelligence・Windows Agent Workspace）
-9. 仮説 ①　必要な計算資源の試算（同時稼働台数で約660倍変わる）
+9. 仮説 ①　必要な計算資源の試算（控えめに見ても約12万台が同時に動く）
 10. 仮説 ①　メモリ・CPU市況と Meta 自身の発言
 11. 仮説 ②　アプリ型は OS 型に駆逐されるか
 12. まとめ
@@ -58,7 +58,7 @@ uv run tools/extract_script.py exec_muse_briefing.html     exec_briefing_script.
 - ダウンロード数・DAU・継続率は **調査会社の推計**（Sensor Tower・Similarweb・Apptopia・TickerTrends）。同じ時期の累計でも会社ごとにかなり差があるので、スライドにも出典を併記してある。
 - Muse の **MAU（月間アクティブユーザー）は Meta も調査会社も公表していない**。代わりに DAU と継続率で比較している。
 - VM のスペックは Qiita 記事の著者が1人の環境で実測した値（2026/10/26〜27）。公式報道は 2 vCPU・8GB・100GB。
-- 9枚目の試算は概算。前提（1台 2 vCPU・8GB、サーバー1台に128台、平均値で計算）はスライドと構成メモに明記してある。
+- 9枚目の試算は概算。前提（1台 2 vCPU・8GB、平均値で計算、稼働時間は仮定）はスライドと構成メモに明記してある。
 - メモリ・CPUの値上がりを **Muse のせいにはしていない**（主因は AI サーバー・HBM への生産振り替え）。
 
 ## 検証
