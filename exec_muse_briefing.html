@@ -539,6 +539,22 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 .tl.v li.key{background:rgba(0,102,204,.06);}
 @media (max-width:900px){ .tl ol{grid-template-columns:1fr 1fr;} }
 
+/* 役員版 論点②：競合の2方向と比較表（暗いページ） */
+.rivals{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.4vw,22px);margin-top:.9em;}
+.rivals .card h3{margin-bottom:.3em;}
+.rivals .who{margin:0;font-size:clamp(14px,min(1.35vw,2.3vh),24px);font-weight:700;color:#fff;line-height:1.5;}
+.rivals .what{margin:.25em 0 0;font-size:clamp(12px,min(1.08vw,1.85vh),19px);color:#a1a1a6;line-height:1.55;}
+.cmp{margin-top:clamp(10px,1.4vh,18px);}
+.cmp table{table-layout:fixed;}
+.cmp th:first-child,.cmp td:first-child{width:18%;text-align:left;}
+.cmp th,.cmp td{text-align:left;}
+.cmp td.g{color:#8fc0f0;font-weight:700;}
+.cmp td.b{color:#8a8a90;}
+.cmp .lg2{display:flex;gap:1.4em;justify-content:flex-end;font-size:clamp(11px,min(.95vw,1.62vh),16px);color:#8a8a90;margin:.4em 0 0;}
+.warn .cmp .lg2 b{color:#8fc0f0;}
+@media (max-width:900px){ .rivals{grid-template-columns:1fr;} }
+@media print{ .rivals .who{color:#000!important;} .cmp td.g{color:#000!important;} }
+
 /* 問いで締める1行 */
 .ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
   font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
@@ -733,40 +749,35 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 6. 論点② 競合リスク ============ -->
-<section>
+<section class="warn">
   <div class="wrap">
     <p class="kicker">論点 ②　競合リスク</p>
-    <h2>先行投資を負った Muse は、<span class="pop">OS に置き換えられないか</span></h2>
-    <div class="sameweek">
-      <span><em>10/23</em>Muse 日本で提供開始</span>
-      <span><em>10/27</em>Siri AI 日本語対応</span>
-    </div>
-    <div class="duel">
-      <div class="card os">
-        <h3>OS の代理人　Siri AI・Gemini・Windows</h3>
-        <ul>
-          <li>スマホや PC に<b>最初から入っている</b></li>
-          <li><b>画面・アプリ・個人データ</b>に最初から触れる</li>
-          <li>端末で動く分は<b>サーバー代がかからない</b></li>
-        </ul>
+    <h2>Muse の競合は、<span class="gold">アプリ型と OS 型の2方向</span></h2>
+    <div class="rivals">
+      <div class="card">
+        <h3>アプリ型　同じ作りの競合</h3>
+        <p class="who">OpenAI dots・xAI Grok Bot・Anthropic Claude Duet</p>
+        <p class="what">1体ごとにクラウドのPCを持ち、常駐して自分から動く。8〜10月に相次いで登場。</p>
       </div>
-      <div class="vsx">vs</div>
-      <div class="card cl">
-        <h3>クラウドの代理人　Muse</h3>
-        <ul>
-          <li>端末を閉じても<b>動き続ける</b></li>
-          <li>iPhone・Android・Web と<b>OS をまたげる</b></li>
-          <li>1人1台の<b>費用は Meta 持ち</b></li>
-        </ul>
+      <div class="card">
+        <h3>OS 型　スマホや PC に組み込まれた代理人</h3>
+        <p class="who">Apple Siri AI・Google Gemini Intelligence・Windows Agent Workspace</p>
+        <p class="what">Siri AI は 10/27 に日本語対応（Muse の日本公開の4日後）。</p>
       </div>
     </div>
-    <p class="paths-t">OS を持たない Meta。置き換えられたら、その時 Meta は…？</p>
-    <div class="paths">
-      <div><b>自前の入口で粘る</b>WhatsApp（アプリ群の1日の利用者 36億人）と、自社デバイス（Muse Charm・AIグラス）。</div>
-      <div><b>OS の上の一アプリとして残る</b>閉じた後も続く長い仕事に絞って、OS の代理人と棲み分ける。</div>
-      <div><b>先行投資が重荷になる</b>無料で配った1人1台の費用を、回収できないまま抱える。</div>
+    <div class="card cmp">
+      <table>
+        <tr><th>観点</th><th>アプリ型（Muse・dots など）</th><th>OS 型（Siri AI・Gemini など）</th></tr>
+        <tr><td>使い始め</td><td class="b">アプリを入れて登録が必要</td><td class="g">最初から入っている</td></tr>
+        <tr><td>触れる範囲</td><td class="b">連携したサービスだけ</td><td class="g">画面・他のアプリ・個人データ</td></tr>
+        <tr><td>閉じた後</td><td class="g">クラウドで動き続ける</td><td class="b">端末での操作が中心</td></tr>
+        <tr><td>使える端末</td><td class="g">iPhone・Android・Web をまたげる</td><td class="b">自社の OS の中だけ</td></tr>
+        <tr><td>提供側の費用</td><td class="b">1人1台のPCを負担</td><td class="g">端末で動く分はサーバー代がかからない</td></tr>
+      </table>
+      <p class="lg2"><span><b>青</b>＝有利</span><span>灰＝不利</span></p>
     </div>
-    <p class="foot">Source: Meta 日本（2026/10/23）、gori.me（2026/10/27）、Apple Newsroom、Business Standard（2026/05/13）、Petri、Meta 2026年7〜9月期決算</p>
+    <p class="ask" style="color:#fff">OS を持たず、先行投資を負った Meta。<span class="gold">OS 型に置き換えられたら、その時 Meta は…？</span></p>
+    <p class="foot">Source: SiliconANGLE（dots、2026/09/29）、Interesting Engineering（Grok Bot）、TechCrunch（Claude Duet、2026/10/22）、Apple Newsroom、gori.me（2026/10/27）、Business Standard（2026/05/13）、Petri</p>
   </div>
 </section>
 
