@@ -512,6 +512,24 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
   .agenda li,.agenda li b{color:#000!important;}
 }
 
+/* 裏側：なぜクラウドに1台要るのか */
+.why{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.2em 1em;align-items:baseline;margin:.1em 0 .7em;
+  font-size:clamp(13px,min(1.2vw,2.05vh),22px);line-height:1.55;color:var(--ink-2);}
+.why b{color:var(--ink);white-space:nowrap;}
+.why .k{color:var(--blue);font-weight:700;}
+/* その時 Meta は？ */
+.paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1.2vw,18px);margin-top:.8em;}
+.paths div{border-top:3px solid var(--ink);padding-top:.5em;font-size:clamp(12px,min(1.1vw,1.9vh),20px);line-height:1.55;color:var(--ink-2);}
+.paths b{display:block;color:var(--ink);font-size:1.1em;margin-bottom:.15em;}
+.paths-t{margin:1em 0 0;font-weight:700;font-size:clamp(16px,min(1.6vw,2.7vh),28px);}
+/* 役員版：サービス一覧 */
+.svcs{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(12px,1.8vw,30px);margin-top:1em;}
+.svcs ul{margin:0;padding:0;list-style:none;}
+.svcs li{display:flex;justify-content:space-between;gap:1em;padding:.4em 0;border-bottom:1px solid var(--line);font-size:clamp(14px,min(1.3vw,2.2vh),24px);}
+.svcs li:last-child{border-bottom:0;}
+.svcs li b{color:var(--ink);} .svcs li span{color:var(--ink-2);font-size:.85em;white-space:nowrap;}
+@media (max-width:900px){ .paths,.svcs{grid-template-columns:1fr;} }
+
 /* 問いで締める1行 */
 .ask{text-align:center;font-weight:700;color:var(--ink);line-height:1.45;
   font-size:clamp(18px,min(2vw,3.4vh),34px);margin:.7em 0 0;}
@@ -620,10 +638,11 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 3. 裏側 ============ -->
-<section data-note="<b>【約50秒】</b>なぜそれができるのか。Muse は、<b>利用者1人ひとりに、クラウド上のパソコンを1台ずつ渡しています。</b>性能は、ひと昔前の事務用ノートパソコン1台分ほどです。<br>頭脳にあたるCPUが2コアで、ブラウザを開いたりプログラムを動かしたりする。作業机にあたるメモリが8GBで、実際に測った人の環境では<b>ほぼ満杯で動いていました。</b>ファイルの置き場は150GBで、スマホの写真なら3万枚ほどです。外へ出る通信は、別の見張り役のAIが許可したものだけです。<br>このノートパソコンが、<b>登録者1,000万人分</b>。Meta がクラウドで預かって動かしています。これを回し続けられるのか、というのが後半の論点の1つ目です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── スペックは利用者が Muse にコマンドを打たせて測った実測値（Qiita、2026/10/26）。CPU はサーバー向けの AMD EPYC、OS は普通の Ubuntu（Linux）。公式報道は 2vCPU・8GB・100GB。写真3万枚は1枚5MBとしての概算。Muse の仮想マシンの中で、別会社のAI（Claude Code）を動かしてWebページを作らせた例も報告されています。</span>">
+<section data-note="<b>【約55秒】</b>なぜそれができるのか。閉じても働いて自分から動くには、作業用のパソコンが要ります。スマホは閉じれば止まるので、クラウドに置くしかない。そこで Muse は、<b>利用者1人ひとりに、クラウド上のパソコンを1台ずつ渡しています。</b>性能は、ひと昔前の事務用ノートパソコン1台分ほどです。<br>頭脳にあたるCPUが2コアで、ブラウザを開いたりプログラムを動かしたりする。作業机にあたるメモリが8GBで、実際に測った人の環境では<b>ほぼ満杯で動いていました。</b>ファイルの置き場は150GBで、スマホの写真なら3万枚ほどです。外へ出る通信は、別の見張り役のAIが許可したものだけです。<br>このノートパソコンが、<b>登録者1,000万人分</b>。Meta がクラウドで預かって動かしています。これを回し続けられるのか、というのが後半の論点の1つ目です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── スペックは利用者が Muse にコマンドを打たせて測った実測値（Qiita、2026/10/26）。CPU はサーバー向けの AMD EPYC、OS は普通の Ubuntu（Linux）。公式報道は 2vCPU・8GB・100GB。写真3万枚は1枚5MBとしての概算。Muse の仮想マシンの中で、別会社のAI（Claude Code）を動かしてWebページを作らせた例も報告されています。</span>">
   <div class="wrap">
     <p class="kicker">裏側</p>
     <h2>チャットの裏に、<span class="pop">1人1台のノートPC</span></h2>
+    <p class="why"><b>なぜ要るのか</b><span>閉じても働き、自分から動くには、<span class="k">作業用のPC</span>が要る。スマホは閉じると止まるので、<span class="k">クラウドに置く</span>しかない。</span></p>
     <div class="spec3">
       <div class="card">
         <div class="hd"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><rect x="9" y="9" width="22" height="22" rx="3"/><rect x="15" y="15" width="10" height="10" rx="1"/><path d="M15 3v6M25 3v6M15 31v6M25 31v6M3 15h6M3 25h6M31 15h6M31 25h6"/></svg><div><div class="nm">CPU</div><div class="v">2コア</div></div></div>
@@ -652,75 +671,73 @@ code,.mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace;}
 </section>
 
 <!-- ============ 4. 他社動向 ============ -->
-<section class="alt" data-note="<b>【約45秒】</b>この方向は Meta だけではありません。OpenAI は9月末に、やはり1体ごとにクラウドのパソコンを持つエージェントを出しました。xAI も8月に同じものを出しています。<br>一方で、<b>OS の側も代理人になり始めました。</b>Apple の新しい Siri は画面を理解してアプリを操作し、日本語には10月27日に対応しました。Google も Microsoft も同じ方向です。こちらは<b>利用者の端末の中で動く</b>のが特徴です。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 開発者向けには Anthropic の Claude Code、OpenAI の Codex もクラウド上の隔離環境で動きますが、こちらは使うときだけ起動して止める作りです。</span>">
+<section class="alt" data-note="<b>【約45秒】</b>この作りは Meta だけではありません。<b>AI の稼働環境をクラウドに持たせるサービスが、この3か月で一気に増えました。</b>xAI が8月、Meta が9月、OpenAI が9月末、Anthropic が10月。どれも、1体ごとにクラウド上のパソコンを持ち、閉じても働きます。開発者向けには、Claude Code や Codex のクラウド機能が先にありました。<br>つまり、<b>各社が同じ方向に走り出しています。</b><br><span class=qa>── ここから下は読み上げません（質疑用） ── 開発者向けの2つは、使うときだけ起動して止める作りで、常駐ではありません。Claude Duet は仕事・小規模事業者向けで、Pro・Max 加入者向けの研究プレビュー（順番待ち）。dots は ChatGPT Pro・Business Premium、Grok Bot は SuperGrok Heavy などの加入者向けです。</span>">
   <div class="wrap">
     <p class="kicker">他社動向</p>
-    <h2>AI に1台渡す流れと、<span class="pop">OS に組み込む流れ</span></h2>
-    <div class="duel">
-      <div class="card cl">
-        <h3>クラウドに1台</h3>
+    <h2>AI の稼働環境をクラウドに。<span class="pop">各社が同じ方向へ</span></h2>
+    <div class="svcs">
+      <div class="card">
+        <h3 style="color:var(--blue)">常駐して自分から動く（1体ごとにクラウドのPC）</h3>
         <ul>
-          <li><b>Meta　Muse</b>　2026/9（日本 10/23）</li>
-          <li><b>OpenAI　dots</b>　2026/9</li>
-          <li><b>xAI　Grok Bot</b>　2026/8</li>
+          <li><b>xAI　Grok Bot</b><span>2026/8</span></li>
+          <li><b>Meta　Muse</b><span>2026/9（日本 10/23）</span></li>
+          <li><b>OpenAI　dots</b><span>2026/9</span></li>
+          <li><b>Anthropic　Claude Duet</b><span>2026/10</span></li>
         </ul>
-        <p class="where" style="margin-top:.7em;padding-top:.55em;border-top:1px solid var(--line);font-weight:700">端末を閉じても動き続ける</p>
       </div>
-      <div class="vsx">vs</div>
-      <div class="card os">
-        <h3>端末の中で</h3>
+      <div class="card">
+        <h3>開発者向け（使うときだけ起動）</h3>
         <ul>
-          <li><b>Apple　Siri AI</b>　日本語 2026/10/27</li>
-          <li><b>Google　Gemini Intelligence</b>　2026/5 発表</li>
-          <li><b>Microsoft　Windows Agent Workspace</b></li>
+          <li><b>Claude Code</b><span>クラウド機能</span></li>
+          <li><b>Codex</b><span>クラウド機能</span></li>
         </ul>
-        <p class="where" style="margin-top:.7em;padding-top:.55em;border-top:1px solid var(--line);font-weight:700">画面・アプリ・個人データに最初から触れる</p>
       </div>
     </div>
-    <p class="ask">同じ「代理人」でも、<span class="pop">置く場所が違う</span>。</p>
-    <p class="foot">Source: SiliconANGLE（2026/09/29）、Interesting Engineering、Apple Newsroom、gori.me（2026/10/27）、Business Standard（2026/05/13）、Petri</p>
+    <p class="ask">常駐型は、<span class="pop">この3か月で4つ</span>出そろった。</p>
+    <p class="foot">Source: Interesting Engineering、Meta、SiliconANGLE（2026/09/29）、TechCrunch（2026/10/22）、Claude Code Docs、OpenAI</p>
   </div>
 </section>
 
 <!-- ============ 5. 論点 ============ -->
-<section class="warn" data-note="<b>【約1分】</b>論点は2つです。<br>1つ目は<b>コスト</b>です。1,000万人分のパソコンを全員つけっぱなしにすると、1,000万台が同時に動きます。では使うときだけ動かせばよいかというと、Muse は画面を閉じた後も働き、自分から提案もするので、そう短くはできません。毎日使う人の分を控えめに1日1時間ずつと置いても、<b>約12万台が同時に動き続けます。</b>しかも「閉じても働く」が売りなので、止めれば止めるほど売りが弱まる。Meta 自身も、計算資源を相当食うと認め、来年中にコスト効率を10倍にすると言っています。<br>2つ目は<b>居場所</b>です。Apple や Google の代理人は端末に最初から入っていて、端末で動く分はサーバー代もかかりません。<b>OS を持たない Meta の代理人は、OS に組み込まれた代理人に置き換えられないのか。</b>ここはまだ答えが出ていません。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 試算の前提：1台 2コア・8GB。登録者1,000万人全員が常時稼働で1,000万台（メモリ80PB＝8,000万GB）。米国アプリの1日の利用者約290万人が1日1時間ずつなら約12万台（24万コア・メモリ約100万GB）。1日1時間は仮定で、平均値での計算（ピークはこの数倍）。メモリ価格は4〜6月期に58〜63%上がっていますが、主因はAIサーバー向けの生産振り替えで、Muse 単体のせいではありません。当社として見ておくべき点としては、社員が個人で使うエージェントに業務データやログイン情報を渡さないルールの確認があります（Muse の仮想マシンは Meta 側にあります）。</span>">
+<section class="warn" data-note="<b>【約1分15秒】</b>論点は2つです。<br>1つ目は<b>コスト</b>です。1,000万人分のパソコンを全員つけっぱなしにすると、1,000万台が同時に動きます。Muse は画面を閉じた後も働くので、使うときだけに絞るのも限界があり、控えめに1日1時間ずつと置いても<b>約12万台が同時に動き続けます。</b>しかも各社が同じことを始めました。<b>メモリやCPUの需要が増えている一因ではないか</b>、と見ています。<br>2つ目は<b>居場所</b>です。Meta はこの Muse を基本無料で配り、設備投資は四半期で349億ドルと過去最高です。<b>先行投資の負担はほぼ間違いなく重い。</b>そこへ、Apple の Siri や Google の Gemini のように、OS そのものに代理人が入り始めました。日本語の Siri AI は10月27日からです。こちらは端末に最初から入っていて、画面やアプリに触れます。<b>OS を持たない Meta の代理人が置き換えられたら、その時 Meta はどうするのか。</b>ここはまだ答えが出ていません。<br><span class=qa>── ここから下は読み上げません（質疑用） ── 試算の前提：1台 2コア・8GB。登録者1,000万人全員が常時稼働で1,000万台（メモリ80PB＝8,000万GB）。米国アプリの1日の利用者約290万人が1日1時間ずつなら約12万台（24万コア・メモリ約100万GB）。1日1時間は仮定で、平均値での計算（ピークはこの数倍）。メモリ価格は4〜6月期に58〜63%上がっていますが、主因はAIサーバー向けの生産振り替えで、Muse 単体では年間供給の0.1%程度です。設備投資349億ドルは2026年7〜9月期で、AI 全体の数字です（Muse 単体は非公開）。フリーキャッシュフローは21億ドルのマイナスでした。当社として見ておくべき点としては、社員が個人で使うエージェントに業務データやログイン情報を渡さないルールの確認があります（Muse の仮想マシンは Meta 側にあります）。</span>">
   <div class="wrap">
     <p class="kicker">論点</p>
-    <h2>回し続けられるか。<span class="gold">置き換えられないか。</span></h2>
+    <h2>回し続けられるか。<span class="gold">OS に置き換えられないか。</span></h2>
     <div class="grid2" style="margin-top:1em">
       <div class="card">
         <h3>1　コスト：回し続けられるか</h3>
         <div class="facts">
           <div class="f"><span class="lbl">1,000万人分のPCを、全員つけっぱなしにすると</span><span class="val"><em>1,000万台</em>が同時に動く</span><span class="sub">CPU 2,000万コア、メモリ 8,000万GB。</span></div>
           <div class="f"><span class="lbl">毎日使う人の分を、1日1時間ずつに絞っても</span><span class="val">それでも<em>約12万台</em>が同時に動く</span><span class="sub">画面を開くのは1日7.5分でも、Muse は閉じた後も働くので、実際はもっと長いはず。</span></div>
-          <div class="f"><span class="concl">「閉じても働く」が売りなので、止めるほど売りが弱まる。Meta も「計算資源を相当食う」と認めている。</span></div>
+          <div class="f"><span class="concl">各社が同じことを始めた。メモリや CPU の需要が増えている一因ではないか。</span></div>
         </div>
       </div>
       <div class="card">
-        <h3>2　居場所：置き換えられないか</h3>
+        <h3>2　居場所：OS に置き換えられないか</h3>
         <div class="facts">
-          <div class="f"><span class="lbl">端末の中の代理人（Siri AI・Gemini）</span><span class="val">最初から入っていて、<em>画面やアプリに触れる</em></span><span class="sub">端末で動く分は、提供側のサーバー代もかからない。</span></div>
-          <div class="f"><span class="lbl">クラウドの代理人（Muse）</span><span class="val">閉じても動くが、<em>費用は Meta 持ち</em></span><span class="sub">OS を持たない Meta は、WhatsApp と自社デバイスを入口にしようとしている。</span></div>
+          <div class="f"><span class="lbl">Meta は Muse を基本無料で配り、先行投資を負っている</span><span class="val">設備投資は四半期 <em>349億ドル</em></span><span class="sub">設備投資は AI 全体の数字。広告予算の39%も Muse の宣伝に。</span></div>
+          <div class="f"><span class="lbl">そこへ、OS にも代理人が入り始めた（Siri AI・Gemini・Windows）</span><span class="val">最初から入っていて、<em>画面やアプリに触れる</em></span><span class="sub">端末で動く分は、提供側のサーバー代もかからない。</span></div>
+          <div class="f"><span class="concl">OS を持たない Meta の代理人が置き換えられたら、その時 Meta は…？</span></div>
         </div>
       </div>
     </div>
-    <p class="foot">試算：1台 2コア・8GB。登録者1,000万人、米国アプリ利用者 約290万人/日。1日1時間は仮定、平均値での概算（ピークはこの数倍）。Source: Similarweb、Meta Q3 決算説明会</p>
+    <p class="foot">試算：1台 2コア・8GB。登録者1,000万人、米国アプリ利用者 約290万人/日。1日1時間は仮定、平均値での概算（ピークはこの数倍）。Source: Similarweb、Meta 2026年7〜9月期決算・説明会、Apple Newsroom</p>
   </div>
 </section>
 
 <!-- ============ 6. まとめ ============ -->
-<section data-note="<b>【約30秒】</b>まとめます。AIは、<b>話し相手から、自分のパソコンを持った代理人</b>になりました。Muse はその最初の大ヒットですが、定着するかはまだ分かりません。<br>見ておくべき問いは2つ。<b>その1台を、誰がいくらで回し続けるのか。そしてその1台は、クラウドに置くのか、手元の端末に置くのか。</b>以上です。">
+<section data-note="<b>【約30秒】</b>まとめます。AIは、<b>話し相手から、自分のパソコンを持った代理人</b>になりました。Muse はその最初の大ヒットですが、定着するかはまだ分かりません。<br>見ておくべき問いは2つ。<b>その1台を、誰がいくらで回し続けるのか。そして、OS の代理人が広まったとき、Meta の先行投資はどうなるのか。</b>以上です。">
   <div class="wrap">
     <p class="kicker">まとめ</p>
     <h2>AI は「話し相手」から<br><span class="pop">「自分のPCを持った代理人」へ</span></h2>
     <div class="grid2" style="margin-top:1em">
-      <div class="card"><h3>起きたこと</h3><p>AIアプリとして過去最速の立ち上がり。裏では、利用者1人に1台のPCをクラウドで動かしている。OpenAI・xAI も同じ方向へ。</p></div>
+      <div class="card"><h3>起きたこと</h3><p>AIアプリとして過去最速の立ち上がり。裏では、利用者1人に1台のPCをクラウドで動かしている。OpenAI・xAI・Anthropic も同じ方向へ。</p></div>
       <div class="card"><h3>まだ分からないこと</h3><p>伸びは鈍り、利用時間は ChatGPT の3分の1。<strong style="color:var(--ink)">定着するかは、これから。</strong></p></div>
     </div>
     <div class="closer">
       <p class="c1">これから見ておくべき問い</p>
       <p class="c2">その1台を、誰が・いくらで回し続けるのか</p>
-      <p class="c3">その1台は、クラウドに置くのか、手元の端末に置くのか</p>
+      <p class="c3">OS の代理人が広まったとき、Meta の先行投資はどうなるのか</p>
     </div>
   </div>
 </section>
