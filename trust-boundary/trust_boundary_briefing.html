@@ -539,7 +539,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <div class="next"><p class="next-label b">次の問い</p><p class="next-q">では、購入や変更のような、取り消せない操作（④）はどう扱われるのか</p></div>
 <p class="pageno">11</p>
 </section>
-<section id="m11-approve" class="tone2" style="gap:20px">
+<section id="m11-approve" class="tone2" style="gap:14px">
 <div class="top"><p class="eyebrow b">3　サイト側から見ると（Museに限らない話）</p><p class="tag fact">事実（仕様）と発表者の推測</p></div>
 <h2 class="title">④ 取り消せない操作は、承認されるまで実行されない</h2>
 <p class="lead">Poppyの追加ルールでは、サイトは実行前に条件（金額など）を示し、承認された条件で1回だけ実行する</p>
@@ -554,14 +554,14 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 <div class="card strong" style="flex:none; padding:24px 32px">
 <p class="card-h">ただし、承認するのは、あなたの指示を受けたAIエージェント側でもよい</p>
-<p class="txt">例：最初に「20ドル以下の買い物なら進めてよい」と決めておけば、<b>毎回あなたに聞かずに承認が送られる</b>。Museなら、この判断をするのはAIではなく許可の仕組み（Sentinel、p.6）と考えられる（発表者の推測）。<br>サイト側には、本人が承認したかは確かめられない</p>
+<p class="txt">例：あなたが「20ドル以下の買い物なら進めてよい」と決めておけば、<b>範囲内と確かなときに限り、聞かずに承認を送ってよい</b>（迷えばあなたに聞く）。Museなら、この判断は許可の仕組み（Sentinel、p.6）がすると考えられる（発表者の推測）。<br>サイト側は本人の承認か確かめられないが、AI側の承認を断ることはできる</p>
 </div>
 <div class="note"><p class="note-txt"><b>実例：</b>Shopifyのストアは「購入の準備」を取り消せない操作とし、購入を完了するのは買い手（AIだけでは買えない）としている</p></div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label b">次の問い</p><p class="next-q">結局、AIに指示するとき、私たちは何を渡しているのか</p></div>
 <p class="pageno">12</p>
 </section>
-<section id="m13-summary" class="dark statement" style="gap:24px">
+<section id="m13-summary" class="dark statement" style="gap:16px">
 <p class="st-eyebrow">まとめ：AIに指示するとき、私たちは何を渡しているのか（Museに限らない）</p>
 <p class="st-text" style="font-size:56px">答え：私たちは、次の3つをAIエージェントに渡している。<br>どこで止まり、どこで止まらないかを知ったうえで任せる</p>
 <div class="recap" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px">
@@ -577,7 +577,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 <div class="rc">
 <p class="rc-t">③ 承認する権利</p>
-<p class="rc-txt">「20ドル以下なら進めて」と決めておくと、その範囲ではAIエージェントがあなたに聞かずにサイトへ承認を送る。<br>サイトはAIの申告を信じるしかなく、あなたが本当に承認したかは確かめられない</p>
+<p class="rc-txt">「20ドル以下なら進めて」と決めておくと、確かにその範囲なら、AIエージェント側は聞かずに承認を送ってよい。<br>サイトはAIの申告を信じるしかなく、あなたが本当に承認したかは確かめられない</p>
 <p class="rc-txt" style="font-size:24px; color:#AFC0CF; border-top:1px solid #3B5166; padding-top:10px"><b>今日の例：</b>Poppyの追加ルールが認めている（p.12）。Museなら、判断するのは許可の仕組みと考えられる（p.6）</p>
 </div>
 </div>
