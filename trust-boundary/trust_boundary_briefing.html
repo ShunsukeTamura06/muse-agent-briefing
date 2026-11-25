@@ -278,7 +278,6 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <p class="small">Metaは「Museはパスワードや支払い方法を見られない」と説明している。</p>
 <div class="spacer"></div>
 <div class="next"><p class="next-label">今日の問い</p><p class="next-q">AIに頼むとき、私たちは何を渡していて、それはどこで止められるのか</p></div>
-<p class="footer">出典：GeekWire（2026/9/20）、eMarketer（2026/9）、Meta日本法人の発表（2026/10/23）</p>
 <p class="pageno">2</p>
 </section>
 <section id="m03-agent">
@@ -304,7 +303,6 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label">次の問い</p><p class="next-q">権限を渡したAIは、どんな失敗をしうるのか</p></div>
-<p class="footer">出典：Meta「Museの安全機能」（2026/9/8）、ChatGPTのエージェントモードについては各社報道（2026年）</p>
 <p class="pageno">3</p>
 </section>
 <section id="m04-example">
@@ -333,7 +331,6 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label">次の問い</p><p class="next-q">Museは、この失敗をどう防ごうとしているのか</p></div>
-<p class="footer">出典：Simon Willison「The lethal trifecta for AI agents」（2025/6/16）。3つの組み合わせを「Lethal Trifecta」と呼んでいる</p>
 <p class="pageno">4</p>
 </section>
 <section id="m05-propose">
@@ -362,7 +359,6 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label">次の問い</p><p class="next-q">では、あなたへの確認やパスワードは、AIからどう守られているのか</p></div>
-<p class="footer">出典：Meta「Museの安全機能」（2026/9/8）、Claude Code Docs「Configure permissions」</p>
 <p class="pageno">5</p>
 </section>
 <section id="m06-secrets">
@@ -392,7 +388,6 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label">次の問い</p><p class="next-q">確認されない操作は、本当に安全なのか</p></div>
-<p class="footer">出典：Meta「Museの安全機能」（2026/9/8）、Runtime Wire（使い捨て番号の目的）、Claude Code Docs「Configure permissions」</p>
 <p class="pageno">6</p>
 </section>
 <section id="m07-breach">
@@ -405,7 +400,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <ul class="list">
 <li>Museが開いたWebページから侵入された。入口はAIではなく、内蔵ブラウザの既知の弱点</li>
 <li>「読み取り」扱いの通信は確認なしで通る。そこに情報を載せて外へ出した</li>
-<li>NebuSecによれば、公開前に修正済み</li>
+<li>NebuSecによれば、公開前に修正済み（同社単独の報告）</li>
 </ul>
 </div>
 <div class="card accent-a">
@@ -419,7 +414,6 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label">次の問い</p><p class="next-q">ここまではMuseの中の話。では、相手の会社からは、Museはどう見えているのか</p></div>
-<p class="footer">出典：NebuSec「Inside Meta Muse」（2026/11/20）。同社単独の報告で、第三者の再現はない</p>
 <p class="pageno">7</p>
 </section>
 <section id="m08-company" class="tone2">
@@ -427,73 +421,57 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <h2 class="title">会社からは、来たのが本人かAIか、誰の代わりか分からない</h2>
 <p class="lead">冒頭のAmazonが問題にしたのも、Museが名乗らずに、顧客のアカウントで動いていたこと</p>
 <div class="grid4">
-<div class="card"><p class="card-h">どのAIが来たのか</p><p class="txt">Museか、別のAIか、ただの迷惑な自動アクセスか</p></div>
-<div class="card"><p class="card-h">どの顧客の代わりか</p><p class="txt">本当にその顧客に頼まれたのか</p></div>
-<div class="card"><p class="card-h">顧客は何を許したのか</p><p class="txt">見るだけか、買い物までか</p></div>
-<div class="card"><p class="card-h">取り消せない操作か</p><p class="txt">購入やキャンセルを、このまま通してよいか</p></div>
+<div class="card"><p class="card-h">① どのAIが来たのか</p><p class="txt">Museか、別のAIか、ただの迷惑な自動アクセスか</p></div>
+<div class="card"><p class="card-h">② どの顧客の代わりか</p><p class="txt">本当にその顧客に頼まれたのか</p></div>
+<div class="card"><p class="card-h">③ 何を許したのか</p><p class="txt">見るだけか、買い物までか</p></div>
+<div class="card"><p class="card-h">④ 取り消せない操作か</p><p class="txt">購入やキャンセルを、このまま通してよいか</p></div>
 </div>
 <div class="note">
 <p class="note-txt">これが分からないので、多くの会社は「本物の顧客の代理」と「迷惑な自動アクセス」を見分けられず、両方をブロックしている（Metaの説明）</p>
 </div>
 <div class="spacer"></div>
-<div class="next"><p class="next-label b">次の問い</p><p class="next-q">会社がAIを見分けて、範囲を決めて受け入れる方法はないのか</p></div>
-<p class="footer">出典：GeekWire（2026/9/20）、Meta「Museがビジネスと連携する方法が広がりました」（2026/11/13）。4つの問いは発表者の整理</p>
+<div class="next"><p class="next-label b">次の問い</p><p class="next-q">①〜④に答えて、会社がAIを見分け、範囲を決めて受け入れる方法はないのか</p></div>
 <p class="pageno">8</p>
 </section>
 <section id="m09-poppy" class="tone2">
 <div class="top"><p class="eyebrow b">3　相手の会社から見ると</p><p class="tag fact">事実（各社の発表・仕様）</p></div>
-<h2 class="title">Poppyは、会社が「AI専用の受付」を用意するための共通ルール</h2>
-<p class="lead">MetaとSierraが中心に作り、2026年11月13日に正式版を公開。Shopifyの全ストアが対応した</p>
-<div class="row">
-<div class="card">
-<p class="kicker">受付がないと（今のAmazonなど）</p>
-<ul class="list">
-<li>AIは人のふりをして、画面を操作する</li>
-<li>ログインはAIのブラウザの中で行われる</li>
-<li>会社は見分けられず、黙認か締め出し</li>
-</ul>
-</div>
-<x-shape kind="arrow-right" class="arrow"></x-shape>
-<div class="card strong">
-<p class="kicker b">Poppyの受付があると</p>
-<ul class="list">
-<li>AIは受付で、どのAIか・誰の代わりかを名乗る</li>
-<li>あなたは会社のページで自分でログインし、「見るだけ」など渡す範囲を選ぶ</li>
-<li>会社は、範囲の外の操作を断れる</li>
-</ul>
-</div>
-</div>
-<div class="strip">
-<p class="strip-label">似た前例</p>
-<p class="strip-text">家計簿アプリも、以前は銀行のパスワードを預かってログインしていた。今はパスワードを渡さず、見る範囲を決めてつなぐ（2017年の改正銀行法から）</p>
+<h2 class="title">答え：Poppyは、AI専用の受付で①〜④に答えさせる</h2>
+<p class="lead">MetaとSierraが中心に作った共通ルール（2026年11月13日に正式版、Shopifyの全ストアが対応）</p>
+<table class="t5">
+<tr><th style="width:30%">会社の問い（前のページ）</th><th style="width:70%">Poppyの受付での答え方</th></tr>
+<tr><td><b>① どのAIが来たのか</b></td><td>AIが毎回、受付で名乗る（例：Museです）</td></tr>
+<tr><td><b>② どの顧客の代わりか</b></td><td>会社ごとに違う仮のIDで示す。本名やメールアドレスは渡さない</td></tr>
+<tr><td><b>③ 何を許したのか</b></td><td>顧客が会社のページでログインし、範囲を選ぶ。<b>パスワードはAIに渡らない</b></td></tr>
+<tr><td><b>④ 取り消せない操作か</b></td><td>会社が操作ごとに影響を宣言する。取り消せない操作は、条件を示して承認を待てる</td></tr>
+</table>
+<div class="note">
+<p class="note-txt"><b>受付の窓口は会社が選ぶ：</b>MCP（Claude CodeのMCPと同じ。調べた実例はすべてこれ）、API、Webサイトの画面、会社のAIとの会話。受付がないサイトでは、AIは今まで通り人のふりをして画面を操作し、ログイン後にできることは全部できる</p>
 </div>
 <div class="spacer"></div>
-<div class="next"><p class="next-label b">次の問い</p><p class="next-q">実際のサイトでは、どうなっているのか</p></div>
-<p class="footer">出典：Sierraブログ（2026/11/13）、Personal Agent Protocol 1.0 仕様、金融庁「電子決済等代行業制度の概要」</p>
+<div class="next"><p class="next-label b">次の問い</p><p class="next-q">実際の会社の受付では、③と④はどう決まっているのか</p></div>
 <p class="pageno">9</p>
 </section>
 <section id="m10-airline" class="tone2">
 <div class="top"><p class="eyebrow b">3　相手の会社から見ると</p><p class="tag fact">事実（発表者の確認）</p></div>
-<h2 class="title">実例：航空会社は、やりたいことごとに必要な許可を決めている</h2>
+<h2 class="title">実例：航空会社の受付は、用途ごとに③と④を決めている</h2>
 <p class="lead">ターキッシュエアラインズが公開しているPoppyの設定ファイルを、発表者が日本語にまとめた（11月25日確認）</p>
 <table class="t5">
-<tr><th style="width:28%">Museにやらせたいこと</th><th style="width:40%">必要なもの</th><th style="width:32%">会社の宣言</th></tr>
-<tr><td>フライトを探す</td><td>ログイン不要</td><td>変更なし・個人データなし</td></tr>
-<tr><td>予約を確認する</td><td>予約番号と姓</td><td>変更なし・個人データあり</td></tr>
-<tr><td>マイル残高を見る</td><td><b>あなたが航空会社のページでログインし、許可する</b></td><td>変更なし・個人データあり</td></tr>
+<tr><th style="width:26%">Museにやらせたいこと</th><th style="width:44%">③ 顧客が許すもの</th><th style="width:30%">④ 会社の宣言</th></tr>
+<tr><td>フライトを探す</td><td>何も要らない（ログイン不要）</td><td>変更なし・個人データなし</td></tr>
+<tr><td>予約を確認する</td><td>予約番号と姓を伝える</td><td>変更なし・個人データあり</td></tr>
+<tr><td>マイル残高を見る</td><td><b>航空会社のページでログインし、「見る」ことを許す</b><br>（「Googleでログイン」のときの「〇〇がアクセスを求めています。許可しますか？」と同じ形の画面）</td><td>変更なし・個人データあり</td></tr>
 </table>
 <div class="note">
-<p class="note-txt">パスワードはAIに渡らず、許可はあとから取り消せる。名乗らずに接続してみると「マイル会員のログインが必要」と断られた（発表者の確認）</p>
+<p class="note-txt">AIに許せるのは「見る」ことだけで、予約の変更は受け付けていない。①の名乗りなしで接続してみると「マイル会員のログインが必要」と断られた（発表者の確認）</p>
 </div>
 <div class="spacer"></div>
-<div class="next"><p class="next-label b">次の問い</p><p class="next-q">では、購入やキャンセルのような、取り消せない操作はどうなるのか</p></div>
-<p class="footer">出典：ターキッシュエアラインズ poppy.json（2026/11/25確認）、Personal Agent Protocol 1.0 仕様 §4.7・§5.4</p>
+<div class="next"><p class="next-label b">次の問い</p><p class="next-q">では、購入や変更のような、取り消せない操作（④）はどう扱われるのか</p></div>
 <p class="pageno">10</p>
 </section>
 <section id="m11-approve" class="tone2">
 <div class="top"><p class="eyebrow b">3　相手の会社から見ると</p><p class="tag fact">事実（仕様）</p></div>
-<h2 class="title">会社は承認まで止める。ただし、あなたの一言が承認になりうる</h2>
-<p class="lead">取り消せない操作について、Poppyの追加ルールを使う会社は、条件（金額など）を示して承認を待ち、承認された条件で1回だけ実行する</p>
+<h2 class="title">④ 取り消せない操作は、承認されるまで実行されない</h2>
+<p class="lead">Poppyの追加ルールに対応した会社は、実行の前に条件（金額など）を示し、承認された条件で1回だけ実行する</p>
 <div class="mflow">
 <p class="mchip">AIが「交換したい」と依頼</p>
 <x-shape kind="arrow-right" class="arrow sm"></x-shape>
@@ -504,46 +482,51 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <p class="mchip">その条件で実行</p>
 </div>
 <div class="card strong">
-<p class="kicker b">承認できるのは、あなた自身か、あなたの指示を受けたAI</p>
+<p class="kicker b">ただし、承認するのは、あなたの指示を受けたAIでもよい</p>
 <p class="txt">ルールに載っている例：あなたが最初に「20ドル以下の交換なら進めてよい」と伝えておけば、<b>AIは毎回あなたに聞かずに承認できる</b>。会社には、あなたが本当に承認したかは確かめられない</p>
 </div>
-<p class="small">ShopifyのストアのPoppy設定は「購入の準備」を取り消せない操作と宣言し、購入を完了するのは買い手だとしている</p>
+<p class="small">実例：Shopifyのストアは「購入の準備」を取り消せない操作と宣言し、購入を完了するのは買い手だとしている</p>
 <div class="spacer"></div>
 <div class="next"><p class="next-label b">次の問い</p><p class="next-q">では、AIに指示する私たちは、何をすればよいのか</p></div>
-<p class="footer">出典：Personal Agent Protocol Operations extension v3 §1・§5・§8.1、Allbirds・土屋鞄製造所の poppy.json（2026/11/25確認）</p>
 <p class="pageno">11</p>
 </section>
 <section id="m12-actions">
 <div class="top"><p class="eyebrow">4　AIに指示する側の一手</p><p class="tag interp">発表者の解釈</p></div>
-<h2 class="title">AIに指示する私たちが、明日からできる5つのこと</h2>
+<h2 class="title">AIに指示するとき、見落としやすい5つのこと</h2>
 <table class="t5" style="font-size:24px">
-<tr><th style="width:22%">すること</th><th style="width:30%">理由（今日の例）</th><th style="width:48%">明日からの一手（例。金額などは用途に合わせる）</th></tr>
-<tr><td><b>任せる範囲を言葉で区切る</b></td><td>指示がそのまま承認として扱われうる（p.11）</td><td>「1万円を超える購入と、取り消せない操作は、必ず私に確認して」と最初に伝える</td></tr>
-<tr><td><b>つなぐサービスを絞る</b></td><td>データ・外部の文章・送る手段がそろうと漏れうる（p.4）</td><td>使わない連携やMCPサーバーは外す。外部のWebを読ませる作業と、秘密を扱う作業を分ける</td></tr>
-<tr><td><b>確認の意味を知る</b></td><td>確認されない操作もあり、そこを突かれた（p.7）</td><td>Claude Codeでは、危ない操作をdenyに入れる。「今後は確認しない」は気軽に選ばない</td></tr>
-<tr><td><b>渡す許可は最小限に</b></td><td>許可は相手のページで選べて、取り消せる（p.10）</td><td>「見るだけ」で足りるなら、それだけを渡す。使い終わった連携は解除する</td></tr>
-<tr><td><b>結果と記録を確かめる</b></td><td>エージェントが識別されても、意図までは証明されない（p.11）</td><td>購入・送信の履歴をあとで見る。Claude Codeの変更は、差分を見てから反映する</td></tr>
+<tr><th style="width:24%">ありがちな思い込み</th><th style="width:36%">実際は（今日の例）</th><th style="width:40%">だから、こうする</th></tr>
+<tr><td><b>確認が出なければ、危ないことはしていない</b></td><td>確認なしで通る「読み取り」の通信から、情報が持ち出された（p.7）</td><td>外部のWebやメールを読ませる作業と、社内データや秘密を扱う作業を、同じAIの同じ作業に混ぜない</td></tr>
+<tr><td><b>「1万円以下なら進めて」は安全な指示</b></td><td>その一言がそのまま承認として使われ、会社には本人の承認か確かめられない（p.11）</td><td>金額ではなく「取り消せるか」で区切る。「取り消せない操作は、金額にかかわらず私に聞いて」</td></tr>
+<tr><td><b>AIがやったことは、AIの責任</b></td><td>相手のサイトからは、あなたがやったことに見える。Amazonは「顧客が同意した規約に違反」と表示した（p.2）</td><td>AIに使わせるサイトの規約と、AI向けの窓口（Poppyなど）があるかを確かめる。<b>使っているAIがPoppyに対応しているかも</b>（11月時点で公表はMuseのみ）</td></tr>
+<tr><td><b>ログインさせてしまえば楽</b></td><td>AIのブラウザでログインすると、その画面でできることは全部AIにもできる（p.9）</td><td>相手のページで範囲を選べる連携（公式の連携やPoppy）があれば、そちらを使う</td></tr>
+<tr><td><b>AIは一番いいものを選んでくれる</b></td><td>エージェントの運営者が、取引の手数料で稼ぐ計画を持っていることがある（Museなど）</td><td>選び方の基準も指示に書く。「正規販売店から」「最安だと判断した根拠も示して」</td></tr>
 </table>
-<div class="note"><p class="note-txt">補足：取引で稼ぐエージェントでは、<b>選び方の基準も指示に含める</b>（例：「正規販売店から買って」）。Poppyは扱わない</p></div>
 <div class="spacer"></div>
-<div class="next"><p class="next-label">まとめ</p><p class="next-q">今日の話を一言でまとめると</p></div>
-<p class="footer">発表者による整理（各例の出典は該当スライドを参照）</p>
+<div class="next"><p class="next-label">まとめ</p><p class="next-q">結局、私たちはAIに何を渡しているのか</p></div>
 <p class="pageno">12</p>
 </section>
-<section id="m13-summary" class="dark statement">
-<p class="st-eyebrow">まとめ</p>
-<p class="st-text">AIに指示することは、あなたの権限を渡すこと。<br>どこで止まり、どこで止まらないかを<br>知ったうえで任せる。</p>
-<div class="recap">
+<section id="m13-summary" class="dark statement" style="gap:36px">
+<p class="st-eyebrow">まとめ：AIに指示するとき、私たちは何を渡しているのか</p>
+<p class="st-text" style="font-size:56px">答え：次の4つ。<br>どこで止まり、どこで止まらないかを知ったうえで任せる</p>
+<div class="recap" style="display:grid; grid-template-columns:1fr 1fr; gap:24px">
 <div class="rc">
-<p class="rc-t">AIエージェントの中では</p>
-<p class="rc-txt">提案するAIと、許可する仕組みが分かれている。ただし確認されない操作もあり、破られることもある</p>
+<p class="rc-t">① あなたとして操作する力</p>
+<p class="rc-txt">メール送信や購入まで。別の仕組みや会社の範囲で止まるが、確認なしの「読み取り」は通る（p.5・p.7）</p>
 </div>
 <div class="rc">
-<p class="rc-t b">相手の会社では</p>
-<p class="rc-txt">あなたが会社のページで許可の範囲を選び、取り消せない操作は会社が止める。そのための共通ルール（Poppy）が始まったところ</p>
+<p class="rc-t">② 読ませる情報</p>
+<p class="rc-txt">メール、社内データ、予約番号と姓など。外の文章と混ざると、外へ出うる（p.4・p.7）</p>
+</div>
+<div class="rc">
+<p class="rc-t b">③ 承認する権利</p>
+<p class="rc-txt">会社は承認まで止めるが、「20ドル以下なら進めて」の一言がそのまま承認になる（p.11）</p>
+</div>
+<div class="rc">
+<p class="rc-t b">④ 選ぶ判断</p>
+<p class="rc-txt">どの店で、何を買うか。どこでも止まらない。基準は自分で指示するしかない（p.12）</p>
 </div>
 </div>
-<p class="rc-note">いつか「AIに使われる側」のシステムを作るなら：AI用の受付、操作の影響の宣言、会社側での確認が設計のポイントになる</p>
+<p class="rc-note">渡さずに済むもの：パスワードとカード番号（よく作られた仕組みなら。p.6・p.9）。<br>いつか「AIに使われる側」のシステムを作るなら：AI用の受付、操作の影響の宣言、会社側での確認が設計のポイント</p>
 <p class="pageno">13</p>
 </section>
 <section id="s19-sources">
