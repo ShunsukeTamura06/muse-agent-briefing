@@ -1,4 +1,4 @@
-<section id="m07-breach">
+<section id="m07-breach" style="gap:20px">
 <div class="top"><p class="eyebrow">2　Museの守り</p><p class="tag third">第三者の報告</p></div>
 <h2 class="title">それでもMuseから、確認のない通信で情報が持ち出された</h2>
 <p class="lead">セキュリティ企業NebuSecが、悪意あるWebページ1つで、会話履歴と記憶を外へ出せたと報告（11月20日）</p>
@@ -7,7 +7,7 @@
 <p class="kicker">何が起きたか</p>
 <ul class="list">
 <li>Museに悪意あるページを保存させると、内蔵ブラウザの弱点を突かれ、<b>攻撃者のプログラムがMuseの作業区画の中で動いた</b>（AIがだまされたのではない）</li>
-<li>Sentinelは、中身のないGET通信を「読み取り」として確認なしで通す。<b>そのGETのURLなどに情報を載せて</b>、少しずつ外へ出した</li>
+<li>Sentinelは、本文のないGETなどの通信を「読み取り」とみなし、初期設定では確認なしで通す。攻撃者はこの規則の範囲内で、<b>確認を一度も出さずに</b>情報を送った（送り方の細部は非公表）</li>
 <li>NebuSecによれば公開前に修正済み。<b>何をどう直したかは公表されていない</b>（同社単独の報告）</li>
 </ul>
 </div>

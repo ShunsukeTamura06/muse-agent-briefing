@@ -275,8 +275,8 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <div class="card">
 <p class="kicker">背景にあると指摘される理由（報道・分析）</p>
 <ul class="list">
-<li>Amazonの広告収入は年680億ドル超。人がページを見て回ることで成り立つ</li>
-<li>AIが代わりに買うと、広告や「ついで買い」が起きにくい</li>
+<li>Amazonの昨年の広告収入は680億ドル超。人が商品ページを見て回ることで成り立つ</li>
+<li>AIが代わりに見て回ると、広告は素通りされ、閲覧の記録も広告に使えない</li>
 </ul>
 </div>
 </div>
@@ -406,7 +406,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <div class="dg">
 <!-- あなた 0,0,180,120  番号 268,0,200,150  店 268,210,200,80 -->
 <div class="m-box" style="left:0px; top:0px; width:180px; height:120px"><p class="m-t">あなた</p><p class="m-s">代金は<br>自分のカード</p></div>
-<div class="m-box sa" style="left:268px; top:0px; width:200px; height:150px"><p class="m-t">使い捨て番号</p><p class="m-s">（Stripe）<br>この店・〇〇円<br>今日だけ</p></div>
+<div class="m-box sa" style="left:268px; top:0px; width:200px; height:150px"><p class="m-t">使い捨て番号</p><p class="m-s">（Stripe）<br>この店・〇〇円<br>期限つき</p></div>
 <div class="m-box" style="left:268px; top:200px; width:200px; height:90px; border-style:dashed"><div style="display:flex; align-items:center; gap:8px"><svg aria-label="AIのアイコン" width="34" height="34" viewBox="0 0 40 40"><line x1="20" y1="4" x2="20" y2="10" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="4" r="3" fill="#4A5561"/><rect x="6" y="10" width="28" height="24" rx="7" fill="#E3E8EE" stroke="#4A5561" stroke-width="3"/><circle cx="15" cy="22" r="3" fill="#4A5561"/><circle cx="25" cy="22" r="3" fill="#4A5561"/><line x1="2" y1="21" x2="6" y2="21" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="21" x2="38" y2="21" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/></svg><p class="m-t">店とAI</p></div><p class="m-s">番号だけ届く</p></div>
 <x-connector x1="180" y1="45" x2="268" y2="45" style="color:#8A949E; border-width:3px"></x-connector>
 <x-connector x1="372" y1="150" x2="372" y2="200" style="color:#2A63A0; border-width:4px"></x-connector>
@@ -424,7 +424,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <div class="next"><p class="next-label">次の問い</p><p class="next-q">確認されない操作は、本当に安全なのか</p></div>
 <p class="pageno">6</p>
 </section>
-<section id="m07-breach">
+<section id="m07-breach" style="gap:20px">
 <div class="top"><p class="eyebrow">2　Museの守り</p><p class="tag third">第三者の報告</p></div>
 <h2 class="title">それでもMuseから、確認のない通信で情報が持ち出された</h2>
 <p class="lead">セキュリティ企業NebuSecが、悪意あるWebページ1つで、会話履歴と記憶を外へ出せたと報告（11月20日）</p>
@@ -433,7 +433,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <p class="kicker">何が起きたか</p>
 <ul class="list">
 <li>Museに悪意あるページを保存させると、内蔵ブラウザの弱点を突かれ、<b>攻撃者のプログラムがMuseの作業区画の中で動いた</b>（AIがだまされたのではない）</li>
-<li>Sentinelは、中身のないGET通信を「読み取り」として確認なしで通す。<b>そのGETのURLなどに情報を載せて</b>、少しずつ外へ出した</li>
+<li>Sentinelは、本文のないGETなどの通信を「読み取り」とみなし、初期設定では確認なしで通す。攻撃者はこの規則の範囲内で、<b>確認を一度も出さずに</b>情報を送った（送り方の細部は非公表）</li>
 <li>NebuSecによれば公開前に修正済み。<b>何をどう直したかは公表されていない</b>（同社単独の報告）</li>
 </ul>
 </div>
@@ -467,19 +467,19 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <div class="next"><p class="next-label b">次の問い</p><p class="next-q">①〜④に答えて、サイト側がAIを見分け、範囲を決めて受け入れる方法はないのか</p></div>
 <p class="pageno">8</p>
 </section>
-<section id="m09-poppy" class="tone2" style="gap:14px">
+<section id="m09-poppy" class="tone2" style="gap:10px">
 <div class="top"><p class="eyebrow b">3　サイト側から見ると</p><p class="tag fact">事実（各社の発表・仕様）</p></div>
 <h2 class="title">答え：Poppyは、AI専用の受付で①〜④に答えさせる</h2>
-<p class="lead">MetaとSierraが中心に作った共通ルール（2026年11月13日に正式版、Shopifyの全ストアが対応）</p>
+<p class="lead">MetaとSierraが中心に作った共通ルール（2026年11月13日に1.0版。Sierraによれば、Shopifyの全ストアが対応）</p>
 <table class="t5">
 <tr><th style="width:36%">サイト側の問い（前のページ）</th><th style="width:64%">Poppyの受付での答え方</th></tr>
 <tr><td><b>① 来たのはどのAIか</b></td><td>AIが毎回、署名付きで名乗る。偽物は見抜けるが、通すかはサイト側次第</td></tr>
 <tr><td><b>② そのAIは、どのユーザーの代わりか</b></td><td>ユーザーごとの番号で示す。<b>AIの中でも人ごとに区別でき、Museごと締め出さずに済む</b>。番号はサイト専用で、本名やメールは伝わらない</td></tr>
-<tr><td><b>③ ユーザーは、AIに何を許したのか</b></td><td>ユーザー自身がサイトの画面でログインし、許す範囲を選ぶ。<b>AIが受け取るのはその範囲だけの許可で、パスワードは受け取らない</b></td></tr>
-<tr><td><b>④ AIは、取り消せないと分かっているか</b></td><td>サイト側が操作ごとの影響を宣言する。取り消せない操作は承認を待てる</td></tr>
+<tr><td><b>③ ユーザーは、AIに何を許したのか</b></td><td>基本は、ユーザー自身がサイトの画面でログインし、許す範囲を選ぶ。<b>AIが受け取るのはその範囲だけの許可で、パスワードは受け取らない</b></td></tr>
+<tr><td><b>④ AIは、取り消せないと分かっているか</b></td><td>サイト側が、許可の範囲ごとに「変更があるか」「個人データを扱うか」を宣言する。取り消せない操作は承認を待てる</td></tr>
 </table>
 <div class="note">
-<p class="note-txt"><b>AIがサイトを操作する方法は、サイト側が選ぶ：</b>MCP（Claude CodeのMCPと同じ。調べた実例はすべてこれ）、API、Webの画面、<br>サイト側のAIとの会話。Poppyに対応していないサイトでは、AIは今まで通り人のふりをして画面を操作し、範囲の制限はない</p>
+<p class="note-txt"><b>AIがサイトを操作する方法は、サイト側が選ぶ：</b>MCP（Claude CodeのMCPと同じ）、API、Webの画面、サイト側のAIとの会話など。<br>Poppyに対応していないサイトでは、AIは今まで通り人のふりをして画面を操作し、範囲の制限はない</p>
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label b">次の問い</p><p class="next-q">実際のサイトの受付では、③と④はどう決まっているのか</p></div>
@@ -497,7 +497,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </table>
 <div style="display:flex; gap:24px; align-items:stretch">
 <div class="codebox" style="padding:18px 28px; gap:6px; flex:0 0 auto">
-<p class="code-path">実物の一部：poppy.json の "scope_hints"（表の順に並べ替え）</p>
+<p class="code-path">実物の一部：poppy.json の "scope_hints"（表の順に並べ替え。ファイルは0.4版の書式）</p>
 <pre class="code" style="margin:0">"flights:search": { "changes": "none", "personal_data": false },
 "bookings:read":  { "changes": "none", "personal_data": true },
 "profile:read":   { "changes": "none", "personal_data": true }</pre>
@@ -521,7 +521,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <x-shape kind="arrow-right" class="arrow sm"></x-shape>
 <p class="mchip" style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; font-size:28px; padding:14px 12px">人が承認</p>
 <x-shape kind="arrow-right" class="arrow sm"></x-shape>
-<p class="mchip" style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; font-size:28px; padding:14px 12px">AIがその条件で実行</p>
+<p class="mchip" style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; font-size:28px; padding:14px 12px">サイトがその条件で<br>1回だけ実行</p>
 </div>
 <div class="card strong" style="flex:none; padding:24px 32px">
 <p class="card-h">ただし、承認するのは、あなたの指示を受けたAIでもよい</p>
@@ -539,7 +539,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <div class="rc">
 <p class="rc-t">① あなたとして操作する力</p>
 <p class="rc-txt">AIエージェントは、あなたのアカウントで、メールの送信や購入まで行える。危ない操作を止めるのは、AIとは別の許可の仕組み</p>
-<p class="rc-txt" style="font-size:24px; color:#AFC0CF; border-top:1px solid #3B5166; padding-top:10px"><b>Museでは：</b>許可の仕組み（Sentinel）が止めるが、確認なしで通る「読み取り」の通信から情報が出た（p.5・p.7）</p>
+<p class="rc-txt" style="font-size:24px; color:#AFC0CF; border-top:1px solid #3B5166; padding-top:10px"><b>Museでは：</b>許可の仕組み（Sentinel）が止めるが、確認を一度も出さずに情報が持ち出された報告がある（p.5・p.7）</p>
 </div>
 <div class="rc">
 <p class="rc-t">② あなたの情報</p>
@@ -548,11 +548,11 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 <div class="rc">
 <p class="rc-t">③ 承認する権利</p>
-<p class="rc-txt">「20ドル以下なら進めて」と決めておくと、その範囲ではAIエージェントがあなたに聞かずにサイトへ承認を送る。サイトは、承認したのがあなたかAIかを見分けられない</p>
+<p class="rc-txt">「20ドル以下なら進めて」と決めておくと、その範囲ではAIエージェントがあなたに聞かずにサイトへ承認を送る。サイトはAIの申告を信じるしかなく、あなたが本当に承認したかは確かめられない</p>
 <p class="rc-txt" style="font-size:24px; color:#AFC0CF; border-top:1px solid #3B5166; padding-top:10px"><b>今日の例：</b>Poppyのルールに載っている（p.11）。Museなら、そのルールで判断するのは許可の仕組み（p.5）</p>
 </div>
 </div>
-<p class="rc-note">渡さずに済むもの：パスワードとカード番号（Museの預かり方やPoppyのような仕組みがあれば。p.6・p.9）。<br>いつか「AIに使われる側」のシステムを作るなら：AI用の受付、操作の影響の宣言、サイト側での確認が設計のポイント</p>
+<p class="rc-note">渡さずに済むもの：パスワード（Museは札だけ、Poppyではあなたがログイン。p.6・p.9）とカード番号（Museは使い捨て番号。p.6）<br>いつか「AIに使われる側」のシステムを作るなら：AI用の受付、操作の影響の宣言、サイト側での確認が設計のポイント</p>
 <p class="pageno">12</p>
 </section>
 <section id="s19-sources" style="gap:20px">
