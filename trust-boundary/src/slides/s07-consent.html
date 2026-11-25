@@ -1,0 +1,30 @@
+<section id="s07-consent">
+<div class="top"><p class="eyebrow">第2章　境界A：AIの内側</p><p class="tag meta">Metaの説明（「なぜ」は発表者の補足）</p></div>
+<h2 class="title">大事な確認はAIの外で。ただし、全部は聞かない</h2>
+<p class="lead">同意と秘密はAIを通さない。一方で、日常の作業を止めないよう、低リスクの操作は確認しない</p>
+<div class="row">
+<div class="card">
+<p class="card-h">承認はチャットの外で</p>
+<p class="txt">確認画面はアプリの専用UIに出る。回答はAIを通らず、Sentinelに直接届く</p>
+<p class="txt"><b>なぜ：</b>チャットには外部の文章も流れ込み、乗っ取られたAIは「承認された」と装える。専用画面なら装えない</p>
+</div>
+<div class="card">
+<p class="card-h">AIは本物の鍵を見ない</p>
+<p class="txt">AIが持つのは代わりのトークン。送信の直前に本物へ差し替える</p>
+<p class="txt"><b>なぜ：</b>許可の仕組みがすり抜けられても、外に出るのは外では使えない代わりのトークン。ただし、鍵を使った操作は許可の範囲で通る</p>
+</div>
+<div class="card">
+<p class="card-h">支払いは使い捨て番号で</p>
+<p class="txt">加盟店・金額・期間に紐づく番号を発行し、購入のたびにあなたが承認する</p>
+<p class="txt"><b>なぜ：</b>AIにも店にも本物のカード番号が渡らない。漏れても、その店・その金額・その期間でしか使えない</p>
+</div>
+</div>
+<div class="strip">
+<p class="strip-label">確認しないもの</p>
+<p class="strip-text">読み取りだけ・許可済み・低リスクと判定された操作。Claude Codeでも、ファイルの読み取りは確認なし</p>
+</div>
+<div class="spacer"></div>
+<div class="next"><p class="next-label">次の問い</p><p class="next-q">その「確認しない」部分は、本当に安全なのか</p></div>
+<p class="footer">出典：Meta「Museの安全機能」（2026/9/8）、Runtime Wire（使い捨て番号の目的）、Claude Code Docs「Configure permissions」</p>
+<p class="pageno"></p>
+</section>

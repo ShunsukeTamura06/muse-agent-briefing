@@ -1,0 +1,24 @@
+<section id="s08-breach">
+<div class="top"><p class="eyebrow">第3章　境界Aは破られうる</p><p class="tag third">第三者の報告</p></div>
+<h2 class="title">確認されない「読み取り」から、データが持ち出された</h2>
+<p class="lead">NebuSecは、悪意あるWebページ1つから会話履歴と記憶を持ち出せたと報告した</p>
+<div class="matrix">
+<p class="mx-label">守りのはずだったもの</p>
+<p class="mx-head">確認ダイアログ</p>
+<p class="mx-head">許可の仕組み（Sentinel）</p>
+<p class="mx-head">AIの判断</p>
+<p class="mx-label">実際には</p>
+<p class="mx-cell">「読み取り」扱いの通信は確認しない設計。そこにデータを載せて外へ出された</p>
+<p class="mx-cell">OSの脆弱性でコンテナの外に出たプロセスは、見ていなかった</p>
+<p class="mx-cell">入口はAIではなく、PDF保存に使う同梱ブラウザの既知の脆弱性だった</p>
+<p class="mx-label">使う側の教訓</p>
+<p class="lesson">確認ボタンだけが守りではない</p>
+<p class="lesson">守りには、届く範囲がある</p>
+<p class="lesson">AIでも、ふつうのソフトの弱点からは逃れられない</p>
+</div>
+<div class="note"><p class="note-txt"><b>Muse固有の話ではない。</b>Claude Codeを含め、読む・つなぐ・送るができるエージェントすべてに当てはまる（対策は第6章）</p></div>
+<div class="spacer"></div>
+<div class="next"><p class="next-label">次の問い</p><p class="next-q">内側は破られうる。では、相手の会社はエージェントをどう見ているのか</p></div>
+<p class="footer">出典：NebuSec「Inside Meta Muse」（2026/11/20）。同社単独の報告で再現はなく、同社によれば修正済み。教訓は発表者の整理</p>
+<p class="pageno"></p>
+</section>

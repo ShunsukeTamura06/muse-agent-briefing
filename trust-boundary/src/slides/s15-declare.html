@@ -1,0 +1,21 @@
+<section id="s15-declare" class="tone2">
+<div class="top"><p class="eyebrow b">第5章　例② 取り消せない操作（1/2）宣言</p><p class="tag fact">事実（発表者の確認）</p></div>
+<h2 class="title">取り消せない操作は、あらかじめ宣言されている</h2>
+<p class="lead">会社は、権限ごとの影響の大きさを、機械が読める形で示している（実物）</p>
+<div class="row">
+<div class="card">
+<p class="kicker b">Shopifyのストア（例：Allbirds、土屋鞄製造所）</p>
+<p class="code">"dev.ucp.shopping.checkout:manage": {<br>&#160;&#160;"changes": "irreversible",<br>&#160;&#160;"personal_data": true }</p>
+<p class="txt">「購入の準備」の権限を、取り消せない操作と宣言。説明には「エージェントは購入を準備し、<b>購入を完了するのは買い手</b>」とある</p>
+</div>
+<div class="card">
+<p class="kicker b">ターキッシュエアラインズ</p>
+<p class="code">"flights:search" / "bookings:read" /<br>"profile:read" →<br>&#160;&#160;すべて "changes": "none"</p>
+<p class="txt">エージェントに渡せるのは「見る」権限だけ。予約の変更などは、窓口が案内するリンク先で行う</p>
+</div>
+</div>
+<div class="spacer"></div>
+<div class="next"><p class="next-label b">次の問い</p><p class="next-q">「取り消せない」と書いてあれば、それで止まるのか</p></div>
+<p class="footer">出典：Allbirds・土屋鞄製造所・ターキッシュエアラインズの poppy.json（2026/11/25確認）、Personal Agent Protocol 1.0 仕様 §4.7</p>
+<p class="pageno"></p>
+</section>
