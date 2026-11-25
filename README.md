@@ -25,6 +25,8 @@ Meta のパーソナルAIエージェント「Muse」（2026年9月8日 米国�
 
 構成の理由、試算の前提、言わないことにした点、出典の一覧は `engineer_briefing_outline.md` にまとめてある。
 
+別テーマの資料として、AIエージェントに**指示する側**向けの「AIに指示するとき、私たちは何を渡しているのか ― Meta Muse と Poppy の事例から」（13枚）を `trust-boundary/` に置いている。詳細はそのフォルダの README を参照。
+
 `*_backup.pdf` は表示が崩れた場合の保険（`node tools/export_pdf.mjs <html>` で再生成）。
 
 ## 自分で試した記録の差し込み方
