@@ -14,7 +14,7 @@ h1 { font-size: 96px; font-weight: 600 } h2 { font-size: 64px; font-weight: 600 
 p, li, h1, h2, h3, td, th { overflow-wrap: break-word; text-wrap: pretty }
 table { width: 100%; border-collapse: separate; border-spacing: 0; border: solid #0003; border-width: 2px 0 0 2px }
 th, td { padding: .35em .6em; text-align: left; border: solid #0003; border-width: 0 2px 2px 0 }
-x-shape, x-icon { display: block }
+x-shape, x-icon { display: block } x-connector { display: block; position: absolute }
 
 body { font-family: 'IBM Plex Sans JP', Arial, sans-serif; }
 
@@ -213,6 +213,11 @@ section.statement { justify-content: center; gap: 56px; }
 .src { font-size: 24px; line-height: 1.45; color: #3A4652; }
 .src a { color: #1D4A7A; }
 
+/* small pinned diagram inside a card */
+.dg { position: relative; width: 468px; height: 290px; }
+.dg .m-t { font-size: 25px; }
+.dg .m-s { font-size: 21px; }
+
 
 body, section { font-family: 'IBM Plex Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', 'Yu Gothic', sans-serif }
 x-shape.arrow { background: none !important; width: auto !important; height: auto !important;
@@ -327,7 +332,7 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 </div>
 <div class="note">
-<p class="note-txt">この失敗は、AIに①あなたの私的なデータ、②誰が書いたか分からない文章、③外へ送る手段、の3つを同時に持たせると起こりうる。<b>AIが賢くても、AIの判断だけでは防ぎきれない</b></p>
+<p class="note-txt">この失敗は、AIに「あなたの私的なデータ」「誰が書いたか分からない文章」「外へ送る手段」の3つを同時に持たせると起こりうる。<b>AIが賢くても、AIの判断だけでは防ぎきれない</b></p>
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label">次の問い</p><p class="next-q">Museは、この失敗をどう防ごうとしているのか</p></div>
@@ -361,25 +366,54 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <div class="next"><p class="next-label">次の問い</p><p class="next-q">では、あなたへの確認やパスワードは、AIからどう守られているのか</p></div>
 <p class="pageno">5</p>
 </section>
-<section id="m06-secrets">
+<section id="m06-secrets" style="gap:12px">
 <div class="top"><p class="eyebrow">2　Museの守り</p><p class="tag meta">Metaの説明（「なぜ」は発表者の補足）</p></div>
 <h2 class="title">Museは、大事な確認と秘密をAIに触らせない</h2>
 <p class="lead">AIが乗っ取られても、承認を偽ったり、秘密を盗んだりできないようにするため</p>
 <div class="row">
 <div class="card">
 <p class="card-h">確認は、AIの外の画面で</p>
-<p class="txt">「送ってよいですか？」は専用画面に出て、答えはAIを通らない</p>
-<p class="txt"><b>なぜ：</b>AIは「承認された」と嘘をつけない</p>
+<div class="dg">
+<!-- AI 0,0,160,90  許可 272,0,200,90  あなた 272,180,200,90 -->
+<div class="m-box" style="left:0px; top:0px; width:160px; height:90px; border-style:dashed"><div style="display:flex; align-items:center; gap:8px"><svg aria-label="AIのアイコン" width="34" height="34" viewBox="0 0 40 40"><line x1="20" y1="4" x2="20" y2="10" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="4" r="3" fill="#4A5561"/><rect x="6" y="10" width="28" height="24" rx="7" fill="#E3E8EE" stroke="#4A5561" stroke-width="3"/><circle cx="15" cy="22" r="3" fill="#4A5561"/><circle cx="25" cy="22" r="3" fill="#4A5561"/><line x1="2" y1="21" x2="6" y2="21" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="21" x2="38" y2="21" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/></svg><p class="m-t">AI</p></div><p class="m-s">提案だけ</p></div>
+<div class="m-box sa" style="left:268px; top:0px; width:200px; height:110px"><p class="m-t">許可の仕組み</p><p class="m-s">（Sentinel）<br>実行を決める</p></div>
+<div class="m-box" style="left:268px; top:180px; width:200px; height:90px"><p class="m-t">あなた</p><p class="m-s">専用画面で回答</p></div>
+<x-connector x1="160" y1="45" x2="268" y2="45" style="color:#8A949E; border-width:3px"></x-connector>
+<x-connector x1="330" y1="110" x2="330" y2="180" style="color:#8A949E; border-width:3px"></x-connector>
+<x-connector x1="414" y1="180" x2="414" y2="110" style="color:#2A63A0; border-width:4px"></x-connector>
+<p class="m-lab" style="left:184px; top:53px; width:64px; color:#4A5561">提案</p>
+<p class="m-lab" style="left:172px; top:128px; width:150px; color:#4A5561">送ってよい？</p>
+<p class="m-lab" style="left:424px; top:128px; width:48px; color:#2A63A0">はい</p>
+<p style="position:absolute; left:0px; top:170px; width:250px; font-size:24px; line-height:1.45; color:#13212E; font-weight:600">答えはAIを通らない<br>→ AIは承認を偽れない</p>
+</div>
 </div>
 <div class="card">
 <p class="card-h">パスワードは、AIに見せない</p>
-<p class="txt">AIが持つのは代わりの札。外へ送る直前に、AIの外で本物に差し替える</p>
-<p class="txt"><b>なぜ：</b>札を盗まれても、外では使えない</p>
+<div class="dg">
+<!-- AI 0,0,160,90  許可 272,0,200,90  サイト 272,180,200,90 -->
+<div class="m-box" style="left:0px; top:0px; width:160px; height:90px; border-style:dashed"><div style="display:flex; align-items:center; gap:8px"><svg aria-label="AIのアイコン" width="34" height="34" viewBox="0 0 40 40"><line x1="20" y1="4" x2="20" y2="10" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="4" r="3" fill="#4A5561"/><rect x="6" y="10" width="28" height="24" rx="7" fill="#E3E8EE" stroke="#4A5561" stroke-width="3"/><circle cx="15" cy="22" r="3" fill="#4A5561"/><circle cx="25" cy="22" r="3" fill="#4A5561"/><line x1="2" y1="21" x2="6" y2="21" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="21" x2="38" y2="21" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/></svg><p class="m-t">AI</p></div><p class="m-s">持つのは札</p></div>
+<div class="m-box sa" style="left:268px; top:0px; width:200px; height:110px"><p class="m-t">許可の仕組み</p><p class="m-s">（Sentinel）<br>札→本物の鍵</p></div>
+<div class="m-box" style="left:268px; top:180px; width:200px; height:90px"><p class="m-t">相手のサイト</p><p class="m-s">本物だけ届く</p></div>
+<x-connector x1="160" y1="45" x2="268" y2="45" style="color:#8A949E; border-width:3px"></x-connector>
+<x-connector x1="372" y1="110" x2="372" y2="180" style="color:#2A63A0; border-width:4px"></x-connector>
+<p class="m-lab" style="left:190px; top:53px; width:56px; color:#4A5561">依頼</p>
+<p class="m-lab" style="left:268px; top:128px; width:96px; color:#2A63A0">本物の鍵</p>
+<p style="position:absolute; left:0px; top:170px; width:250px; font-size:24px; line-height:1.45; color:#13212E; font-weight:600">札を盗まれても<br>→ 外では使えない</p>
+</div>
 </div>
 <div class="card">
 <p class="card-h">カードは、使い捨て番号で</p>
-<p class="txt">店・金額・期間を限った番号を発行し、購入のたびにあなたが承認する</p>
-<p class="txt"><b>なぜ：</b>漏れても、その買い物にしか使えない</p>
+<div class="dg">
+<!-- あなた 0,0,180,120  番号 268,0,200,150  店 268,210,200,80 -->
+<div class="m-box" style="left:0px; top:0px; width:180px; height:120px"><p class="m-t">あなた</p><p class="m-s">代金は<br>自分のカード</p></div>
+<div class="m-box sa" style="left:268px; top:0px; width:200px; height:150px"><p class="m-t">使い捨て番号</p><p class="m-s">（Stripe）<br>この店・〇〇円<br>今日だけ</p></div>
+<div class="m-box" style="left:268px; top:200px; width:200px; height:90px; border-style:dashed"><div style="display:flex; align-items:center; gap:8px"><svg aria-label="AIのアイコン" width="34" height="34" viewBox="0 0 40 40"><line x1="20" y1="4" x2="20" y2="10" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="4" r="3" fill="#4A5561"/><rect x="6" y="10" width="28" height="24" rx="7" fill="#E3E8EE" stroke="#4A5561" stroke-width="3"/><circle cx="15" cy="22" r="3" fill="#4A5561"/><circle cx="25" cy="22" r="3" fill="#4A5561"/><line x1="2" y1="21" x2="6" y2="21" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="21" x2="38" y2="21" stroke="#4A5561" stroke-width="3" stroke-linecap="round"/></svg><p class="m-t">店とAI</p></div><p class="m-s">番号だけ届く</p></div>
+<x-connector x1="180" y1="45" x2="268" y2="45" style="color:#8A949E; border-width:3px"></x-connector>
+<x-connector x1="372" y1="150" x2="372" y2="200" style="color:#2A63A0; border-width:4px"></x-connector>
+<p class="m-lab" style="left:200px; top:53px; width:48px; color:#4A5561">承認</p>
+<p class="m-lab" style="left:292px; top:158px; width:72px; color:#2A63A0">支払い</p>
+<p style="position:absolute; left:0px; top:170px; width:250px; font-size:24px; line-height:1.45; color:#13212E; font-weight:600">本物の番号は<br>店にもAIにも渡らない</p>
+</div>
 </div>
 </div>
 <div class="strip">
@@ -398,9 +432,9 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <div class="card">
 <p class="kicker">何が起きたか</p>
 <ul class="list">
-<li>Museが開いたWebページから侵入された。入口はAIではなく、内蔵ブラウザの既知の弱点</li>
-<li>「読み取り」扱いの通信は確認なしで通る。そこに情報を載せて外へ出した</li>
-<li>NebuSecによれば、公開前に修正済み（同社単独の報告）</li>
+<li>Museに悪意あるページを保存させると、内蔵ブラウザの弱点を突かれ、<b>攻撃者のプログラムがMuseの作業区画の中で動いた</b>（AIがだまされたのではない）</li>
+<li>Sentinelは、中身のないGET通信を「読み取り」として確認なしで通す。<b>そのGETのURLなどに情報を載せて</b>、少しずつ外へ出した</li>
+<li>NebuSecによれば公開前に修正済み。<b>何をどう直したかは公表されていない</b>（同社単独の報告）</li>
 </ul>
 </div>
 <div class="card accent-a">
@@ -413,126 +447,118 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 </div>
 </div>
 <div class="spacer"></div>
-<div class="next"><p class="next-label">次の問い</p><p class="next-q">ここまではMuseの中の話。では、相手の会社からは、Museはどう見えているのか</p></div>
+<div class="next"><p class="next-label">次の問い</p><p class="next-q">ここまではMuseの中の話。では、相手のサイト側からは、Museはどう見えているのか</p></div>
 <p class="pageno">7</p>
 </section>
-<section id="m08-company" class="tone2">
-<div class="top"><p class="eyebrow b">3　相手の会社から見ると</p><p class="tag fact">事実（報道）と発表者の整理</p></div>
-<h2 class="title">会社からは、来たのが本人かAIか、誰の代わりか分からない</h2>
-<p class="lead">冒頭のAmazonが問題にしたのも、Museが名乗らずに、顧客のアカウントで動いていたこと</p>
+<section id="m08-company" class="tone2" style="gap:20px">
+<div class="top"><p class="eyebrow b">3　サイト側から見ると</p><p class="tag fact">事実（報道）と発表者の整理</p></div>
+<h2 class="title">サイト側からは、来たのが本人かAIか、確実には見分けられない</h2>
+<p class="lead">誰かがサイトを操作しに来たとき、サイト側が確かめたいのは次の4つ</p>
 <div class="grid4">
-<div class="card"><p class="card-h">① どのAIが来たのか</p><p class="txt">Museか、別のAIか、ただの迷惑な自動アクセスか</p></div>
-<div class="card"><p class="card-h">② どの顧客の代わりか</p><p class="txt">本当にその顧客に頼まれたのか</p></div>
-<div class="card"><p class="card-h">③ 何を許したのか</p><p class="txt">見るだけか、買い物までか</p></div>
-<div class="card"><p class="card-h">④ 取り消せない操作か</p><p class="txt">購入やキャンセルを、このまま通してよいか</p></div>
+<div class="card"><p class="card-h">① 来たのはどのAIか</p><p class="txt">Museか、別のAIか、ただの迷惑な自動アクセスか</p></div>
+<div class="card"><p class="card-h">② そのAIは、どのユーザーの代わりか</p><p class="txt">本当にそのユーザーがAIに頼んだのか</p></div>
+<div class="card"><p class="card-h">③ ユーザーは、AIに何を許したのか</p><p class="txt">見るだけか、買い物までか</p></div>
+<div class="card"><p class="card-h">④ AIは、その操作が取り消せないと分かっているか</p><p class="txt">購入やキャンセルを、このまま通してよいか</p></div>
 </div>
 <div class="note">
-<p class="note-txt">これが分からないので、多くの会社は「本物の顧客の代理」と「迷惑な自動アクセス」を見分けられず、両方をブロックしている（Metaの説明）</p>
+<p class="note-txt">送信元などの痕跡から「たぶんAI」とは推測できても、外れることも、すり抜けられることもある（発表者の推測）。①〜④は痕跡からは確かめられないので、サイト側に残る手は「まとめて締め出す」くらいになる</p>
 </div>
 <div class="spacer"></div>
-<div class="next"><p class="next-label b">次の問い</p><p class="next-q">①〜④に答えて、会社がAIを見分け、範囲を決めて受け入れる方法はないのか</p></div>
+<div class="next"><p class="next-label b">次の問い</p><p class="next-q">①〜④に答えて、サイト側がAIを見分け、範囲を決めて受け入れる方法はないのか</p></div>
 <p class="pageno">8</p>
 </section>
-<section id="m09-poppy" class="tone2">
-<div class="top"><p class="eyebrow b">3　相手の会社から見ると</p><p class="tag fact">事実（各社の発表・仕様）</p></div>
+<section id="m09-poppy" class="tone2" style="gap:14px">
+<div class="top"><p class="eyebrow b">3　サイト側から見ると</p><p class="tag fact">事実（各社の発表・仕様）</p></div>
 <h2 class="title">答え：Poppyは、AI専用の受付で①〜④に答えさせる</h2>
 <p class="lead">MetaとSierraが中心に作った共通ルール（2026年11月13日に正式版、Shopifyの全ストアが対応）</p>
 <table class="t5">
-<tr><th style="width:30%">会社の問い（前のページ）</th><th style="width:70%">Poppyの受付での答え方</th></tr>
-<tr><td><b>① どのAIが来たのか</b></td><td>AIが毎回、受付で名乗る（例：Museです）</td></tr>
-<tr><td><b>② どの顧客の代わりか</b></td><td>会社ごとに違う仮のIDで示す。本名やメールアドレスは渡さない</td></tr>
-<tr><td><b>③ 何を許したのか</b></td><td>顧客が会社のページでログインし、範囲を選ぶ。<b>パスワードはAIに渡らない</b></td></tr>
-<tr><td><b>④ 取り消せない操作か</b></td><td>会社が操作ごとに影響を宣言する。取り消せない操作は、条件を示して承認を待てる</td></tr>
+<tr><th style="width:36%">サイト側の問い（前のページ）</th><th style="width:64%">Poppyの受付での答え方</th></tr>
+<tr><td><b>① 来たのはどのAIか</b></td><td>AIが毎回、署名付きで名乗る。偽物は見抜けるが、通すかはサイト側次第</td></tr>
+<tr><td><b>② そのAIは、どのユーザーの代わりか</b></td><td>ユーザーごとの番号で示す。<b>AIの中でも人ごとに区別でき、Museごと締め出さずに済む</b>。番号はサイト専用で、本名やメールは伝わらない</td></tr>
+<tr><td><b>③ ユーザーは、AIに何を許したのか</b></td><td>ユーザー自身がサイトの画面でログインし、許す範囲を選ぶ。<b>AIが受け取るのはその範囲だけの許可で、パスワードは受け取らない</b></td></tr>
+<tr><td><b>④ AIは、取り消せないと分かっているか</b></td><td>サイト側が操作ごとの影響を宣言する。取り消せない操作は承認を待てる</td></tr>
 </table>
 <div class="note">
-<p class="note-txt"><b>受付の窓口は会社が選ぶ：</b>MCP（Claude CodeのMCPと同じ。調べた実例はすべてこれ）、API、Webサイトの画面、会社のAIとの会話。受付がないサイトでは、AIは今まで通り人のふりをして画面を操作し、ログイン後にできることは全部できる</p>
+<p class="note-txt"><b>AIがサイトを操作する方法は、サイト側が選ぶ：</b>MCP（Claude CodeのMCPと同じ。調べた実例はすべてこれ）、API、Webの画面、<br>サイト側のAIとの会話。Poppyに対応していないサイトでは、AIは今まで通り人のふりをして画面を操作し、範囲の制限はない</p>
 </div>
 <div class="spacer"></div>
-<div class="next"><p class="next-label b">次の問い</p><p class="next-q">実際の会社の受付では、③と④はどう決まっているのか</p></div>
+<div class="next"><p class="next-label b">次の問い</p><p class="next-q">実際のサイトの受付では、③と④はどう決まっているのか</p></div>
 <p class="pageno">9</p>
 </section>
 <section id="m10-airline" class="tone2">
-<div class="top"><p class="eyebrow b">3　相手の会社から見ると</p><p class="tag fact">事実（発表者の確認）</p></div>
+<div class="top"><p class="eyebrow b">3　サイト側から見ると</p><p class="tag fact">事実（発表者の確認）</p></div>
 <h2 class="title">実例：航空会社の受付は、用途ごとに③と④を決めている</h2>
-<p class="lead">ターキッシュエアラインズが公開しているPoppyの設定ファイルを、発表者が日本語にまとめた（11月25日確認）</p>
+<p class="lead">ターキッシュエアラインズのPoppyの設定ファイルを、発表者が日本語にまとめた（11月25日確認）</p>
 <table class="t5">
-<tr><th style="width:26%">Museにやらせたいこと</th><th style="width:44%">③ 顧客が許すもの</th><th style="width:30%">④ 会社の宣言</th></tr>
+<tr><th style="width:26%">Museにやらせたいこと</th><th style="width:44%">③ ユーザーが許すもの</th><th style="width:30%">④ サイト側の宣言</th></tr>
 <tr><td>フライトを探す</td><td>何も要らない（ログイン不要）</td><td>変更なし・個人データなし</td></tr>
 <tr><td>予約を確認する</td><td>予約番号と姓を伝える</td><td>変更なし・個人データあり</td></tr>
-<tr><td>マイル残高を見る</td><td><b>航空会社のページでログインし、「見る」ことを許す</b><br>（「Googleでログイン」のときの「〇〇がアクセスを求めています。許可しますか？」と同じ形の画面）</td><td>変更なし・個人データあり</td></tr>
+<tr><td>マイル残高を見る</td><td>航空会社のページでログインし、「見る」ことを許す</td><td>変更なし・個人データあり</td></tr>
 </table>
-<div class="note">
-<p class="note-txt">AIに許せるのは「見る」ことだけで、予約の変更は受け付けていない。①の名乗りなしで接続してみると「マイル会員のログインが必要」と断られた（発表者の確認）</p>
+<div style="display:flex; gap:24px; align-items:stretch">
+<div class="codebox" style="padding:18px 28px; gap:6px; flex:0 0 auto">
+<p class="code-path">実物の一部：poppy.json の "scope_hints"（表の順に並べ替え）</p>
+<pre class="code" style="margin:0">"flights:search": { "changes": "none", "personal_data": false },
+"bookings:read":  { "changes": "none", "personal_data": true },
+"profile:read":   { "changes": "none", "personal_data": true }</pre>
+</div>
+<div class="note" style="flex:1; display:flex; align-items:center">
+<p class="note-txt">3つとも <b>"changes": "none"</b>（変更なし）。AIに許せるのは「見る」ことだけで、予約の変更は受け付けていない</p>
+</div>
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label b">次の問い</p><p class="next-q">では、購入や変更のような、取り消せない操作（④）はどう扱われるのか</p></div>
 <p class="pageno">10</p>
 </section>
 <section id="m11-approve" class="tone2">
-<div class="top"><p class="eyebrow b">3　相手の会社から見ると</p><p class="tag fact">事実（仕様）</p></div>
+<div class="top"><p class="eyebrow b">3　サイト側から見ると</p><p class="tag fact">事実（仕様）</p></div>
 <h2 class="title">④ 取り消せない操作は、承認されるまで実行されない</h2>
-<p class="lead">Poppyの追加ルールに対応した会社は、実行の前に条件（金額など）を示し、承認された条件で1回だけ実行する</p>
-<div class="mflow">
-<p class="mchip">AIが「交換したい」と依頼</p>
+<p class="lead">Poppyの追加ルールでは、サイトは実行前に条件（金額など）を示し、承認された条件で1回だけ実行する</p>
+<div class="mflow" style="gap:12px; align-items:stretch">
+<p class="mchip" style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; font-size:28px; padding:14px 12px">AIが「交換したい」<br>と依頼</p>
 <x-shape kind="arrow-right" class="arrow sm"></x-shape>
-<p class="mchip">会社は実行せず、条件を返す</p>
+<p class="mchip" style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; font-size:28px; padding:14px 12px">サイト側は実行せず、<br>条件を返す</p>
 <x-shape kind="arrow-right" class="arrow sm"></x-shape>
-<p class="mchip">承認</p>
+<p class="mchip" style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; font-size:28px; padding:14px 12px">人が承認</p>
 <x-shape kind="arrow-right" class="arrow sm"></x-shape>
-<p class="mchip">その条件で実行</p>
+<p class="mchip" style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center; font-size:28px; padding:14px 12px">AIがその条件で実行</p>
 </div>
-<div class="card strong">
-<p class="kicker b">ただし、承認するのは、あなたの指示を受けたAIでもよい</p>
-<p class="txt">ルールに載っている例：あなたが最初に「20ドル以下の交換なら進めてよい」と伝えておけば、<b>AIは毎回あなたに聞かずに承認できる</b>。会社には、あなたが本当に承認したかは確かめられない</p>
+<div class="card strong" style="flex:none; padding:24px 32px">
+<p class="card-h">ただし、承認するのは、あなたの指示を受けたAIでもよい</p>
+<p class="txt">ルールの例：最初に「20ドル以下の交換なら進めてよい」と伝えておけば、<b>AIは毎回あなたに聞かずに承認できる</b>。<br>サイト側には、本人が承認したかは確かめられない</p>
 </div>
-<p class="small">実例：Shopifyのストアは「購入の準備」を取り消せない操作と宣言し、購入を完了するのは買い手だとしている</p>
+<div class="note"><p class="note-txt"><b>実例：</b>Shopifyのストアは「購入の準備」を取り消せない操作とし、購入を完了するのは買い手としている</p></div>
 <div class="spacer"></div>
-<div class="next"><p class="next-label b">次の問い</p><p class="next-q">では、AIに指示する私たちは、何をすればよいのか</p></div>
+<div class="next"><p class="next-label b">次の問い</p><p class="next-q">結局、AIに指示するとき、私たちは何を渡しているのか</p></div>
 <p class="pageno">11</p>
-</section>
-<section id="m12-actions">
-<div class="top"><p class="eyebrow">4　AIに指示する側の一手</p><p class="tag interp">発表者の解釈</p></div>
-<h2 class="title">AIに指示するとき、見落としやすい5つのこと</h2>
-<table class="t5" style="font-size:24px">
-<tr><th style="width:24%">ありがちな思い込み</th><th style="width:36%">実際は（今日の例）</th><th style="width:40%">だから、こうする</th></tr>
-<tr><td><b>確認が出なければ、危ないことはしていない</b></td><td>確認なしで通る「読み取り」の通信から、情報が持ち出された（p.7）</td><td>外部のWebやメールを読ませる作業と、社内データや秘密を扱う作業を、同じAIの同じ作業に混ぜない</td></tr>
-<tr><td><b>「1万円以下なら進めて」は安全な指示</b></td><td>その一言がそのまま承認として使われ、会社には本人の承認か確かめられない（p.11）</td><td>金額ではなく「取り消せるか」で区切る。「取り消せない操作は、金額にかかわらず私に聞いて」</td></tr>
-<tr><td><b>AIがやったことは、AIの責任</b></td><td>相手のサイトからは、あなたがやったことに見える。Amazonは「顧客が同意した規約に違反」と表示した（p.2）</td><td>AIに使わせるサイトの規約と、AI向けの窓口（Poppyなど）があるかを確かめる。<b>使っているAIがPoppyに対応しているかも</b>（11月時点で公表はMuseのみ）</td></tr>
-<tr><td><b>ログインさせてしまえば楽</b></td><td>AIのブラウザでログインすると、その画面でできることは全部AIにもできる（p.9）</td><td>相手のページで範囲を選べる連携（公式の連携やPoppy）があれば、そちらを使う</td></tr>
-<tr><td><b>AIは一番いいものを選んでくれる</b></td><td>エージェントの運営者が、取引の手数料で稼ぐ計画を持っていることがある（Museなど）</td><td>選び方の基準も指示に書く。「正規販売店から」「最安だと判断した根拠も示して」</td></tr>
-</table>
-<div class="spacer"></div>
-<div class="next"><p class="next-label">まとめ</p><p class="next-q">結局、私たちはAIに何を渡しているのか</p></div>
-<p class="pageno">12</p>
 </section>
 <section id="m13-summary" class="dark statement" style="gap:36px">
 <p class="st-eyebrow">まとめ：AIに指示するとき、私たちは何を渡しているのか</p>
-<p class="st-text" style="font-size:56px">答え：次の4つ。<br>どこで止まり、どこで止まらないかを知ったうえで任せる</p>
-<div class="recap" style="display:grid; grid-template-columns:1fr 1fr; gap:24px">
+<p class="st-text" style="font-size:56px">答え：私たちは、次の3つをAIエージェントに渡している。<br>どこで止まり、どこで止まらないかを知ったうえで任せる</p>
+<div class="recap" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px">
 <div class="rc">
 <p class="rc-t">① あなたとして操作する力</p>
-<p class="rc-txt">メール送信や購入まで。別の仕組みや会社の範囲で止まるが、確認なしの「読み取り」は通る（p.5・p.7）</p>
+<p class="rc-txt">AIエージェントは、あなたのアカウントで、メールの送信や購入まで行える。危ない操作を止めるのは、AIとは別の許可の仕組み</p>
+<p class="rc-txt" style="font-size:24px; color:#AFC0CF; border-top:1px solid #3B5166; padding-top:10px"><b>Museでは：</b>許可の仕組み（Sentinel）が止めるが、確認なしで通る「読み取り」の通信から情報が出た（p.5・p.7）</p>
 </div>
 <div class="rc">
-<p class="rc-t">② 読ませる情報</p>
-<p class="rc-txt">メール、社内データ、予約番号と姓など。外の文章と混ざると、外へ出うる（p.4・p.7）</p>
+<p class="rc-t">② あなたの情報</p>
+<p class="rc-txt">あなたがAIエージェントに読ませたメールや社内データは、AIの手元に渡る。誰が書いたか分からない文章も一緒に読むと、その指示で外へ送られうる</p>
+<p class="rc-txt" style="font-size:24px; color:#AFC0CF; border-top:1px solid #3B5166; padding-top:10px"><b>Museでは：</b>メールの一文で請求書を転送する例（架空、p.4）。悪意あるページ1つで会話履歴が出た報告（p.7）</p>
 </div>
 <div class="rc">
-<p class="rc-t b">③ 承認する権利</p>
-<p class="rc-txt">会社は承認まで止めるが、「20ドル以下なら進めて」の一言がそのまま承認になる（p.11）</p>
-</div>
-<div class="rc">
-<p class="rc-t b">④ 選ぶ判断</p>
-<p class="rc-txt">どの店で、何を買うか。どこでも止まらない。基準は自分で指示するしかない（p.12）</p>
+<p class="rc-t">③ 承認する権利</p>
+<p class="rc-txt">「20ドル以下なら進めて」と決めておくと、その範囲ではAIエージェントがあなたに聞かずにサイトへ承認を送る。サイトは、承認したのがあなたかAIかを見分けられない</p>
+<p class="rc-txt" style="font-size:24px; color:#AFC0CF; border-top:1px solid #3B5166; padding-top:10px"><b>今日の例：</b>Poppyのルールに載っている（p.11）。Museなら、そのルールで判断するのは許可の仕組み（p.5）</p>
 </div>
 </div>
-<p class="rc-note">渡さずに済むもの：パスワードとカード番号（よく作られた仕組みなら。p.6・p.9）。<br>いつか「AIに使われる側」のシステムを作るなら：AI用の受付、操作の影響の宣言、会社側での確認が設計のポイント</p>
-<p class="pageno">13</p>
+<p class="rc-note">渡さずに済むもの：パスワードとカード番号（Museの預かり方やPoppyのような仕組みがあれば。p.6・p.9）。<br>いつか「AIに使われる側」のシステムを作るなら：AI用の受付、操作の影響の宣言、サイト側での確認が設計のポイント</p>
+<p class="pageno">12</p>
 </section>
-<section id="s19-sources">
+<section id="s19-sources" style="gap:20px">
 <div class="top"><p class="eyebrow">参考資料</p><p class="tag fact">2026年11月25日時点</p></div>
 <h2 class="title">参考資料</h2>
-<div class="src-grid">
+<div class="src-grid" style="gap:8px 48px">
 <p class="src">Meta「Museの安全機能」（2026/9/8）<br><a href="https://muse.ai/blog/security-and-safety-for-ai-agents-our-approach-with-muse">muse.ai/blog/security-and-safety-for-ai-agents…</a></p>
 <p class="src">Meta「Museがビジネスと連携する方法が広がりました」（2026/11/13）<br><a href="https://muse.ai/blog/poppy-personal-agent-protocol">muse.ai/blog/poppy-personal-agent-protocol</a></p>
 <p class="src">Personal Agent Protocol 1.0 仕様<br><a href="https://personalagentprotocol.org/docs/1.0/spec">personalagentprotocol.org/docs/1.0/spec</a></p>
@@ -542,20 +568,46 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 <p class="src">NebuSec「Inside Meta Muse」（2026/11/20）<br><a href="https://nebusec.ai/research/inside-meta-muse/">nebusec.ai/research/inside-meta-muse</a></p>
 <p class="src">GeekWire「Amazon blocks Meta’s Muse AI assistant…」（2026/9/20）<br><a href="https://www.geekwire.com/2026/amazon-blocks-metas-muse-ai-assistant-in-new-standoff-over-agentic-shopping/">geekwire.com/2026/amazon-blocks-metas-muse-ai-assistant…</a></p>
 <p class="src">eMarketer「Amazon blocks Meta's Muse agent to retain control of first-party data」（2026/9）<br><a href="https://www.emarketer.com/content/amazon-blocks-meta-muse-agent-retain-control-of-first-party-data">emarketer.com/content/amazon-blocks-meta-muse-agent…</a></p>
-<p class="src">Meta日本法人「Museの日本での提供開始」（2026/10/23）<br><a href="https://about.fb.com/ja/news/2026/10/muse-personal-ai-agent-launches-in-japan/">about.fb.com/ja/news/2026/10/muse-personal-ai-agent…</a></p>
 <p class="src">Simon Willison「The lethal trifecta for AI agents」（2025/6/16）<br><a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">simonwillison.net/2025/Jun/16/the-lethal-trifecta</a></p>
 <p class="src">Model Context Protocol 仕様 2026-07-28（Authorization・Tools）<br><a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization">modelcontextprotocol.io/specification/2026-07-28</a></p>
 <p class="src">Claude Code Docs「Configure permissions」<br><a href="https://code.claude.com/docs/en/permissions">code.claude.com/docs/en/permissions</a></p>
-<p class="src">金融庁「電子決済等代行業制度の概要」<br><a href="https://www.fsa.go.jp/common/about/pamphlet/dendaigyo_start.pdf">fsa.go.jp/common/about/pamphlet/dendaigyo_start.pdf</a></p>
-<p class="src">金融庁資料（改正前のシステム接続の現状）<br><a href="https://www.fsa.go.jp/news/27/sonota/20151214-2/02.pdf">fsa.go.jp/news/27/sonota/20151214-2/02.pdf</a></p>
-<p class="src">全国銀行協会「オープンAPIに対する銀行界の取組み」（2019/12/23）<br><a href="https://www.fsa.go.jp/singi/kessai_kanmin/siryou/20191223/06.pdf">fsa.go.jp/singi/kessai_kanmin/siryou/20191223/06.pdf</a></p>
 </div>
-<p class="pageno">14</p>
+<p class="pageno">13</p>
 </section>
 </div>
 <div class="help">→ / ↓ / PageDown / クリックで次へ　← / ↑ / PageUp で前へ</div>
 <script>
 (function () {
+  // x-connector（図の線）を SVG に置き換える。座標は親要素の左上からの px。
+  var NS = 'http://www.w3.org/2000/svg';
+  Array.prototype.slice.call(document.querySelectorAll('x-connector[x1]')).forEach(function (c) {
+    var g = function (k) { return parseFloat(c.getAttribute(k)); };
+    var x1 = g('x1'), y1 = g('y1'), x2 = g('x2'), y2 = g('y2');
+    var cs = getComputedStyle(c), col = cs.color, w = parseFloat(cs.borderTopWidth) || 2;
+    var dash = cs.borderTopStyle === 'dashed';
+    var route = c.getAttribute('route') || 'straight', head = c.getAttribute('head') || 'end';
+    var pts = [[x1, y1], [x2, y2]];
+    if (route === 'hv') pts = [[x1, y1], [x2, y1], [x2, y2]];
+    if (route === 'vh') pts = [[x1, y1], [x1, y2], [x2, y2]];
+    var svg = document.createElementNS(NS, 'svg');
+    svg.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none';
+    var pl = document.createElementNS(NS, 'polyline');
+    pl.setAttribute('points', pts.map(function (p) { return p.join(','); }).join(' '));
+    pl.setAttribute('fill', 'none'); pl.setAttribute('stroke', col); pl.setAttribute('stroke-width', w);
+    if (dash) pl.setAttribute('stroke-dasharray', (3 * w) + ' ' + (2 * w));
+    svg.appendChild(pl);
+    var addHead = function (a, b) {
+      var ang = Math.atan2(b[1] - a[1], b[0] - a[0]), L = 4 * w, W = 2.2 * w;
+      var bx = b[0] - L * Math.cos(ang), by = b[1] - L * Math.sin(ang);
+      var p = document.createElementNS(NS, 'polygon');
+      p.setAttribute('points', [b[0] + ',' + b[1], (bx + W * Math.sin(ang)) + ',' + (by - W * Math.cos(ang)), (bx - W * Math.sin(ang)) + ',' + (by + W * Math.cos(ang))].join(' '));
+      p.setAttribute('fill', col); svg.appendChild(p);
+    };
+    if (head === 'end' || head === 'both') addHead(pts[pts.length - 2], pts[pts.length - 1]);
+    if (head === 'both') addHead(pts[1], pts[0]);
+    c.replaceWith(svg);
+  });
+
   var stage = document.querySelector('.stage');
   var slides = Array.prototype.slice.call(stage.children);
   var cur = 0;

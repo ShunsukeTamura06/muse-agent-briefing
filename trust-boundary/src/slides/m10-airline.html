@@ -1,15 +1,23 @@
 <section id="m10-airline" class="tone2">
-<div class="top"><p class="eyebrow b">3　相手の会社から見ると</p><p class="tag fact">事実（発表者の確認）</p></div>
+<div class="top"><p class="eyebrow b">3　サイト側から見ると</p><p class="tag fact">事実（発表者の確認）</p></div>
 <h2 class="title">実例：航空会社の受付は、用途ごとに③と④を決めている</h2>
-<p class="lead">ターキッシュエアラインズが公開しているPoppyの設定ファイルを、発表者が日本語にまとめた（11月25日確認）</p>
+<p class="lead">ターキッシュエアラインズのPoppyの設定ファイルを、発表者が日本語にまとめた（11月25日確認）</p>
 <table class="t5">
-<tr><th style="width:26%">Museにやらせたいこと</th><th style="width:44%">③ 顧客が許すもの</th><th style="width:30%">④ 会社の宣言</th></tr>
+<tr><th style="width:26%">Museにやらせたいこと</th><th style="width:44%">③ ユーザーが許すもの</th><th style="width:30%">④ サイト側の宣言</th></tr>
 <tr><td>フライトを探す</td><td>何も要らない（ログイン不要）</td><td>変更なし・個人データなし</td></tr>
 <tr><td>予約を確認する</td><td>予約番号と姓を伝える</td><td>変更なし・個人データあり</td></tr>
-<tr><td>マイル残高を見る</td><td><b>航空会社のページでログインし、「見る」ことを許す</b><br>（「Googleでログイン」のときの「〇〇がアクセスを求めています。許可しますか？」と同じ形の画面）</td><td>変更なし・個人データあり</td></tr>
+<tr><td>マイル残高を見る</td><td>航空会社のページでログインし、「見る」ことを許す</td><td>変更なし・個人データあり</td></tr>
 </table>
-<div class="note">
-<p class="note-txt">AIに許せるのは「見る」ことだけで、予約の変更は受け付けていない。①の名乗りなしで接続してみると「マイル会員のログインが必要」と断られた（発表者の確認）</p>
+<div style="display:flex; gap:24px; align-items:stretch">
+<div class="codebox" style="padding:18px 28px; gap:6px; flex:0 0 auto">
+<p class="code-path">実物の一部：poppy.json の "scope_hints"（表の順に並べ替え）</p>
+<pre class="code" style="margin:0">"flights:search": { "changes": "none", "personal_data": false },
+"bookings:read":  { "changes": "none", "personal_data": true },
+"profile:read":   { "changes": "none", "personal_data": true }</pre>
+</div>
+<div class="note" style="flex:1; display:flex; align-items:center">
+<p class="note-txt">3つとも <b>"changes": "none"</b>（変更なし）。AIに許せるのは「見る」ことだけで、予約の変更は受け付けていない</p>
+</div>
 </div>
 <div class="spacer"></div>
 <div class="next"><p class="next-label b">次の問い</p><p class="next-q">では、購入や変更のような、取り消せない操作（④）はどう扱われるのか</p></div>

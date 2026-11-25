@@ -25,7 +25,7 @@ h1 { font-size: 96px; font-weight: 600 } h2 { font-size: 64px; font-weight: 600 
 p, li, h1, h2, h3, td, th { overflow-wrap: break-word; text-wrap: pretty }
 table { width: 100%; border-collapse: separate; border-spacing: 0; border: solid #0003; border-width: 2px 0 0 2px }
 th, td { padding: .35em .6em; text-align: left; border: solid #0003; border-width: 0 2px 2px 0 }
-x-shape, x-icon { display: block }
+x-shape, x-icon { display: block } x-connector { display: block; position: absolute }
 """
 
 STANDALONE_CSS = """
@@ -54,6 +54,36 @@ html, body { height: 100%; background: #0d141b; overflow: hidden }
 
 SCRIPT = """
 (function () {
+  // x-connector（図の線）を SVG に置き換える。座標は親要素の左上からの px。
+  var NS = 'http://www.w3.org/2000/svg';
+  Array.prototype.slice.call(document.querySelectorAll('x-connector[x1]')).forEach(function (c) {
+    var g = function (k) { return parseFloat(c.getAttribute(k)); };
+    var x1 = g('x1'), y1 = g('y1'), x2 = g('x2'), y2 = g('y2');
+    var cs = getComputedStyle(c), col = cs.color, w = parseFloat(cs.borderTopWidth) || 2;
+    var dash = cs.borderTopStyle === 'dashed';
+    var route = c.getAttribute('route') || 'straight', head = c.getAttribute('head') || 'end';
+    var pts = [[x1, y1], [x2, y2]];
+    if (route === 'hv') pts = [[x1, y1], [x2, y1], [x2, y2]];
+    if (route === 'vh') pts = [[x1, y1], [x1, y2], [x2, y2]];
+    var svg = document.createElementNS(NS, 'svg');
+    svg.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none';
+    var pl = document.createElementNS(NS, 'polyline');
+    pl.setAttribute('points', pts.map(function (p) { return p.join(','); }).join(' '));
+    pl.setAttribute('fill', 'none'); pl.setAttribute('stroke', col); pl.setAttribute('stroke-width', w);
+    if (dash) pl.setAttribute('stroke-dasharray', (3 * w) + ' ' + (2 * w));
+    svg.appendChild(pl);
+    var addHead = function (a, b) {
+      var ang = Math.atan2(b[1] - a[1], b[0] - a[0]), L = 4 * w, W = 2.2 * w;
+      var bx = b[0] - L * Math.cos(ang), by = b[1] - L * Math.sin(ang);
+      var p = document.createElementNS(NS, 'polygon');
+      p.setAttribute('points', [b[0] + ',' + b[1], (bx + W * Math.sin(ang)) + ',' + (by - W * Math.cos(ang)), (bx - W * Math.sin(ang)) + ',' + (by + W * Math.cos(ang))].join(' '));
+      p.setAttribute('fill', col); svg.appendChild(p);
+    };
+    if (head === 'end' || head === 'both') addHead(pts[pts.length - 2], pts[pts.length - 1]);
+    if (head === 'both') addHead(pts[1], pts[0]);
+    c.replaceWith(svg);
+  });
+
   var stage = document.querySelector('.stage');
   var slides = Array.prototype.slice.call(stage.children);
   var cur = 0;

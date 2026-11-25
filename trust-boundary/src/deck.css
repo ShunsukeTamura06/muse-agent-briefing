@@ -194,3 +194,8 @@ section.statement { justify-content: center; gap: 56px; }
 .src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 48px; }
 .src { font-size: 24px; line-height: 1.45; color: #3A4652; }
 .src a { color: #1D4A7A; }
+
+/* small pinned diagram inside a card */
+.dg { position: relative; width: 468px; height: 290px; }
+.dg .m-t { font-size: 25px; }
+.dg .m-s { font-size: 21px; }
